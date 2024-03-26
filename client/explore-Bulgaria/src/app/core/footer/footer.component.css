@@ -1,0 +1,19 @@
+footer {
+    background: rgb(10, 214, 17);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100;
+    transform: translateX(100%);
+    padding: 10px 20px;
+    max-width: 1366px;
+}
+
+footer p {
+    text-align: center;
+    background: rgb(10, 214, 17);
+    color: rgb(0, 72, 255);
+    margin: 0;
+    padding: 0;
+    font-size: 7 em;
+}

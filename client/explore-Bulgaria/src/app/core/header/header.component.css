@@ -1,0 +1,15 @@
+li {
+    float: right;
+    
+  }
+
+  li :hover{
+    background-color: #7d4040;
+  }
+  
+  a {
+    display: block;
+    padding: 18px;
+
+    color: #f80303;
+  }
