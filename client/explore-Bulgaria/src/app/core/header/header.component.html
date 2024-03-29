@@ -10,15 +10,21 @@
       <li>
         <a href="/add-place">New Place</a>
       </li>
-      <li>
-        <a href="/login">Login</a>
-    </li>
-      <li>
-        <a href="/register">Register</a>
-    </li>
-      <li>
-        <a href="/logout">Logout</a>
-    </li>
+      <div *ngIf="!isLoggetIn" class="mini-navbar">
+      
+        <li>
+          <a href="/login">Login</a>
+      </li>
+        <li>
+          <a href="/register">Register</a>
+      </li>
+      </div>
+      <div *ngIf="isLoggetIn" class="mini-navbar">
+      
+        <li>
+          <a href="/logout">Logout</a>
+      </li>
+      </div>
     </ul>
   </nav>
 </header>

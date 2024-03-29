@@ -1,0 +1,17 @@
+<main>
+    <div *ngIf="isLoading"> 
+        <app-loader />
+    </div>
+
+    <div *ngIf="!isLoading" class="place-title"> 
+
+        <div  *ngFor="let place of places" class="place-container">
+            <h2>{{place.name}}</h2>
+            <!-- <p>{{place.img}}</p> -->
+            <p>{{place.city}}</p>
+            <p>{{place.workTime}}</p>
+            <p>{{place.createdAt}}</p>
+            <p>{{place.description}}</p>
+        </div>
+    </div>
+</main>
