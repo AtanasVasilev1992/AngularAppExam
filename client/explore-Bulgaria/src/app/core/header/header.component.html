@@ -2,27 +2,27 @@
   <nav>
     <ul>
       <li>
-        <a href="/">Home</a>
+        <a routerLink="/">Home</a>
       </li>
       <li>
-        <a href="/places">Places</a>
+        <a routerLink="/places">Places</a>
       </li>
       <li>
-        <a href="/add-place">New Place</a>
+        <a routerLink="/add-place">New Place</a>
       </li>
       <div *ngIf="!isLoggetIn" class="mini-navbar">
       
         <li>
-          <a href="/login">Login</a>
+          <a routerLink="/login">Login</a>
       </li>
         <li>
-          <a href="/register">Register</a>
+          <a routerLink="/register">Register</a>
       </li>
       </div>
       <div *ngIf="isLoggetIn" class="mini-navbar">
       
         <li>
-          <a href="/logout">Logout</a>
+          <a routerLink="/logout">Logout</a>
       </li>
       </div>
     </ul>

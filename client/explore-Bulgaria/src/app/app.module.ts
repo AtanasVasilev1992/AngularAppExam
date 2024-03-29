@@ -9,11 +9,13 @@ import { PlaceModule } from './place/place.module';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './main/main.component';
+import { PlacesComponent } from './place/places/places.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+  
   ],
   imports: [
     BrowserModule,

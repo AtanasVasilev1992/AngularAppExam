@@ -43,7 +43,7 @@ mongoose.connection.on('connected', ()=> console.log('DB connected!'));
 mongoose.connection.on('disconnected', ()=> console.log('DB disconnected!'));
 mongoose.connection.on('error', (err)=> console.log(err));
 
-const PORT = 3000;
+const PORT = 3030;
 app.listen(PORT, () => {
 
   console.log(`Server is listenning to http://localhost:${PORT}...`)

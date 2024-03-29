@@ -15,7 +15,7 @@ export class ApiService {
   getHome() {
     const { apiUrl } = environment
 
-    return this.http.get<Place[]>(`${apiUrl}/places`);
+    return this.http.get<Place[]>(`${apiUrl}places`);
   }
   
 }
