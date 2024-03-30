@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './main/main.component';
+
 import { NotFoundComponent } from './not-found/not-found.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: MainComponent },
+  { path: '', pathMatch: 'full', component: HomeComponent },
   {path: '**', redirectTo: '/404'},
   {path: '404', component: NotFoundComponent}
 ];

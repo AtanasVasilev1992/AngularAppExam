@@ -5,5 +5,14 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
 
+  isLoading = false;
   constructor() { }
+
+  login(){
+    this.isLoading = true
+  }
+
+  logout(){
+    this.isLoading = false
+  }
 }

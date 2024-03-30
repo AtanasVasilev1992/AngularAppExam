@@ -7,11 +7,13 @@
 
         <div  *ngFor="let place of places" class="place-container">
             <h2>{{place.name}}</h2>
-            <!-- <p>{{place.img}}</p> -->
+            <img src="{{place.img}}" alt="Image of current place">
             <p>{{place.city}}</p>
             <p>{{place.workTime}}</p>
             <p>{{place.createdAt}}</p>
             <p>{{place.description}}</p>
+            
+            <a [routerLink]="place._id">more</a>
         </div>
     </div>
 </main>

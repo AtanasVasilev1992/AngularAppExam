@@ -14,8 +14,7 @@ export class PlacesComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.getHome().subscribe((places) => {
-      console.log(places);
-      
+     
       this.places = places;
       setTimeout(()=>{
         this.isLoading = false;

@@ -8,17 +8,13 @@ import { SharedModule } from './shared/shared.module';
 import { PlaceModule } from './place/place.module';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
-import { MainComponent } from './main/main.component';
+
 import { NotFoundComponent } from './not-found/not-found.component';
+import { HomeComponent } from './home/home.component';
 // import { PlacesComponent } from './place/places/places.component';
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainComponent,
-    NotFoundComponent,
-  ],
+  declarations: [AppComponent, NotFoundComponent, HomeComponent],
   imports: [
     BrowserModule,
     UserModule,
@@ -27,9 +23,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     CoreModule,
     HttpClientModule,
     AppRoutingModule,
-
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

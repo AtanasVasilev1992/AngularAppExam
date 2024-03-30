@@ -18,4 +18,10 @@ export class ApiService {
     return this.http.get<Place[]>(`${apiUrl}places`);
   }
   
+  
+  getPlace(id:string) {
+    const { apiUrl }  = environment;
+
+    return this.http.get<Place>(`${apiUrl}places/${id}`)
+  }
 }
