@@ -9,22 +9,25 @@ import { PlaceModule } from './place/place.module';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './main/main.component';
-import { PlacesComponent } from './place/places/places.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+// import { PlacesComponent } from './place/places/places.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-  
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     UserModule,
     SharedModule,
     PlaceModule,
     CoreModule,
     HttpClientModule,
+    AppRoutingModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
