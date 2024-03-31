@@ -1,17 +1,67 @@
 <main>
-    <section id="register">
-        <div class="form">
-            <h2>Register</h2>
-            <form class="login-form" [formGroup]="form" (ngSubmit)="register()">
-                <input type="text" name="email" id="mail" placeholder="email"  />
-                <input type="text" name="username" id="username" placeholder="username"  />
-                <input type="password" name="password" id="register-password" placeholder="***********" />
-                <input type="password" name="rePassword" id="repeat-password" placeholder="***********" />
-                <input type="text" name="country" id="country" placeholder="country"  />
-                <input type="text" name="city" id="city" placeholder="city"  />
-                <button >Register</button>
-                <p class="message">Already registered? <a routerLink="/login">Login</a></p>
-            </form>
-        </div>
-    </section>
+  <section id="register">
+    <div class="form">
+      <h2>Register</h2>
+      <form class="login-form" [formGroup]="form" (ngSubmit)="register()">
+        <input type="text" name="email" id="email" placeholder="email" formControlName="email" />
+        <ng-container *ngIf="form.get('email')?.touched">
+            <p class="errors" *ngIf="form.get('email')?.errors?.['required']">Email is required!</p>
+            <p class="errors" *ngIf="form.get('email')?.errors?.['emailValidator']">Email is ivalid!</p>
+        </ng-container>
+        
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="username"
+          formControlName="username"
+        />
+        <ng-container *ngIf="form.get('username')?.touched">
+            <p class="errors" *ngIf="form.get('username')?.errors?.['required']">Username is required!</p>
+            <p class="errors" *ngIf="form.get('username')?.errors?.['minlength']">Username must be at least 5 characters!</p>
+        </ng-container>
+        
+        <input type="text" name="country" id="country" placeholder="country" formControlName="country"/>
+        <ng-container *ngIf="form.get('country')?.touched">
+            <p class="errors" *ngIf="form.get('country')?.errors?.['required']">Country is required!</p>
+            <p class="errors" *ngIf="form.get('country')?.errors?.['minlength']">Username must be at least 2 characters!</p>
+        </ng-container>
+        
+        <input type="text" name="city" id="city" placeholder="city" formControlName="city"/>
+        <ng-container *ngIf="form.get('city')?.touched">
+            <p class="errors" *ngIf="form.get('city')?.errors?.['required']">City is required!</p>
+        </ng-container>
+        
+        <ng-container formGroupName="passGroup">
+            <input
+              type="password"
+              name="password"
+              id="register-password"
+              placeholder="***********"
+              formControlName="password"
+            />
+            
+            <input
+              type="password"
+              name="rePassword"
+              id="repeat-password"
+              placeholder="***********"
+              formControlName="rePassword"
+            />
+            
+            <ng-container *ngIf="form.get('passGroup')?.get('rePassword')?.touched">
+                <p class="errors" *ngIf="form.get('passGroup')?.errors?.['matchPasswordsValidator'] ||
+                form.get('passGroup')?.get('rePassword')?.errors?.['required']"
+                >Passwords missmatch!</p>
+            </ng-container>
+        
+        </ng-container>
+
+        <button [disabled]="form.invalid" [style]="{backgroundColor: form.invalid ? 'gray': 'green'}">Register</button>
+        <p class="message">
+          Already registered? <a routerLink="/login">Login</a>
+        </p>
+      </form>
+    </div>
+  </section>
 </main>

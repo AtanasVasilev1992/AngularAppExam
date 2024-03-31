@@ -5,10 +5,12 @@ import { EmailDirective } from './validators/email.directive';
 
 
 
+
 @NgModule({
   declarations: [
     LoaderComponent,
-    EmailDirective
+    EmailDirective,
+
   ],
   imports: [
     CommonModule
