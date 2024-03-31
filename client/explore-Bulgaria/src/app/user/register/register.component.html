@@ -2,14 +2,14 @@
     <section id="register">
         <div class="form">
             <h2>Register</h2>
-            <form class="login-form" method="POST" >
+            <form class="login-form" [formGroup]="form" (ngSubmit)="register()">
                 <input type="text" name="email" id="mail" placeholder="email"  />
                 <input type="text" name="username" id="username" placeholder="username"  />
                 <input type="password" name="password" id="register-password" placeholder="***********" />
                 <input type="password" name="rePassword" id="repeat-password" placeholder="***********" />
                 <input type="text" name="country" id="country" placeholder="country"  />
                 <input type="text" name="city" id="city" placeholder="city"  />
-                <button type="submit">Register</button>
+                <button >Register</button>
                 <p class="message">Already registered? <a routerLink="/login">Login</a></p>
             </form>
         </div>

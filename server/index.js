@@ -8,29 +8,11 @@ const { errorHandler } = require("./middlewares/errorMiddleware");
 
 const app = express();
 
-// app.use((req, res, next) => {
-//   //! Позволязава на заявки от порта(за да работи с Front-End)!
-//   res.header("Access-Control-Allow-Origin", "http://localhost:4200");
-//   next();
-// });
-
-//! Just for test use
-app.get("/users/login", (req, res)=>{
-  res.send(`<h1>Hello world!</h1>`);
-});
-
-//! Така се позволява всичко..
 app.use(cors());
 
 app.use(express.json());
 
 app.use(authMiddleware);
-
-app.get("/", (req, res) => {
-  res.json({
-    message: "Zdrasti Nase!",
-  });
-});
 
 app.use(routes);
 
