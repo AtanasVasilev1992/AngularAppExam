@@ -1,11 +1,23 @@
 const router = require("express").Router();
 const userService = require("../services/userService");
 
-router.post("/register", async (req, res) => {
+router.post('/register', async (req, res) => {
   const userData = req.body;
-  const result = await userService.register(userData);
+  const { email,
+    username,
+    country,
+    city,
+    password,
+    rePassword,} = userData
+  const result = await userService.register( email,
+    username,
+    country,
+    city,
+    password,
+    rePassword,);
 
   res.json(result);
+
 });
 
 router.post("/login", async (req, res) => {
@@ -19,6 +31,7 @@ router.get("/logout", async (req, res) => {
   //!!!
   res.json({ok: true});
 });
+
 
 
 //!Just to show me users!

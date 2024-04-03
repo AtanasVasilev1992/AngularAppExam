@@ -10,7 +10,6 @@ const placeSchema = new mongoose.Schema(
     city: String,
     img: String,
     description: String,
-    workTime: String,
     owner: {
       type: mongoose.Types.ObjectId,
       ref: "User",
@@ -20,7 +19,5 @@ const placeSchema = new mongoose.Schema(
 );
 
 const Place = mongoose.model("Place", placeSchema);
-
-
 
 module.exports = Place;

@@ -1,19 +1,19 @@
 <header>
   <div class="header">
-    <a routerLink="/" class="logo">Logo</a>
+    <a routerLink="/" class="logo">HOME</a>
     <div class="header-right">
       <nav>
         <ul>
           <div *ngIf="!isLoggedIn" class="mini-navbar">
             <a routerLink="/">Home</a>
-            <a routerLink="/login">Login</a>
-            <a routerLink="/register">Register</a>
+            <a routerLink="/auth/login">Login</a>
+            <a routerLink="auth/register">Register</a>
           </div>
           <div *ngIf="isLoggedIn" class="mini-navbar">
             <a routerLink="/places">Places</a>
             <a routerLink="/add-place">New Place</a>
-            <a routerLink="/profile">Nasko's Profile</a>
-            <a routerLink="/logout" (click)="logout()">Logout</a>
+            <a routerLink="/auth/profile">Nasko's Profile</a>
+            <a routerLink="/auth/logout" (click)="logout()">Logout</a>
           </div>
         </ul>
       </nav>

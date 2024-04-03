@@ -11,13 +11,15 @@ export class HeaderComponent {
   constructor(private userService: UserService, private router: Router){}
 
   get isLoggedIn(): boolean{
-    return this.userService.isLoading;
+    return this.userService.isLoging;
   }
 
 
   logout() {
-    this.userService.logout();
-    this.router.navigate(['/'])
+    this.userService.logout().subscribe({
+      next: ()=> this.router.navigate(['/home'])
+    });
+    
   }
 
 }

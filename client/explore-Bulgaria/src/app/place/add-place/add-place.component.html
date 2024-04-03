@@ -1,15 +1,46 @@
 <main>
-    <section  id="register">
+    <section id="register">
         <div class="form">
             <h2>Add New Place</h2>
-            <form class="login-form" method="POST" >
-                <input type="text" name="name" id="name" placeholder="name"  />
-                <input type="text" name="image" id="image" placeholder="image"  />
-                <input type="text" name="country" id="country" placeholder="country"  />
-                <input type="text" name="city" id="city" placeholder="city"  />
-                <input type="" name="description" id="description" placeholder="description"  />
-                <input type="text" name="workTime" id="workTime" placeholder="Please type work time!"  />
-                <button type="submit">Create</button>
+            <form class="login-form" #form="ngForm">
+                <input type="text" name="name" id="name" placeholder="name" ngModel #inputName="ngModel" required minlength="5" />
+                <ng-container *ngIf="inputName.touched">
+                    <p *ngIf="inputName?.errors?.['required']">Name is required!</p>
+                    <p *ngIf="inputName?.errors?.['minlength']">Name must be at least 5 characters!</p>
+                </ng-container>
+
+                <input type="text" name="image" id="image" placeholder="image" ngModel #inputImage="ngModel" required />
+                <ng-container *ngIf="inputImage.touched">
+                    <p *ngIf="inputImage?.errors?.['required']">Image is required!</p>
+                </ng-container>
+
+                <input type="text" name="country" id="country" placeholder="country" ngModel #inputCoutry="ngModel" required
+                    minlength="2" />
+                <ng-container *ngIf="inputCoutry.touched">
+                    <p *ngIf="inputCoutry?.errors?.['required']">Country is required!</p>
+                    <p *ngIf="inputCoutry?.errors?.['minlength']">Country must be at least 2 characters!</p>
+                </ng-container>
+
+                <input type="text" name="city" id="city" placeholder="city" ngModel #inputCity="ngModel" required minlength="3" />
+                <ng-container *ngIf="inputCity.touched">
+                    <p *ngIf="inputCoutry?.errors?.['required']">City is required!</p>
+                    <p *ngIf="inputCoutry?.errors?.['minlength']">City must be at least 3 characters!</p>
+                </ng-container>
+
+                <input type="text" name="description" id="description" placeholder="description" ngModel #inputDescrpition="ngModel"
+                    required minlength="10" />
+                <ng-container *ngIf="inputDescrpition.touched">
+                    <p *ngIf="inputDescrpition?.errors?.['required']">Description is required!</p>
+                    <p *ngIf="inputDescrpition?.errors?.['minlength']">Description must be at least 10 characters!</p>
+                </ng-container>
+
+                <input type="text" name="workTime" id="workTime" placeholder="Please type work time!" ngModel
+                    #inputWorkTime="ngModel" required />
+                <ng-container *ngIf="inputWorkTime.touched">
+                    <p *ngIf="inputWorkTime?.errors?.['required']">Work time is required!</p>
+                </ng-container>
+
+                <button (click)="addPlace(form)">Create</button>
             </form>
         </div>
     </section>

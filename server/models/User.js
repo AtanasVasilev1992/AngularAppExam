@@ -6,9 +6,7 @@ const userSchema = new mongoose.Schema({
     username: String,
     password: String,
     // rePassword: String,
-    country: String,
     city: String,
-    
 })
 
 const User = mongoose.model('User', userSchema);

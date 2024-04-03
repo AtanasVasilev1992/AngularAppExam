@@ -7,7 +7,19 @@ exports.register = async (userData) => {
     throw new Error("Password missmatch!");
   }
 
-  const user = await User.create(userData);
+  const { email,
+    username,
+    country,
+    city,
+    password,
+   } = userData
+
+  const user = await User.create( email,
+    username,
+    country,
+    city,
+    password,
+    );
 
   return genereteToken(user);
 };
@@ -28,6 +40,7 @@ exports.login = async (userData) => {
 };
 
 exports.getAll = () => User.find()
+
 
 
 function genereteToken(user) {
