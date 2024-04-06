@@ -26,7 +26,7 @@ export class ApiService {
     workTime: string
   ) {
     const payload = { name, image, country, city, description, workTime };
-    return this.http.post<Place>('/api/places', payload);
+    return this.http.post<Place>('/api/places/create', payload);
   }
 
   getMuseums() {

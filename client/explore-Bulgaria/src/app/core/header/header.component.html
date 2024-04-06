@@ -6,11 +6,14 @@
         <ul>
           <div *ngIf="!isLoggedIn" class="mini-navbar">
             <a routerLink="/">Home</a>
+            <a routerLink="/places">Places</a>
+            <a routerLink="/museums">Museums</a>
             <a routerLink="/auth/login">Login</a>
             <a routerLink="auth/register">Register</a>
           </div>
           <div *ngIf="isLoggedIn" class="mini-navbar">
             <a routerLink="/places">Places</a>
+            <a routerLink="/museums">Museums</a>
             <a routerLink="/add-place">New Place</a>
             <a routerLink="/auth/profile">Nasko's Profile</a>
             <a routerLink="/auth/logout" (click)="logout()">Logout</a>

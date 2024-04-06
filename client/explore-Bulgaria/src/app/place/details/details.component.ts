@@ -21,7 +21,7 @@ export class DetailsComponent implements OnInit {
   
       this.apiService.getPlace(id).subscribe((place) => {
         this.place = place;
-        console.log('Thsi must be a place',place);
+        console.log('This must be a place',place);
         
       });
     });

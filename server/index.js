@@ -11,20 +11,21 @@ const app = express();
 
 app.use(express.json());
 
-app.use(cors({
-  origin: 'http://localhost:4200',
-  optionsSuccessStatus: 200,
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: 'http://localhost:4200',
+//   optionsSuccessStatus: 200,
+//   credentials: true,
+// }));
 
-app.use((req,res,next)=>{
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-  res.setHeader('Access-Control-Allow-Method', "GET", "PUT", "POST", "DELETE");
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Allow-Credentials', true)
-  next()
-})
+// app.use((req,res,next)=>{
+//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+//   res.setHeader('Access-Control-Allow-Method', "GET", "PUT", "POST", "DELETE");
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+//   res.setHeader('Access-Control-Allow-Credentials', true)
+//   next()
+// })
 
+app.use(cors())
 app.use(authMiddleware);
 
 app.use(routes);

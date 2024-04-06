@@ -14,4 +14,6 @@ const museumSchema = new mongoose.Schema({
 
 const Museum = mongoose.model('Museum', museumSchema);
 
+
+
 module.exports = Museum
