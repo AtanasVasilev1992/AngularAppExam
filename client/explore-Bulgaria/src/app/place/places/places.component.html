@@ -1,19 +1,20 @@
+
 <main>
     <div *ngIf="isLoading"> 
         <app-loader />
-    </div>
+    </div> 
 
     <div *ngIf="!isLoading" class="place-title"> 
 
         <div  *ngFor="let place of places" class="place-container">
-            <h2>{{place.name}}</h2>
-            <img src="{{place.img}}" alt="Image of current place">
-            <p>{{place.city}}</p>
-            <p>{{place.workTime}}</p>
-            <p>{{place.createdAt}}</p>
-            <p>{{place.description}}</p>
-            
-            <a [routerLink]="place._id">more</a>
+            <div class="card">
+                <img src="{{place.img}}" alt="John" style="width:100%">
+                <h1>{{place.name}}</h1>
+                <p class="title">{{place.description}}</p>
+                
+                <p [routerLink]="place._id"><button>More Info</button></p>
+              </div>
         </div>
-    </div>
+    </div> 
+
 </main>

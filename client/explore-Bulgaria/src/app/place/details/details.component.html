@@ -1,7 +1,10 @@
 <div>
    <h2>{{place.name}}</h2>
     <img src="{{place.img}}" alt="Image of current place">
-    <p>{{place.description}}</p>
-    <p>{{place.createdAt | time}}</p>
+    <p>Description: {{place.description}}</p>
+    <p>Crated {{place.createdAt | time}}.</p>
+    <p>Located in {{place.city}}.</p>
+    <button class="edit" style="background-color: green;">Edit</button>
+    <button class="delete" style="background-color: red;">Delete</button>
+    <button class="like" style="background-color: blue;">Like</button>
 </div>
-
