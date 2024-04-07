@@ -19,6 +19,7 @@ export class LoginComponent {
     }
 
     const { email, password } = form.value;
+    // localStorage.setItem('')
 
     this.userService.login(email, password).subscribe(()=> {
       this.router.navigate(['/'])
@@ -26,8 +27,8 @@ export class LoginComponent {
     
   }
 
-  logout(){
-    this.userService.logout();
-    this.router.navigate(['/'])
-  }
+  // logout(){
+  //   this.userService.logout();
+  //   this.router.navigate(['/'])
+  // }
 }

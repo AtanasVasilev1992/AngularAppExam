@@ -1,30 +1,31 @@
-const jwt = require('jsonwebtoken');
+const jwt = require('../lib/jsonwebtoken');
+const { SECRET } = require('../config')
 
 exports.authMiddleware = async (req, res, next) => {
-    
-    const token = req.headers['x-authorization'];
+    const token = req.cookies['auth'];
 
     if (!token) {
         return next()
     }
 
     try {
-        const decodedToken = await jwt.verify(token, "TheSecret123");
+        const decodedToken = await jwt.verify(token, SECRET);
 
         req.user = decodedToken;
         res.locals.isAuthenticated = true;
-      
+        //If need to show profil in navigation...
+        //res.locals.user = decodedToken;
 
         next();
     } catch (err) {
         res.clearCookie('auth');
-        res.redirect('/auth/login')
+        // res.redirect('/auth/login')
     };
 };
 
 exports.isAuth = (req, res, next) => {
     if (!req.user) {
-        return res.redirect('/auth/login')
+        return //res.redirect('/auth/login')
     };
 
     next();
@@ -32,7 +33,7 @@ exports.isAuth = (req, res, next) => {
 
 exports.isGuest = (req, res, next) => {
     if (req.user) {
-        return res.redirect('/')
+         return //res.redirect('/')
     };
 
     next();

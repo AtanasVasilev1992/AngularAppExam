@@ -1,23 +1,34 @@
-const mongoose = require("mongoose");
-const User = require("./User");
+const mongoose = require('mongoose');
 
-const placeSchema = new mongoose.Schema(
-  {
+const placeSchema = new mongoose.Schema({
     name: {
-      type: String,
-      required: true,
+        type: String,
+        required: true,
+        minLength: 5,
+        lowercase: true,
     },
-    city: String,
-    img: String,
-    description: String,
-    owner: {
-      type: mongoose.Types.ObjectId,
-      ref: "User",
+    image: {
+        type: String,
+        required: true,
+        match: /^https?:\/\//,
     },
-  },
-  { timestamps: true }
-);
+    description: {
+        type: String,
+        required: true,
+        minLength: 10,
+        maxLength: 200,
+    },
+    workTime: {
+        type: String
+    },
 
-const Place = mongoose.model("Place", placeSchema);
+    owner: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+    },
+
+});
+
+const Place = mongoose.model('Place', placeSchema);
 
 module.exports = Place;

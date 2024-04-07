@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '../types/user';
 import { BehaviorSubject, Subscription, tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root',
@@ -54,13 +54,16 @@ export class UserService  implements OnDestroy {
         password,
         rePassword,
       })
-      .pipe(tap((user) => this.user$$.next(user)));
+    .pipe(tap((user) => {
+
+      this.user$$.next(user)}));
   }
 
   logout() {
     return this.http
       .post('/api/auth/logout', {})
-      .pipe(tap(() => this.user$$.next(undefined)));
+      .pipe(tap(() => {
+        this.user$$.next(undefined)}));
   }
 
   ngOnDestroy(): void {
