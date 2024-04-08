@@ -15,12 +15,12 @@ export class AddPlaceComponent {
       return;
     }
 
-    const { name, image, country, city, description, workTime } = form.value;
+    const { name, image, city, description, workTime } = form.value;
 
-    this.apiService.createPlace(name, image, country, city, description, workTime).subscribe(()=>{
+    this.apiService.createPlace(name, image, city, description, workTime).subscribe(()=>{
       console.log(name);
-      
       this.router.navigate(['/places'])
     })
+   
   }
 }

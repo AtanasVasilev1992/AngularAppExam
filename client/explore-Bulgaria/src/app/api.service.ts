@@ -20,12 +20,11 @@ export class ApiService {
   createPlace(
     name: string,
     image: string,
-    country: string,
     city: string,
     description: string,
     workTime: string
   ) {
-    const payload = { name, image, country, city, description, workTime };
+    const payload = { name, image, city, description, workTime };
     return this.http.post<Place>('/api/places/create', payload);
   }
 

@@ -4,7 +4,7 @@ export interface Place {
  '_id': string,
     'name': string,
     'city': string,
-    'img': string
+    'image': string
     'description': string
     'workTime': string
     'owner': User,

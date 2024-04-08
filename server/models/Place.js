@@ -22,7 +22,9 @@ const placeSchema = new mongoose.Schema({
     workTime: {
         type: String
     },
-
+    city: {
+        type: String
+    },
     owner: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
