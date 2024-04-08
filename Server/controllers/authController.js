@@ -36,6 +36,11 @@ router.post('/login', async (req, res)=>{
    }
 });
 
+router.get('/profile', (req,res)=>{
+    const userId = req.params.userId
+  res.json(authService.profile(userId))
+})
+
 router.get('/logout', (req,res)=>{
     res.clearCookie('auth');
     res.redirect('/')

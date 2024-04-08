@@ -20,6 +20,8 @@ exports.register = async (userData) => {
     return token;
 }
 
+exports.profile = async (userId) => await User.findById(userId);
+
 exports.login = async ({ email, password }) => {
     // Get user from DB
     const user = await User.findOne({ email });

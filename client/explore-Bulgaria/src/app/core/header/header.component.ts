@@ -14,10 +14,14 @@ export class HeaderComponent {
     return this.userService.isLoging;
   }
 
+  get username(): string{
+    return this.userService.user?.username || '';
+  }
 
   logout() {
     this.userService.logout().subscribe({
-      next: ()=> this.router.navigate(['/'])
+      next: ()=> this.router.navigate(['/api/auth/login']),
+      error: ()=> this.router.navigate(['/api/auth/login'])
     });
     
   }
