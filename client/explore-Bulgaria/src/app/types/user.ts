@@ -4,8 +4,6 @@ export interface User {
 'email': string,
 'username': string,
 'password': string,
-'country': string
-'city': string,
 '__v': number,
 //!
 }

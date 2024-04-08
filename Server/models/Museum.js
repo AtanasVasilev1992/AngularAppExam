@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('./User')
 
-const placeSchema = new mongoose.Schema({
+const museumSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -30,6 +30,6 @@ const placeSchema = new mongoose.Schema({
 
 });
 
-const Place = mongoose.model('Place', placeSchema);
+const Museum = mongoose.model('Museum', museumSchema);
 
-module.exports = Place;
+module.exports = Museum;

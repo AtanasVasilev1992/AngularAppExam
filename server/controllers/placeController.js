@@ -27,11 +27,11 @@ router.get("/:placeId", async (req, res) => {
 });
 
 router.get("/:placeId/delete", isPlaceOwner, async (req, res) => {
-  await electronicService.delete(req.params.placeId);
+  await placeService.delete(req.params.placeId);
 });
 
 router.get("/:placeId/edit", isPlaceOwner, async (req, res) => {
-  res.json(...req.electronic);
+  res.json(...req.place);
 });
 
 router.post("/:placeId/edit", isPlaceOwner, async (req, res) => {
@@ -40,7 +40,7 @@ router.post("/:placeId/edit", isPlaceOwner, async (req, res) => {
   try {
     await placeData.edit(req.params.placeId, placeData);
   } catch (err) {
-    res.json({ ...electronicData, error: getErrorMessage(err) });
+    res.json({ ...placeData, error: getErrorMessage(err) });
   }
 });
 

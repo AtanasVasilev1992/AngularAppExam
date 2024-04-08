@@ -23,12 +23,15 @@ class AppInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     if (req.url.startsWith(this.API)) {
+    
       req = req.clone({
         url: req.url.replace(this.API, apiUrl),
-        // withCredentials: true,
+        withCredentials: true,
       
       });
     }
+
+    console.log(req);
 
     return next.handle(req).pipe(
       catchError((err) => {

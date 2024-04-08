@@ -6,6 +6,7 @@ const { PORT } = require("./config");
 
 const routes = require("./routes");
 const { authMiddleware } = require("./middlewares/authMiddleware");
+const { errorHandler } = require('./middlewares/errMiddleware')
 
 const app = express();
 const cors = require("cors");
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 app.use(authMiddleware);
+
 app.use(cors({
   origin: 'http://localhost:4200',
   credentials: true
@@ -23,7 +25,7 @@ app.use(cors({
 app.use(express.json())
 
 app.use(routes);
-
+app.use(errorHandler);
 mongoose.connect("mongodb://localhost:27017/explore-Bulgaria");
 
 mongoose.connection.on("connected", () => console.log("DB connected!"));
