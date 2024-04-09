@@ -43,6 +43,7 @@ router.get('/profile', (req,res)=>{
 
 router.get('/logout', (req,res)=>{
     res.clearCookie('auth');
+    res.status(200).json({ message: 'Logout successful' });
     res.redirect('/')
 });
 

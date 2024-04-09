@@ -13,7 +13,7 @@ export class UserService  implements OnDestroy {
   private user$ = this.user$$.asObservable();
   
   user: User | undefined;
-  USER_KEY = '[user]';
+  USER_KEY = '[auth]';
 
   userSubscrition: Subscription;
 
@@ -32,7 +32,7 @@ export class UserService  implements OnDestroy {
     return this.http.post<User>('/api/auth/login', { email, password }).pipe(
       tap((user) => {
         this.user$$.next(user);
-
+    
       })
     );
   }
@@ -56,16 +56,29 @@ export class UserService  implements OnDestroy {
       this.user$$.next(user)}));
   }
 
+  // logout() {
+  //   return this.http
+  //     .post('/api/auth/logout', {})
+  //     .pipe(tap(() => {
+  //       this.user$$.next(undefined)}));
+  // }
+
   logout() {
+    
     return this.http
-      .post('/api/auth/logout', {})
-      .pipe(tap(() => {
-        this.user$$.next(undefined)}));
+      .post(`/api/auth/logout`, {})
+      .pipe(
+        tap(() => {
+          this.user$$.next(undefined);
+         this.user = undefined;
+
+        }),
+      );
   }
 
-  getProfile() {
-    return this.http.get<User>('/api/auth/profile').pipe(tap((user) => this.user$$.next(user)))
-  }
+  // getProfile() {
+  //   return this.http.get<User>('/api/auth/profile').pipe(tap((user) => this.user$$.next(user)))
+  // }
 
   ngOnDestroy(): void {
     this.userSubscrition.unsubscribe();

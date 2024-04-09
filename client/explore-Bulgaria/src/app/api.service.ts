@@ -12,9 +12,7 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getHome() {
-    const { apiUrl } = environment;
-
-    return this.http.get<Place[]>(`${apiUrl}/places`);
+    return this.http.get<Place[]>(`/api/places`);
   }
 
   createPlace(
@@ -28,15 +26,16 @@ export class ApiService {
     return this.http.post<Place>('/api/places/create', payload);
   }
 
+ 
   getMuseums() {
-    const { apiUrl } = environment;
-
-    return this.http.get<Museum[]>(`${apiUrl}/museums`);
+    return this.http.get<Museum[]>(`/api/museums`);
   }
 
   getPlace(id: string) {
-    const { apiUrl } = environment;
+    return this.http.get<Place>(`/api/places/${id}`);
+  }
 
-    return this.http.get<Place>(`${apiUrl}/places/${id}`);
+  getMuseum(id: string) {
+    return this.http.get<Place>(`/api/museums/${id}`);
   }
 }

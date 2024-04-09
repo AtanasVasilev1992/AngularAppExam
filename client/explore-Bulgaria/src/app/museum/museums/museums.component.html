@@ -1,20 +1,20 @@
 <main>
     <div *ngIf="isLoading"> 
-        <app-loader/>
-    </div>
+        <app-loader />
+    </div> 
 
-    <div *ngIf="!isLoading" class="place-title"> 
+    <div *ngIf="!isLoading" class="museum-title"> 
 
         <div  *ngFor="let museum of museums" class="museum-container">
-            <h2>{{museum.name}}</h2>
-            <img src="{{museum.img}}" alt="Image of current place">
-          
-            <p>{{museum.workTime}}</p>
-            <p>{{museum.createdAt}}</p>
-            <p>{{museum.description}}</p>
-            
-            <a [routerLink]="museum._id">more</a>
+            <div class="card">
+                <img src="{{museum.image}}" alt="Image of museum" style="width:100%">
+                <h1>{{museum.name}}</h1>
+                <p class="title">{{museum.description}}</p>
+                
+                <p [routerLink]="museum._id"><button>More Info</button></p>
+            </div>
         </div>
-    </div>
-</main>
+    </div> 
 
+
+</main>

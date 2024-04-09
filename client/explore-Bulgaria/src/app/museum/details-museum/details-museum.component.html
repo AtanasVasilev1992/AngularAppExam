@@ -1,1 +1,11 @@
-<p>details-museum works!</p>
+
+<div>
+    <h2>{{museum.name}}</h2>
+     <img src="{{museum.image}}" alt="Image of current place">
+     <p>Description: {{museum.description}}</p>
+     <p>Crated {{museum.createdAt | time}}.</p>
+     <p>Work time: {{museum.workTime}}.</p>
+     <button class="edit" style="background-color: green;">Edit</button>
+     <button class="delete" style="background-color: red;">Delete</button>
+     <button class="like" style="background-color: blue;">Like</button>
+ </div>

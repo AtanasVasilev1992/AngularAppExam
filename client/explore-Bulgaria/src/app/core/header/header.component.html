@@ -5,18 +5,20 @@
       <nav>
         <ul>
           <div *ngIf="!isLoggedIn" class="mini-navbar">
-            <a routerLink="/">Home</a>
-            <a routerLink="/places">Places</a>
-            <a routerLink="/museums">Museums</a>
-            <a routerLink="/auth/login">Login</a>
-            <a routerLink="auth/register">Register</a>
+              <a routerLink="/">Home</a>
+              <a routerLink="/places">Places</a>
+              <a routerLink="/museums">Museums</a>
+              <a routerLink="/auth/login">Login</a>
+              <a routerLink="auth/register">Register</a>
           </div>
           <div *ngIf="isLoggedIn" class="mini-navbar">
-            <a routerLink="/places">Places</a>
-            <a routerLink="/museums">Museums</a>
-            <a routerLink="/add-place">New Place</a>
-            <a routerLink="/auth/profile">{{username}}'s Profile</a>
-            <a  (click)="logout()">Logout</a>
+              <a routerLink="/places">Places</a>
+              <a routerLink="/add-place">New Place</a>
+              <a routerLink="/museums">Museums</a>
+              <a routerLink="/museums/add-museum">New Museum</a>
+              <a routerLink="/auth/profile">{{username}}'s Profile</a>
+              <a (click)="logout()">Logout</a>
+           
           </div>
         </ul>
       </nav>

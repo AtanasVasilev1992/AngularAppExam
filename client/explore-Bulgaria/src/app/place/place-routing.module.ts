@@ -9,7 +9,7 @@ const routes: Routes = [{path: 'places', children: [
     {path: '', pathMatch: 'full', component: PlacesComponent},
     {path: ':placeId', pathMatch: 'full', component: DetailsComponent},
 ]},
-{path: 'add-place', component: AddPlaceComponent,}, //canActivate: [AuthActivate]},
+{path: 'add-place', component: AddPlaceComponent, canActivate: [AuthActivate]},
 ] ;
 
 @NgModule({

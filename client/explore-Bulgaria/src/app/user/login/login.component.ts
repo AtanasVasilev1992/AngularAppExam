@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { EMAIL_DOMAINS } from 'src/environments/environment';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,6 +23,7 @@ export class LoginComponent {
     // localStorage.setItem('')
 
     this.userService.login(email, password).subscribe(()=> {
+      // localStorage.setItem('[user]', 'token')
       this.router.navigate(['/'])
     })
     

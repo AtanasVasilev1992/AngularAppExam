@@ -3,7 +3,7 @@ import { User } from "./user";
 export interface Museum {
     '_id': string,
     'name': string,
-    'img': string
+    'image': string
     'description': string
     'workTime': string
     'owner': User,
