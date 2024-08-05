@@ -14,7 +14,11 @@ router.post('/register',isGuest, async (req, res)=>{
     try {
     const token = await authService.register(userData);
 
-    res.cookie('auth', token);
+    res.cookie('auth', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'Lax'
+      });
     res.json(userData);
    
     } catch(err){
@@ -29,7 +33,11 @@ router.post('/login', async (req, res)=>{
    try {
     const token = await authService.login(loginData);
 
-   res.cookie('auth', token);
+    res.cookie('auth', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'Lax'
+      });
 
    } catch (err){
     res.json( { ...loginData, error: getErrorMessage(err)});
