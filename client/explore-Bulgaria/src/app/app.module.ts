@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { appInterceptorProvider } from './app.interceptor';
+import { AppInterceptorProvider } from './app.interceptor';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { MuseumModule } from './museum/museum.module';
 // import { PlacesComponent } from './place/places/places.component';
@@ -31,7 +31,7 @@ import { MuseumModule } from './museum/museum.module';
     ReactiveFormsModule,
     MuseumModule
   ],
-  providers: [appInterceptorProvider],
+  providers: [AppInterceptorProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

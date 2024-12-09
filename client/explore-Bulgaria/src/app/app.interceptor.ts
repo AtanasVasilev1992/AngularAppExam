@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 const { apiUrl } = environment;
 
 @Injectable()  
-class AppInterceptor implements HttpInterceptor {
+export class AppInterceptor implements HttpInterceptor {
   API = '/api';
 
   constructor(private errorService: ErrorService, private router: Router) {}
@@ -46,7 +46,7 @@ class AppInterceptor implements HttpInterceptor {
   }
 }
 
-export const appInterceptorProvider: Provider = {
+export const AppInterceptorProvider: Provider = {
   useClass: AppInterceptor,
   multi: true,
   provide: HTTP_INTERCEPTORS,
