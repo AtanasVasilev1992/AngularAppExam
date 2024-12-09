@@ -9,10 +9,11 @@ import { Museum } from './types/museum';
   providedIn: 'root',
 })
 export class ApiService {
+  private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
   getHome() {
-    return this.http.get<Place[]>(`/api/places`);
+    return this.http.get<Place[]>(`${this.apiUrl}/data/teams`);
   }
 
   createPlace(
@@ -23,19 +24,19 @@ export class ApiService {
     workTime: string
   ) {
     const payload = { name, image, city, description, workTime };
-    return this.http.post<Place>('/api/places/create', payload);
+    return this.http.post<Place>(`${this.apiUrl}/data/teams`, payload);
   }
 
  
   getMuseums() {
-    return this.http.get<Museum[]>(`/api/museums`);
+    return this.http.get<Museum[]>(`${this.apiUrl}/data/teams`);
   }
 
   getPlace(id: string) {
-    return this.http.get<Place>(`/api/places/${id}`);
+    return this.http.get<Place>(`${this.apiUrl}/data/teams/${id}`);
   }
 
   getMuseum(id: string) {
-    return this.http.get<Place>(`/api/museums/${id}`);
+    return this.http.get<Place>(`${this.apiUrl}/data/teams/${id}`);
   }
 }
