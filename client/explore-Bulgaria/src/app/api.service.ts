@@ -13,7 +13,7 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getHome() {
-    return this.http.get<Place[]>(`${this.apiUrl}/data/teams`);
+    return this.http.get<Place[]>(`${this.apiUrl}/data/places`);
   }
 
   createPlace(
@@ -24,19 +24,19 @@ export class ApiService {
     workTime: string
   ) {
     const payload = { name, image, city, description, workTime };
-    return this.http.post<Place>(`${this.apiUrl}/data/teams`, payload);
+    return this.http.post<Place>(`${this.apiUrl}/data/places`, payload);
   }
 
  
   getMuseums() {
-    return this.http.get<Museum[]>(`${this.apiUrl}/data/teams`);
+    return this.http.get<Museum[]>(`${this.apiUrl}/data/museums`);
   }
 
   getPlace(id: string) {
-    return this.http.get<Place>(`${this.apiUrl}/data/teams/${id}`);
+    return this.http.get<Place>(`${this.apiUrl}/data/places/${id}`);
   }
 
   getMuseum(id: string) {
-    return this.http.get<Place>(`${this.apiUrl}/data/teams/${id}`);
+    return this.http.get<Place>(`${this.apiUrl}/data/museums/${id}`);
   }
 }

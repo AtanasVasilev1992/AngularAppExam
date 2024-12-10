@@ -3,84 +3,76 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '../types/user';
 import { BehaviorSubject, Subscription, tap } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root',
 })
-export class UserService  implements OnDestroy {
-  
+export class UserService implements OnDestroy {
   private user$$ = new BehaviorSubject<User | undefined>(undefined);
   private user$ = this.user$$.asObservable();
-  
+
   user: User | undefined;
   USER_KEY = '[auth]';
 
-  userSubscrition: Subscription;
+  userSubscription: Subscription;
 
-  get isLoging(): boolean {
+  get isLoggedIn(): boolean {
     return !!this.user;
   }
 
+  private readonly API_URL = 'http://localhost:3030'; // Базовият URL на сървъра
+
   constructor(private http: HttpClient) {
-    this.userSubscrition = this.user$.subscribe((user) => {
+    this.userSubscription = this.user$.subscribe((user) => {
       this.user = user;
     });
   }
 
   login(email: string, password: string) {
-
-    return this.http.post<User>('/api/auth/login', { email, password }).pipe(
-      tap((user) => {
-        this.user$$.next(user);
-    
-      })
-    );
-  }
-
-  register(
-    email: string,
-    username: string,
-    password: string,
-    rePassword: string
-  ) {
-  
     return this.http
-      .post<User>('/api/auth/register', {
-        email,
-        username,
-        password,
-        rePassword,
-      })
-    .pipe(tap((user) => {
-
-      this.user$$.next(user)}));
-  }
-
-  // logout() {
-  //   return this.http
-  //     .post('/api/auth/logout', {})
-  //     .pipe(tap(() => {
-  //       this.user$$.next(undefined)}));
-  // }
-
-  logout() {
-    
-    return this.http
-      .get(`/api/auth/logout`, {})
+      .post<User>(`${this.API_URL}/users/login`, { email, password }, { withCredentials: true })
       .pipe(
-        tap(() => {
-          this.user$$.next(undefined);
-         this.user = undefined;
-
-        }),
+        tap((user) => {
+          this.user$$.next(user);
+        })
       );
   }
 
-  // getProfile() {
-  //   return this.http.get<User>('/api/auth/profile').pipe(tap((user) => this.user$$.next(user)))
-  // }
+  register(email: string, username: string, password: string, rePassword: string) {
+    return this.http
+      .post<User>(
+        `${this.API_URL}/users/register`,
+        { email, username, password, rePassword },
+        { withCredentials: true }
+      )
+      .pipe(
+        tap((user) => {
+          this.user$$.next(user);
+        })
+      );
+  }
+
+  logout() {
+    return this.http
+      .get(`${this.API_URL}/users/logout`, { withCredentials: true })
+      .pipe(
+        tap(() => {
+          this.user$$.next(undefined);
+          this.user = undefined;
+        })
+      );
+  }
+
+  getProfile() {
+    return this.http
+      .get<User>(`${this.API_URL}/users/me`, { withCredentials: true })
+      .pipe(
+        tap((user) => {
+          this.user$$.next(user);
+        })
+      );
+  }
 
   ngOnDestroy(): void {
-    this.userSubscrition.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 }

@@ -23,14 +23,14 @@ export class LoginComponent {
     // localStorage.setItem('')
 
     this.userService.login(email, password).subscribe(()=> {
-      // localStorage.setItem('[user]', 'token')
+      localStorage.setItem('[user]', 'token')
       this.router.navigate(['/'])
     })
     
   }
 
-  // logout(){
-  //   this.userService.logout();
-  //   this.router.navigate(['/'])
-  // }
+  logout(){
+    this.userService.logout();
+    this.router.navigate(['/'])
+  }
 }

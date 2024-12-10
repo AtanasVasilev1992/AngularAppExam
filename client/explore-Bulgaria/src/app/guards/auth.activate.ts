@@ -19,6 +19,6 @@ export class AuthActivate implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-        return this.userService.isLoging;
+        return this.userService.isLoggedIn;
     }
 }
