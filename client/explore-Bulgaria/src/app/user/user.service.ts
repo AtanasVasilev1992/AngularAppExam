@@ -1,7 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '../types/user';
-import { BehaviorSubject, Subscription, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
+
+interface LoginResponse {
+  accessToken: string;
+  _id: string;
+  email: string;
+  username: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -11,27 +19,54 @@ export class UserService implements OnDestroy {
   private user$ = this.user$$.asObservable();
 
   user: User | undefined;
-  USER_KEY = '[auth]';
+  private TOKEN_KEY = 'userToken';
 
   userSubscription: Subscription;
 
   get isLoggedIn(): boolean {
-    return !!this.user;
+    return !!this.getToken();
   }
 
-  private readonly API_URL = 'http://localhost:3030'; // Базовият URL на сървъра
+  private readonly API_URL = environment.apiUrl;
 
   constructor(private http: HttpClient) {
     this.userSubscription = this.user$.subscribe((user) => {
       this.user = user;
     });
+    
+    this.tryRestoreSession();
+  }
+
+  private getToken(): string | null {
+    return localStorage.getItem(this.TOKEN_KEY);
+  }
+
+  private tryRestoreSession() {
+    const token = this.getToken();
+    if (token) {
+      this.getProfile().subscribe({
+        error: () => this.logout()
+      });
+    }
   }
 
   login(email: string, password: string) {
     return this.http
-      .post<User>(`${this.API_URL}/users/login`, { email, password }, { withCredentials: true })
+      .post<LoginResponse>(`${this.API_URL}/users/login`, { email, password }, { withCredentials: true })
       .pipe(
-        tap((user) => {
+        tap((response) => {
+          // Записване на accessToken
+          localStorage.setItem(this.TOKEN_KEY, response.accessToken);
+          
+          // Създаване на обект потребител
+          const user: User = {
+            _id: response._id,
+            email: response.email,
+            username: response.username,
+            password: '', // не съхранявайте паролата
+            __v: 0
+          };
+          
           this.user$$.next(user);
         })
       );
@@ -39,13 +74,25 @@ export class UserService implements OnDestroy {
 
   register(email: string, username: string, password: string, rePassword: string) {
     return this.http
-      .post<User>(
+      .post<LoginResponse>(
         `${this.API_URL}/users/register`,
         { email, username, password, rePassword },
         { withCredentials: true }
       )
       .pipe(
-        tap((user) => {
+        tap((response) => {
+          // Записване на accessToken
+          localStorage.setItem(this.TOKEN_KEY, response.accessToken);
+          
+          // Създаване на обект потребител
+          const user: User = {
+            _id: response._id,
+            email: response.email,
+            username: response.username,
+            password: '', // не съхранявайте паролата
+            __v: 0
+          };
+          
           this.user$$.next(user);
         })
       );
@@ -56,6 +103,7 @@ export class UserService implements OnDestroy {
       .get(`${this.API_URL}/users/logout`, { withCredentials: true })
       .pipe(
         tap(() => {
+          localStorage.removeItem(this.TOKEN_KEY);
           this.user$$.next(undefined);
           this.user = undefined;
         })
@@ -63,8 +111,12 @@ export class UserService implements OnDestroy {
   }
 
   getProfile() {
+    const token = this.getToken();
     return this.http
-      .get<User>(`${this.API_URL}/users/me`, { withCredentials: true })
+      .get<User>(`${this.API_URL}/users/profile`, { 
+        headers: { 'X-Authorization': token || '' },
+        withCredentials: true 
+      })
       .pipe(
         tap((user) => {
           this.user$$.next(user);

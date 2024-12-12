@@ -14,23 +14,27 @@ export class LoginComponent {
   domains = EMAIL_DOMAINS;
   constructor(private userService: UserService, private router: Router){}
 
-  login(form: NgForm){
-    if(form.invalid){
-      return
+  login(form: NgForm) {
+    if (form.invalid) {
+      return;
     }
-
+  
     const { email, password } = form.value;
-    // localStorage.setItem('')
-
-    this.userService.login(email, password).subscribe(()=> {
-      localStorage.setItem('[user]', 'token')
-      this.router.navigate(['/'])
-    })
-    
+  
+    this.userService.login(email, password).subscribe({
+      next: () => {
+        // Токенът вече е записан в услугата
+        this.router.navigate(['/'])
+      },
+      error: (error) => {
+        console.error('Login failed:', error);
+      }
+    });
   }
 
-  logout(){
+  logout() {
+    localStorage.removeItem('userToken');
     this.userService.logout();
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
   }
 }

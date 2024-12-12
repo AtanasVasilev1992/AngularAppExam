@@ -13,10 +13,10 @@ export class AuthenticateComponent implements OnInit{
   ngOnInit(): void {
     this.userService.getProfile().subscribe({
       next: () => {
-        this.isAuthenticating = true; // Потребителят е автентикиран
+        this.isAuthenticating = false; // Потребителят е автентикиран
       },
       error: () => {
-        this.isAuthenticating = false; // Потребителят не е автентикиран
+        this.isAuthenticating = true; // Потребителят не е автентикиран
       }
     });
   }
