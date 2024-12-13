@@ -1,1 +1,43 @@
-<p>add-museum works!</p>
+<main>
+    <section id="register">
+        <div class="form">
+            <h2>Add New Museum</h2>
+            <form class="login-form" #form="ngForm">
+                <input type="text" name="name" id="name" museumholder="name" ngModel #inputName="ngModel" required
+                    minlength="5" />
+                <ng-container *ngIf="inputName.touched">
+                    <p *ngIf="inputName?.errors?.['required']">Name is required!</p>
+                    <p *ngIf="inputName?.errors?.['minlength']">Name must be at least 5 characters!</p>
+                </ng-container>
+
+                <input type="text" name="image" id="image" museumholder="image" ngModel #inputImage="ngModel" required />
+                <ng-container *ngIf="inputImage.touched">
+                    <p *ngIf="inputImage?.errors?.['required']">Image is required!</p>
+                </ng-container>
+
+
+                <input type="text" name="city" id="city" museumholder="city" ngModel #inputCity="ngModel" required
+                    minlength="3" />
+                <ng-container *ngIf="inputCity.touched">
+                    <p *ngIf="inputCity?.errors?.['required']">City is required!</p>
+                    <p *ngIf="inputCity?.errors?.['minlength']">City must be at least 3 characters!</p>
+                </ng-container>
+
+                <input type="text" name="description" id="description" museumholder="description" ngModel
+                    #inputDescrpition="ngModel" required minlength="10" />
+                <ng-container *ngIf="inputDescrpition.touched">
+                    <p *ngIf="inputDescrpition?.errors?.['required']">Description is required!</p>
+                    <p *ngIf="inputDescrpition?.errors?.['minlength']">Description must be at least 10 characters!</p>
+                </ng-container>
+
+                <input type="text" name="workTime" id="workTime" museumholder="Please type work time!" ngModel
+                    #inputWorkTime="ngModel" required />
+                <ng-container *ngIf="inputWorkTime.touched">
+                    <p *ngIf="inputWorkTime?.errors?.['required']">Work time is required!</p>
+                </ng-container>
+
+                <button (click)="addMuseum(form)">Create</button>
+            </form>
+        </div>
+    </section>
+</main>

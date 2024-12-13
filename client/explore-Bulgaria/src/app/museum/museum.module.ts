@@ -4,8 +4,8 @@ import { MuseumsComponent } from './museums/museums.component';
 import { AddMuseumComponent } from './add-museum/add-museum.component';
 import { DetailsMuseumComponent } from './details-museum/details-museum.component';
 import { MuseumRoutinModule } from './museum-routing.module';
-import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -18,8 +18,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     MuseumRoutinModule,
-    RouterModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   exports: [
     MuseumsComponent,

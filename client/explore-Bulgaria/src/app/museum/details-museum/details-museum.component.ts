@@ -21,7 +21,7 @@ export class DetailsMuseumComponent implements OnInit {
   
       this.apiService.getMuseum(id).subscribe((museum) => {
         this.museum = museum;
-        console.log('This must be a place',museum);
+        console.log('This must be a museum.',museum);
 
       });
 

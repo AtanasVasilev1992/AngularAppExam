@@ -27,6 +27,17 @@ export class ApiService {
     return this.http.post<Place>(`${this.apiUrl}/data/places`, payload);
   }
 
+  createMuseum(
+    name: string,
+    image: string,
+    city: string,
+    description: string,
+    workTime: string
+  ) {
+    const payload = { name, image, city, description, workTime };
+    return this.http.post<Museum>(`${this.apiUrl}/data/museums`, payload);
+  }
+
  
   getMuseums() {
     return this.http.get<Museum[]>(`${this.apiUrl}/data/museums`);

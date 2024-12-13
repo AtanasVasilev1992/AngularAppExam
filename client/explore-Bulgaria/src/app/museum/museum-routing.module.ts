@@ -5,12 +5,11 @@ import { AddMuseumComponent } from './add-museum/add-museum.component';
 import { DetailsMuseumComponent } from './details-museum/details-museum.component';
 import { AuthActivate } from '../guards/auth.activate';
 
-const routes: Routes = [{path: '', children: [
+const routes: Routes = [{path: 'museums', children: [
     {path: '', pathMatch: 'full', component: MuseumsComponent},
     {path: ':museumId', pathMatch: 'full', component: DetailsMuseumComponent},
-    
 ]},
-{path: 'add-museum', component: AddMuseumComponent,canActivate: [AuthActivate]},
+{path: 'add-museum', component: AddMuseumComponent, canActivate: [AuthActivate]},
 ] ;
 
 @NgModule({

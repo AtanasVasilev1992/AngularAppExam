@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '../types/user';
-import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, Subscription, tap, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 interface LoginResponse {
@@ -55,15 +55,13 @@ export class UserService implements OnDestroy {
       .post<LoginResponse>(`${this.API_URL}/users/login`, { email, password }, { withCredentials: true })
       .pipe(
         tap((response) => {
-          // Записване на accessToken
           localStorage.setItem(this.TOKEN_KEY, response.accessToken);
           
-          // Създаване на обект потребител
           const user: User = {
             _id: response._id,
             email: response.email,
             username: response.username,
-            password: '', // не съхранявайте паролата
+            password: '',
             __v: 0
           };
           
@@ -99,13 +97,28 @@ export class UserService implements OnDestroy {
   }
 
   logout() {
+    const token = this.getToken();
+    
     return this.http
-      .get(`${this.API_URL}/users/logout`, { withCredentials: true })
+      .get(`${this.API_URL}/users/logout`, { 
+        headers: { 
+          'X-Authorization': token || '' 
+        },
+        withCredentials: true 
+      })
       .pipe(
         tap(() => {
           localStorage.removeItem(this.TOKEN_KEY);
           this.user$$.next(undefined);
           this.user = undefined;
+        }),
+        catchError((error) => {
+          console.error('Logout error:', error);
+          localStorage.removeItem(this.TOKEN_KEY);
+          this.user$$.next(undefined);
+          this.user = undefined;
+          
+          return throwError(error);
         })
       );
   }

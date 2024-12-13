@@ -19,7 +19,7 @@
 
         <ng-container *ngIf="inputEmail.touched">
           <p class="Error" *ngIf="inputEmail.errors?.['required']">Email is required!</p>
-          <p class="Error" *ngIf="inputEmail.errors?.['emailValidator']">Email is invalid!</p>
+          <!-- <p class="Error" *ngIf="inputEmail.errors?.['emailValidator']">Email is invalid!</p> -->
         </ng-container>
 
      
@@ -33,12 +33,12 @@
           ngModel
           #inputPassword="ngModel"
           required
-          minlength="6">
+          minlength="4">
 
 
           <ng-container *ngIf="inputPassword.touched">
             <p class="Error" *ngIf="inputPassword.errors?.['required']">Password is required!</p>
-            <p class="Error" *ngIf="inputPassword.errors?.['minlength']">Password must be at least 6 characters!</p>
+            <p class="Error" *ngIf="inputPassword.errors?.['minlength']">Password must be at least 4 characters!</p>
           </ng-container>
         
         <hr>
