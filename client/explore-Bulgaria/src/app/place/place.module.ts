@@ -8,10 +8,6 @@ import { DetailsComponent } from './details/details.component';
 import { FormsModule } from '@angular/forms';
 import { EditPlaceComponent } from './edit-place/edit-place.component';
 
-
-
-
-
 @NgModule({
   declarations: [
     PlacesComponent,

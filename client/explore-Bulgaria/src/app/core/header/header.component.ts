@@ -20,9 +20,9 @@ export class HeaderComponent {
 
   logout() {
     this.userService.logout().subscribe({
-      next: () => this.router.navigate(['/api']),
+      next: () => this.router.navigate(['/api/']),
       error: () => {
-        this.router.navigate(['/api'])
+        this.router.navigate(['/api/'])
       }
     });
   }

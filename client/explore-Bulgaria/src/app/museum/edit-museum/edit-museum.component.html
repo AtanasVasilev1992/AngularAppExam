@@ -1,0 +1,81 @@
+<main>
+    <section id="edit-museum" *ngIf="!isLoading">
+        <div class="form">
+            <h2>Edit Museum</h2>
+            <form class="edit-form" #form="ngForm" (ngSubmit)="editMuseum(form)">
+                <input 
+                    type="text" 
+                    name="name" 
+                    id="name" 
+                    placeholder="Name" 
+                    [ngModel]="museum?.name"
+                    #inputName="ngModel" 
+                    required 
+                    minlength="5" 
+                />
+                <ng-container *ngIf="inputName.touched">
+                    <p *ngIf="inputName?.errors?.['required']">Name is required!</p>
+                    <p *ngIf="inputName?.errors?.['minlength']">Name must be at least 5 characters!</p>
+                </ng-container>
+
+                <input 
+                    type="text" 
+                    name="image" 
+                    id="image" 
+                    placeholder="Image URL" 
+                    [ngModel]="museum?.image"
+                    #inputImage="ngModel" 
+                    required 
+                />
+                <ng-container *ngIf="inputImage.touched">
+                    <p *ngIf="inputImage?.errors?.['required']">Image URL is required!</p>
+                </ng-container>
+
+                <input 
+                    type="text" 
+                    name="city" 
+                    id="city" 
+                    placeholder="City" 
+                    [ngModel]="museum?.city"
+                    #inputCity="ngModel" 
+                    required 
+                    minlength="3" 
+                />
+                <ng-container *ngIf="inputCity.touched">
+                    <p *ngIf="inputCity?.errors?.['required']">City is required!</p>
+                    <p *ngIf="inputCity?.errors?.['minlength']">City must be at least 3 characters!</p>
+                </ng-container>
+
+                <textarea 
+                    name="description" 
+                    id="description" 
+                    placeholder="Description" 
+                    [ngModel]="museum?.description"
+                    #inputDescription="ngModel" 
+                    required 
+                    minlength="10"
+                ></textarea>
+                <ng-container *ngIf="inputDescription.touched">
+                    <p *ngIf="inputDescription?.errors?.['required']">Description is required!</p>
+                    <p *ngIf="inputDescription?.errors?.['minlength']">Description must be at least 10 characters!</p>
+                </ng-container>
+
+                <input 
+                    type="text" 
+                    name="workTime" 
+                    id="workTime" 
+                    placeholder="Work Time" 
+                    [ngModel]="museum?.workTime"
+                    #inputWorkTime="ngModel" 
+                    required 
+                />
+                <ng-container *ngIf="inputWorkTime.touched">
+                    <p *ngIf="inputWorkTime?.errors?.['required']">Work time is required!</p>
+                </ng-container>
+
+                <button type="submit" [disabled]="form.invalid">Save Changes</button>
+            </form>
+        </div>
+    </section>
+    <app-loader *ngIf="isLoading"/>
+</main>

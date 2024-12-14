@@ -1,5 +1,5 @@
 export interface Place {
- '_id': string,
+    '_id': string,
     'name': string,
     'city': string,
     'image': string,

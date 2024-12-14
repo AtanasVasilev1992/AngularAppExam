@@ -1,11 +1,20 @@
+<div *ngIf="isLoading">
+    <app-loader />
+</div>
 
-<div>
+<div *ngIf="!isLoading">
     <h2>{{museum.name}}</h2>
-     <img src="{{museum.image}}" alt="Image of current place">
-     <p>Description: {{museum.description}}</p>
-     <p>Crated {{museum.createdAt | time}}.</p>
-     <p>Work time: {{museum.workTime}}.</p>
-     <button class="edit" style="background-color: green;">Edit</button>
-     <button class="delete" style="background-color: red;">Delete</button>
-     <button class="like" style="background-color: blue;">Like</button>
- </div>
+    <img [src]="museum.image" [alt]="museum.name">
+    <p>Description: {{museum.description}}</p>
+    <p>Created {{museum.createdAt | time}}.</p>
+    <p>Work time: {{museum.workTime}}.</p>
+    
+    <div class="actions" *ngIf="userService.user">
+        <ng-container *ngIf="isOwner">
+            <button class="edit" [routerLink]="['/museums/edit', museum._id]">Edit</button>
+            <button class="delete" (click)="deleteMuseum()">Delete</button>
+        </ng-container>
+        
+        <button class="like" *ngIf="!isOwner">Like</button>
+    </div>
+</div>

@@ -4,13 +4,19 @@ import { MuseumsComponent } from './museums/museums.component';
 import { AddMuseumComponent } from './add-museum/add-museum.component';
 import { DetailsMuseumComponent } from './details-museum/details-museum.component';
 import { AuthActivate } from '../guards/auth.activate';
+import { EditMuseumComponent } from './edit-museum/edit-museum.component';
 
-const routes: Routes = [{path: 'museums', children: [
-    {path: '', pathMatch: 'full', component: MuseumsComponent},
-    {path: ':museumId', pathMatch: 'full', component: DetailsMuseumComponent},
-]},
-{path: 'add-museum', component: AddMuseumComponent, canActivate: [AuthActivate]},
-] ;
+const routes: Routes = [
+  {
+    path: '', 
+    children: [
+      { path: '', component: MuseumsComponent },
+      { path: 'add', component: AddMuseumComponent, canActivate: [AuthActivate] },
+      { path: 'edit/:museumId', component: EditMuseumComponent },
+      { path: ':museumId', component: DetailsMuseumComponent },
+    ]
+  }
+];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

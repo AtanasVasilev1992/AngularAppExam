@@ -13,7 +13,7 @@ export class PlacesComponent implements OnInit {
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
-    this.api.getHome().subscribe((places) => {
+    this.api.getPlaces().subscribe((places) => {
      
       this.places = places;
       setTimeout(()=>{

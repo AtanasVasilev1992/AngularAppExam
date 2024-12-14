@@ -1,20 +1,23 @@
 <main>
-    <div *ngIf="isLoading"> 
+    <div *ngIf="isLoading">
         <app-loader />
-    </div> 
+    </div>
 
-    <div *ngIf="!isLoading" class="museum-title"> 
+    <div *ngIf="!isLoading" class="museum-title">
+        <div *ngIf="museums.length > 0" class="museum-title">
+            <div *ngFor="let museum of museums" class="museum-container">
+                <div class="card">
+                    <img [src]="museum.image" [alt]="museum.name" style="width:100%">
+                    <h1>{{museum.name}}</h1>
+                    <p class="title">{{museum.description}}</p>
 
-        <div  *ngFor="let museum of museums" class="museum-container">
-            <div class="card">
-                <img src="{{museum.image}}" alt="Image of museum" style="width:100%">
-                <h1>{{museum.name}}</h1>
-                <p class="title">{{museum.description}}</p>
-                
-                <p [routerLink]="museum._id"><button>More Info</button></p>
+                    <button [routerLink]="[museum._id]">More Info</button>
+                </div>
             </div>
         </div>
-    </div> 
 
-
+        <div *ngIf="museums.length === 0" class="no-museums">
+            <p>No museums found.</p>
+        </div>
+    </div>
 </main>

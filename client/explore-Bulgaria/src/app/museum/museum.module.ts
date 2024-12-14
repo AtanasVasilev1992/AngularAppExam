@@ -6,14 +6,14 @@ import { DetailsMuseumComponent } from './details-museum/details-museum.componen
 import { MuseumRoutinModule } from './museum-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
-
-
+import { EditMuseumComponent } from './edit-museum/edit-museum.component';
 
 @NgModule({
   declarations: [
     MuseumsComponent,
     AddMuseumComponent,
-    DetailsMuseumComponent
+    DetailsMuseumComponent,
+    EditMuseumComponent
   ],
   imports: [
     CommonModule,

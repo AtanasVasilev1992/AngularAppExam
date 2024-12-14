@@ -2,6 +2,7 @@ export interface Museum {
     '_id': string,
     'name': string,
     'image': string,
+    'city': string,
     'description': string,
     'workTime': string,
     '_ownerId': string,
@@ -9,4 +10,3 @@ export interface Museum {
     'updatedAt': string,
     '__v': number,
 }
-
