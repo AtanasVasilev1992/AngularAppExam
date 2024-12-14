@@ -12,6 +12,8 @@ import { UserService } from 'src/app/user/user.service';
 export class DetailsMuseumComponent implements OnInit {
   museum = {} as Museum;
   isLoading = true;
+  likes: number = 0;
+  hasLiked = false;
 
   constructor(
     private apiService: ApiService,
@@ -47,6 +49,8 @@ export class DetailsMuseumComponent implements OnInit {
         this.router.navigate(['/museums']);
       }
     });
+
+    this.loadLikes();
   }
 
   get isOwner(): boolean {
@@ -68,5 +72,23 @@ export class DetailsMuseumComponent implements OnInit {
         }
       });
     }
+  }
+
+  loadLikes() {
+    this.apiService.getLikes(this.museum._id).subscribe(likes => {
+      this.likes = likes.length;
+      this.hasLiked = likes.some(like => like.userId === this.userService.user?._id);
+    });
+  }
+
+  likeMuseum() {
+    if (!this.userService.user) return;
+    
+    this.apiService.likeMuseum(this.museum._id).subscribe({
+      next: () => {
+        this.loadLikes();
+      },
+      error: (err) => console.error('Error liking museum:', err)
+    });
   }
 }

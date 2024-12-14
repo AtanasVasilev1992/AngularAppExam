@@ -12,6 +12,8 @@ import { Place } from 'src/app/types/place';
 export class DetailsComponent implements OnInit {
   place = {} as Place;
   isLoading = true;
+  likes: number = 0;
+  hasLiked = false;
 
   constructor(
     private apiService: ApiService,
@@ -36,6 +38,8 @@ export class DetailsComponent implements OnInit {
         }
       });
     });
+
+    this.loadLikes();
   }
 
   get isOwner(): boolean {
@@ -61,5 +65,23 @@ export class DetailsComponent implements OnInit {
         }
       });
     }
+  }
+
+  loadLikes() {
+    this.apiService.getLikes(this.place._id).subscribe(likes => {
+      this.likes = likes.length;
+      this.hasLiked = likes.some(like => like.userId === this.userService.user?._id);
+    });
+  }
+
+  likePlace() {
+    if (!this.userService.user) return;
+    
+    this.apiService.likePlace(this.place._id).subscribe({
+      next: () => {
+        this.loadLikes();
+      },
+      error: (err) => console.error('Error liking place:', err)
+    });
   }
 }

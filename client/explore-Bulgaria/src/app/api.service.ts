@@ -104,4 +104,28 @@ export class ApiService {
     const payload = { name, image, city, description, workTime };
     return this.http.put<Museum>(`${this.apiUrl}/data/museums/${id}`, payload);
   }
+
+  likePlace(placeId: string) {
+    return this.http.post<{ likes: number }>(`${this.apiUrl}/data/likes`, { placeId });
+  }
+  
+  likeMuseum(museumId: string) {
+    return this.http.post<{ likes: number }>(`${this.apiUrl}/data/likes`, { museumId });
+  }
+  
+  getLikes(itemId: string) {
+    return this.http.get<{ userId: string, username: string }[]>(`${this.apiUrl}/data/likes/${itemId}`);
+  }
+  
+  getUserPlaces(userId: string) {
+    return this.http.get<Place[]>(`${this.apiUrl}/data/places?where=_ownerId%3D%22${userId}%22`);
+  }
+  
+  getUserMuseums(userId: string) {
+    return this.http.get<Museum[]>(`${this.apiUrl}/data/museums?where=_ownerId%3D%22${userId}%22`);
+  }
+  
+  getUserLikes(userId: string) {
+    return this.http.get<{ places: string[], museums: string[] }>(`${this.apiUrl}/data/likes?where=userId%3D%22${userId}%22`);
+  }
 }

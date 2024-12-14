@@ -1,1 +1,79 @@
-<p>My profile</p>
+<div class="profile-container">
+    <div *ngIf="isLoading">
+      <app-loader />
+    </div>
+  
+    <div *ngIf="!isLoading" class="profile-content">
+      <!-- Profile Info Section -->
+      <div class="profile-info">
+        <h2>Profile Information</h2>
+        <div *ngIf="!isEditMode">
+          <p>Username: {{userService.user?.username}}</p>
+          <p>Email: {{userService.user?.email}}</p>
+          <button (click)="toggleEditMode()">Edit Profile</button>
+        </div>
+        
+        <form *ngIf="isEditMode" #profileForm="ngForm" (ngSubmit)="updateProfile(profileForm.value)">
+          <!-- Form fields for editing -->
+          <button type="submit">Save Changes</button>
+          <button type="button" (click)="toggleEditMode()">Cancel</button>
+        </form>
+      </div>
+  
+      <!-- Tabs -->
+      <div class="content-tabs">
+        <button [class.active]="activeTab === 'created'" (click)="switchTab('created')">Created Items</button>
+        <button [class.active]="activeTab === 'liked'" (click)="switchTab('liked')">Liked Items</button>
+      </div>
+  
+      <!-- Created Content -->
+      <div *ngIf="activeTab === 'created'">
+        <div class="places-section">
+          <h3>Your Places</h3>
+          <div class="items-grid">
+            <div *ngFor="let place of userPlaces" class="item-card">
+              <img [src]="place.image" [alt]="place.name">
+              <h4>{{place.name}}</h4>
+              <button [routerLink]="['/places', place._id]">View Details</button>
+            </div>
+          </div>
+        </div>
+  
+        <div class="museums-section">
+          <h3>Your Museums</h3>
+          <div class="items-grid">
+            <div *ngFor="let museum of userMuseums" class="item-card">
+              <img [src]="museum.image" [alt]="museum.name">
+              <h4>{{museum.name}}</h4>
+              <button [routerLink]="['/museums', museum._id]">View Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Liked Content -->
+      <div *ngIf="activeTab === 'liked'">
+        <div class="places-section">
+          <h3>Liked Places</h3>
+          <div class="items-grid">
+            <div *ngFor="let place of likedPlaces" class="item-card">
+              <img [src]="place.image" [alt]="place.name">
+              <h4>{{place.name}}</h4>
+              <button [routerLink]="['/places', place._id]">View Details</button>
+            </div>
+          </div>
+        </div>
+  
+        <div class="museums-section">
+          <h3>Liked Museums</h3>
+          <div class="items-grid">
+            <div *ngFor="let museum of likedMuseums" class="item-card">
+              <img [src]="museum.image" [alt]="museum.name">
+              <h4>{{museum.name}}</h4>
+              <button [routerLink]="['/museums', museum._id]">View Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
