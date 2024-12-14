@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
+import { UserService } from 'src/app/user/user.service';
 import { Place } from 'src/app/types/place';
 
 @Component({
@@ -10,22 +11,55 @@ import { Place } from 'src/app/types/place';
 })
 export class DetailsComponent implements OnInit {
   place = {} as Place;
+  isLoading = true;
+
   constructor(
     private apiService: ApiService,
-    private activatedRoute: ActivatedRoute
+    public userService: UserService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((data) => {
       const id = data['placeId'];
   
-      this.apiService.getPlace(id).subscribe((place) => {
-        this.place = place;
-        console.log('This must be a place',place);
-
+      this.apiService.getPlace(id).subscribe({
+        next: (place) => {
+          this.place = place;
+          this.isLoading = false;
+          console.log('Place loaded:', place);
+        },
+        error: (err) => {
+          console.error('Error loading place:', err);
+          this.isLoading = false;
+        }
       });
-
-      // this.apiService.delete(id)
     });
+  }
+
+  get isOwner(): boolean {
+    if (!this.userService.user || !this.place._ownerId) {
+      return false;
+    }
+    
+    return this.userService.user._id === this.place._ownerId;
+  }
+
+  deletePlace(): void {
+    if (!this.isOwner) {
+      return;
+    }
+
+    if (confirm('Are you sure you want to delete this place?')) {
+      this.apiService.deletePlace(this.place._id).subscribe({
+        next: () => {
+          this.router.navigate(['/places']);
+        },
+        error: (err) => {
+          console.error('Delete failed:', err);
+        }
+      });
+    }
   }
 }

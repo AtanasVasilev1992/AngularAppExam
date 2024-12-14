@@ -54,6 +54,7 @@ export class UserService implements OnDestroy {
       { withCredentials: true }
     ).pipe(
       tap(response => {
+        console.log('Login response:', response); // Debug info
         this.authService.setTokens(response.accessToken, response.refreshToken);
         const user: User = {
           _id: response._id,

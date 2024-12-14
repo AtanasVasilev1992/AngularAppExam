@@ -1,10 +1,27 @@
-<div>
-   <h2>{{place.name}}</h2>
-    <img src="{{place.image}}" alt="Image of current place">
-    <p>Description: {{place.description}}</p>
-    <p>Crated {{place.createdAt | time}}.</p>
-    <p>Located in {{place.city}}.</p>
-    <button class="edit" style="background-color: green;">Edit</button>
-    <button class="delete" style="background-color: red;">Delete</button>
-    <button class="like" style="background-color: blue;">Like</button>
+<div *ngIf="isLoading">
+  <app-loader />
+</div>
+
+<div *ngIf="!isLoading">
+  <h2>{{place.name}}</h2>
+  <img src="{{place.image}}" alt="Image of current place">
+  <p>Description: {{place.description}}</p>
+  <p>Created {{place.createdAt | time}}.</p>
+  <p>Located in {{place.city}}.</p>
+  
+  <!-- Debug info -->
+  <div>
+    <p>Current user ID: {{userService.user?._id}}</p>
+    <p>Place owner ID: {{place._ownerId}}</p>
+    <p>Is owner: {{isOwner}}</p>
+  </div>
+  
+  <div class="actions">
+    <ng-container *ngIf="isOwner">
+      <button class="edit" [routerLink]="['/places/edit', place._id]">Edit</button>
+      <button class="delete" (click)="deletePlace()">Delete</button>
+    </ng-container>
+    
+    <button class="like" *ngIf="!isOwner && userService.user">Like</button>
+  </div>
 </div>

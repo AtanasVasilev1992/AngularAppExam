@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PlaceRoutinModule } from './place-routing.module';
 import { DetailsComponent } from './details/details.component';
 import { FormsModule } from '@angular/forms';
+import { EditPlaceComponent } from './edit-place/edit-place.component';
 
 
 
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     PlacesComponent,
     AddPlaceComponent,
-    DetailsComponent
+    DetailsComponent,
+    EditPlaceComponent
   ],
   imports: [
     CommonModule,
