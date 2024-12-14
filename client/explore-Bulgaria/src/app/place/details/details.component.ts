@@ -12,8 +12,10 @@ import { Place } from 'src/app/types/place';
 export class DetailsComponent implements OnInit {
   place = {} as Place;
   isLoading = true;
-  likes: number = 0;
-  hasLiked = false;
+  likesCount = 0;
+  hasUserLiked = false;
+  hasLiked: boolean | undefined;
+
 
   constructor(
     private apiService: ApiService,
@@ -68,20 +70,22 @@ export class DetailsComponent implements OnInit {
   }
 
   loadLikes() {
-    this.apiService.getLikes(this.place._id).subscribe(likes => {
-      this.likes = likes.length;
-      this.hasLiked = likes.some(like => like.userId === this.userService.user?._id);
-    });
+    if (this.place._id) {
+      this.apiService.getItemLikes(this.place._id).subscribe(likes => {
+        this.likesCount = likes.length;
+        this.hasLiked = likes.some(like => like._ownerId === this.userService.user?._id);
+      });
+    }
   }
 
-  likePlace() {
+  likeItem() {
     if (!this.userService.user) return;
-    
-    this.apiService.likePlace(this.place._id).subscribe({
+
+    this.apiService.addLike(this.place._id).subscribe({
       next: () => {
         this.loadLikes();
       },
-      error: (err) => console.error('Error liking place:', err)
+      error: (err) => console.error('Error liking item:', err)
     });
   }
 }

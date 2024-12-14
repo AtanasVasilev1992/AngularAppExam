@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Place } from './types/place';
 import { Museum } from './types/museum';
 import { catchError, tap, throwError } from 'rxjs';
+import { Like } from './types/user';
 
 @Injectable({
   providedIn: 'root',
@@ -127,5 +128,17 @@ export class ApiService {
   
   getUserLikes(userId: string) {
     return this.http.get<{ places: string[], museums: string[] }>(`${this.apiUrl}/data/likes?where=userId%3D%22${userId}%22`);
+  }
+  
+  addLike(itemId: string) {
+    return this.http.post<Like>(`${this.apiUrl}/data/likes`, { itemId });
+  }
+  
+  getLikesByUser(userId: string) {
+    return this.http.get<Like[]>(`${this.apiUrl}/data/likes?where=_ownerId%3D%22${userId}%22`);
+  }
+  
+  getItemLikes(itemId: string) {
+    return this.http.get<Like[]>(`${this.apiUrl}/data/likes?where=itemId%3D%22${itemId}%22`);
   }
 }

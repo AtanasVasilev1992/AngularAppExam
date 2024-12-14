@@ -14,3 +14,12 @@ export interface AuthResponse {
     password: string;
     __v: number;
   }
+
+  export interface Like {
+    _id: string;
+    userId: string;
+    itemId: string;
+    itemType: 'place' | 'museum';
+    _ownerId: string;
+    createdAt: string; 
+  }
