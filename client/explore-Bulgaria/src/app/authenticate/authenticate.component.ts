@@ -6,24 +6,23 @@ import { UserService } from '../user/user.service';
   templateUrl: './authenticate.component.html',
   styleUrls: ['./authenticate.component.css']
 })
-export class AuthenticateComponent implements OnInit{
+export class AuthenticateComponent implements OnInit {
   isAuthenticating = true;
-  router: any;
   constructor(private userService: UserService){}
 
   ngOnInit(): void {
-    if (this.userService.isLoggedIn) {
+    if (this.userService.isLoggedIn()) { // Извикваме като метод
       this.userService.getProfile().subscribe({
         next: () => {
-          this.isAuthenticating = false; 
-          this.router.navigate(['/']); 
+          this.isAuthenticating = false;
         },
         error: () => {
-          this.isAuthenticating = true; 
-          this.userService.logout(); 
+          this.isAuthenticating = true;
+          this.userService.logout().subscribe();
         }
       });
+    } else {
+      this.isAuthenticating = false;
     }
   }
-
 }

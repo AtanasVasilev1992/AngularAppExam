@@ -6,25 +6,22 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable, Provider } from '@angular/core';
-import { Observable, catchError, switchMap, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserService } from './user/user.service';
-import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 const { apiUrl } = environment;
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
   constructor(
-    private userService: UserService, 
-    private router: Router
-  ) {}
+    private authService: AuthService  ) {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('userToken');
+    const token = this.authService.getToken();
     
     if (token) {
       req = req.clone({
@@ -36,45 +33,10 @@ export class AppInterceptor implements HttpInterceptor {
 
     return next.handle(req).pipe(
       catchError((err) => {
-      
         if (err.status === 401 || err.status === 403) {
-          
-          return this.handleUnauthorizedError(req, next);
-        } else if (err.status === 0) {
-         
-          this.router.navigate(['/error'], { 
-            queryParams: { 
-              message: 'Моля, проверете интернет връзката си.' 
-            } 
-          });
+          this.authService.handleAuthError();
         }
-        return throwError(err);
-      })
-    );
-  }
-
-  private handleUnauthorizedError(
-    request: HttpRequest<any>, 
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    
-    return this.userService.refreshTokenRequest().pipe(
-      switchMap((response) => {
-       
-        const newRequest = request.clone({
-          setHeaders: {
-            'X-Authorization': response.accessToken
-          }
-        });
-        
-        
-        return next.handle(newRequest);
-      }),
-      catchError((error) => {
-        
-        this.userService.logout();
-        this.router.navigate(['/auth/login']);
-        return throwError(error);
+        return throwError(() => err);
       })
     );
   }

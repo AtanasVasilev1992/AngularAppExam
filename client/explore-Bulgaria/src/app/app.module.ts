@@ -7,14 +7,15 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { PlaceModule } from './place/place.module';
 import { CoreModule } from './core/core.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppInterceptorProvider } from './app.interceptor';
+import { AppInterceptor, AppInterceptorProvider } from './app.interceptor';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { MuseumModule } from './museum/museum.module';
+import { AuthService } from './auth.service';
 // import { PlacesComponent } from './place/places/places.component';
 
 @NgModule({
@@ -31,7 +32,11 @@ import { MuseumModule } from './museum/museum.module';
     ReactiveFormsModule,
     MuseumModule
   ],
-  providers: [AppInterceptorProvider],
+  providers: [ {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AppInterceptor,
+    multi: true
+  }, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
