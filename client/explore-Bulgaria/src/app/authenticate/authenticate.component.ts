@@ -8,17 +8,22 @@ import { UserService } from '../user/user.service';
 })
 export class AuthenticateComponent implements OnInit{
   isAuthenticating = true;
+  router: any;
   constructor(private userService: UserService){}
 
   ngOnInit(): void {
-    this.userService.getProfile().subscribe({
-      next: () => {
-        this.isAuthenticating = false; // Потребителят е автентикиран
-      },
-      error: () => {
-        this.isAuthenticating = true; // Потребителят не е автентикиран
-      }
-    });
+    if (this.userService.isLoggedIn) {
+      this.userService.getProfile().subscribe({
+        next: () => {
+          this.isAuthenticating = false; 
+          this.router.navigate(['/']); 
+        },
+        error: () => {
+          this.isAuthenticating = true; 
+          this.userService.logout(); 
+        }
+      });
+    }
   }
 
 }
