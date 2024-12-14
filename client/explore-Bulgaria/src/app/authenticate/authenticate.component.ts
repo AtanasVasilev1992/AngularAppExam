@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user/user.service';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { catchError, EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-authenticate',
@@ -8,17 +11,34 @@ import { UserService } from '../user/user.service';
 })
 export class AuthenticateComponent implements OnInit {
   isAuthenticating = true;
-  constructor(private userService: UserService){}
+
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    if (this.userService.isLoggedIn()) { // Извикваме като метод
-      this.userService.getProfile().subscribe({
-        next: () => {
+    if (this.authService.getToken()) {
+      this.userService.getProfile().pipe(
+        catchError((err) => {
+          console.error('Authentication error:', err);
+          this.authService.clearTokens();
           this.isAuthenticating = false;
-        },
-        error: () => {
-          this.isAuthenticating = true;
-          this.userService.logout().subscribe();
+          this.router.navigate(['/auth/login']);
+          return EMPTY;
+        })
+      ).subscribe({
+        next: (user) => {
+          if (user) {
+            console.log('Authentication successful');
+            this.isAuthenticating = false;
+          } else {
+            console.log('Invalid authentication response');
+            this.authService.clearTokens();
+            this.isAuthenticating = false;
+            this.router.navigate(['/auth/login']);
+          }
         }
       });
     } else {

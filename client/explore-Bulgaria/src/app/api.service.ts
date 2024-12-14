@@ -30,8 +30,6 @@ export class ApiService {
       tap((response: any) => console.log('Created place:', response))
     );
   }
-  
-  
 
   createMuseum(
     name: string,

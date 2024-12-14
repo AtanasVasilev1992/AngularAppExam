@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription, of, throwError } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { User } from '../types/user';
@@ -32,17 +32,30 @@ export class UserService implements OnDestroy {
     private http: HttpClient,
     private authService: AuthService
   ) {
-    this.tryAutoLogin();
+    this.autoLoadProfile();
   }
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');
   }
 
-  private tryAutoLogin() {
-    if (this.authService.isAuthenticated()) {
-      this.getProfile().subscribe({
-        next: (user) => this.user$$.next(user),
-        error: () => this.authService.clearTokens()
+  private autoLoadProfile() {
+    if (this.authService.getToken()) {
+      this.getProfile().pipe(
+        catchError((err) => {
+          console.error('Error loading profile:', err);
+          this.authService.clearTokens();
+          return EMPTY;
+        })
+      ).subscribe({
+        next: (user) => {
+          if (user) {
+            console.log('Auto-loaded user profile:', user);
+            this.user$$.next(user);
+          } else {
+            console.log('Invalid user profile response');
+            this.authService.clearTokens();
+          }
+        }
       });
     }
   }
@@ -106,19 +119,14 @@ export class UserService implements OnDestroy {
   }
 
   getProfile(): Observable<User> {
-    const token = this.authService.getToken();
-    return this.http.get<User>(
-      `${this.API_URL}/users/profile`,
-      {
-        headers: { 'X-Authorization': token || '' },
-        withCredentials: true
+    return this.http.get<User>(`${this.API_URL}/users/me`, {
+      headers: {
+        'X-Authorization': this.authService.getToken() || ''
       }
-    ).pipe(
-      tap(user => this.user$$.next(user))
-    );
+    });
   }
 
   isLoggedIn(): boolean {
-    return this.authService.isAuthenticated();
+    return !!this.user$$.value && !!this.authService.getToken();
   }
 }
