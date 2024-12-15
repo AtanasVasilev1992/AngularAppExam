@@ -16,6 +16,7 @@ export class DetailsMuseumComponent implements OnInit {
   likesCount = 0;
   hasLiked = false;
   currentLike: Like | null = null;
+  showDeleteDialog = false;
 
   constructor(
     private apiService: ApiService,
@@ -60,17 +61,26 @@ export class DetailsMuseumComponent implements OnInit {
       return;
     }
 
-    if (confirm('Are you sure you want to delete this museum?')) {
-      this.apiService.deleteMuseum(this.museum._id).subscribe({
-        next: () => {
-          this.router.navigate(['/museums']);
-        },
-        error: (err) => {
-          console.error('Delete failed:', err);
-        }
-      });
-    }
+    this.showDeleteDialog = true;
   }
+
+  confirmDelete(): void {
+    this.apiService.deletePlace(this.museum._id).subscribe({
+      next: () => {
+        this.showDeleteDialog = false;
+        this.router.navigate(['/museums']);
+      },
+      error: (err) => {
+        console.error('Delete failed:', err);
+        this.showDeleteDialog = false;
+      }
+    });
+  }
+
+  cancelDelete(): void {
+    this.showDeleteDialog = false;
+  }
+
 
   loadLikes() {
     this.apiService.getItemLikes(this.museum._id).subscribe({
