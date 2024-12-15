@@ -5,16 +5,20 @@
     </div> 
 
     <div *ngIf="!isLoading" class="place-title"> 
-
-        <div  *ngFor="let place of places" class="place-container">
+        <div *ngFor="let place of paginatedPlaces" class="place-container">
             <div class="card">
-                <img src="{{place.image}}" alt="Image of place" style="width:100%">
+                <img [src]="place.image" [alt]="place.name" style="width:100%">
                 <h1>{{place.name}}</h1>
                 <p class="title">{{place.description}}</p>
-                
                 <p [routerLink]="place._id"><button>More Info</button></p>
-              </div>
+            </div>
         </div>
-    </div> 
+    </div>
 
+    <app-pagination 
+        [currentPage]="currentPage"
+        [totalPages]="totalPages"
+        [itemsPerPage]="itemsPerPage"
+        (pageChange)="onPageChange($event)"
+    ></app-pagination>
 </main>

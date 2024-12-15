@@ -10,27 +10,44 @@ import { Museum } from 'src/app/types/museum';
 export class MuseumsComponent implements OnInit {
   museums: Museum[] = [];
   isLoading = true;
+  currentPage = 1;
+  itemsPerPage = 3;
+  totalItems = 0;
+
+  get totalPages(): number {
+      return Math.ceil(this.totalItems / this.itemsPerPage);
+    }
+  
+    get paginatedMuseums(): Museum[] {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      return this.museums.slice(start, start + this.itemsPerPage);
+    }
+  
 
   constructor(private api: ApiService, private injector: Injector) {
     console.log('MuseumsComponent constructed');
   }
 
   ngOnInit(): void {
-    console.log('MuseumsComponent initializing');
-    
+    this.loadMuseums();
+  }
+
+  loadMuseums() {
+    this.isLoading = true;
     this.api.getMuseums().subscribe({
       next: (museums) => {
-        console.log('Museums received:', museums);
         this.museums = museums;
-        setTimeout(() => {
-          this.isLoading = false;
-          console.log('Loading complete');
-        }, 500);
+        this.totalItems = museums.length;
+        this.isLoading = false;
       },
-      error: (error) => {
-        console.error('Error loading museums:', error);
+      error: (err) => {
+        console.error('Error loading museums:', err);
         this.isLoading = false;
       }
     });
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
   }
 }

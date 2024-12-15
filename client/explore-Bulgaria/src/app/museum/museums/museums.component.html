@@ -1,23 +1,23 @@
 <main>
-    <div *ngIf="isLoading">
+    <div *ngIf="isLoading"> 
         <app-loader />
-    </div>
+    </div> 
 
-    <div *ngIf="!isLoading" class="museum-title">
-        <div *ngIf="museums.length > 0" class="museum-title">
-            <div *ngFor="let museum of museums" class="museum-container">
-                <div class="card">
-                    <img [src]="museum.image" [alt]="museum.name" style="width:100%">
-                    <h1>{{museum.name}}</h1>
-                    <p class="title">{{museum.description}}</p>
-
-                    <button [routerLink]="[museum._id]">More Info</button>
-                </div>
+    <div *ngIf="!isLoading" class="museum-title"> 
+        <div *ngFor="let museum of paginatedMuseums" class="place-container">
+            <div class="card">
+                <img [src]="museum.image" [alt]="museum.name" style="width:100%">
+                <h1>{{museum.name}}</h1>
+                <p class="title">{{museum.description}}</p>
+                <p [routerLink]="museum._id"><button>More Info</button></p>
             </div>
         </div>
-
-        <div *ngIf="museums.length === 0" class="no-museums">
-            <p>No museums found.</p>
-        </div>
     </div>
+
+    <app-pagination 
+        [currentPage]="currentPage"
+        [totalPages]="totalPages"
+        [itemsPerPage]="itemsPerPage"
+        (pageChange)="onPageChange($event)"
+    ></app-pagination>
 </main>
