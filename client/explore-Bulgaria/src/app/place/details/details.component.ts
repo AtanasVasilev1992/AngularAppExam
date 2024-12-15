@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { UserService } from 'src/app/user/user.service';
 import { Place } from 'src/app/types/place';
+import { Like } from 'src/app/types/like';
 
 @Component({
   selector: 'app-details',
@@ -13,9 +14,8 @@ export class DetailsComponent implements OnInit {
   place = {} as Place;
   isLoading = true;
   likesCount = 0;
-  hasUserLiked = false;
-  hasLiked: boolean | undefined;
-
+  hasLiked = false;
+  currentLike: Like | null = null;
 
   constructor(
     private apiService: ApiService,
@@ -27,21 +27,23 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((data) => {
       const id = data['placeId'];
-  
-      this.apiService.getPlace(id).subscribe({
-        next: (place) => {
-          this.place = place;
-          this.isLoading = false;
-          console.log('Place loaded:', place);
-        },
-        error: (err) => {
-          console.error('Error loading place:', err);
-          this.isLoading = false;
-        }
-      });
+      this.loadPlace(id);
     });
+  }
 
-    this.loadLikes();
+  loadPlace(id: string) {
+    this.apiService.getPlace(id).subscribe({
+      next: (place) => {
+        this.place = place;
+        this.loadLikes();
+        this.isLoading = false;
+        console.log('Place loaded:', place);
+      },
+      error: (err) => {
+        console.error('Error loading place:', err);
+        this.isLoading = false;
+      }
+    });
   }
 
   get isOwner(): boolean {
@@ -70,22 +72,43 @@ export class DetailsComponent implements OnInit {
   }
 
   loadLikes() {
-    if (this.place._id) {
-      this.apiService.getItemLikes(this.place._id).subscribe(likes => {
+    this.apiService.getItemLikes(this.place._id).subscribe({
+      next: (likes) => {
         this.likesCount = likes.length;
-        this.hasLiked = likes.some(like => like._ownerId === this.userService.user?._id);
-      });
-    }
+        if (this.userService.user) {
+          const userLike = likes.find(like => like._ownerId === this.userService.user?._id);
+          this.hasLiked = !!userLike;
+          this.currentLike = userLike || null;
+        }
+      },
+      error: (err) => console.error('Error loading likes:', err)
+    });
   }
 
-  likeItem() {
-    if (!this.userService.user) return;
+  toggleLike() {
+    if (!this.userService.user) {
+      this.router.navigate(['/auth/login']);
+      return;
+    }
 
-    this.apiService.addLike(this.place._id).subscribe({
-      next: () => {
-        this.loadLikes();
-      },
-      error: (err) => console.error('Error liking item:', err)
-    });
+    if (this.hasLiked && this.currentLike) {
+      this.apiService.removeLike(this.currentLike._id).subscribe({
+        next: () => {
+          this.hasLiked = false;
+          this.currentLike = null;
+          this.likesCount--;
+        },
+        error: (err) => console.error('Error removing like:', err)
+      });
+    } else {
+      this.apiService.addLike(this.place._id).subscribe({
+        next: (like) => {
+          this.hasLiked = true;
+          this.currentLike = like;
+          this.likesCount++;
+        },
+        error: (err) => console.error('Error adding like:', err)
+      });
+    }
   }
 }

@@ -1,27 +1,59 @@
-<div *ngIf="isLoading">
-  <app-loader />
-</div>
-
-<div *ngIf="!isLoading">
-  <h2>{{place.name}}</h2>
-  <img src="{{place.image}}" alt="Image of current place">
-  <p>Description: {{place.description}}</p>
-  <p>Created {{place.createdAt | time}}.</p>
-  <p>Located in {{place.city}}.</p>
-  
-  <!-- Debug info -->
-  <div>
-    <p>Current user ID: {{userService.user?._id}}</p>
-    <p>Place owner ID: {{place._ownerId}}</p>
-    <p>Is owner: {{isOwner}}</p>
+<div class="details-container">
+  <div *ngIf="isLoading" class="loader-container">
+    <app-loader />
   </div>
-  
-  <div class="actions">
-    <ng-container *ngIf="isOwner">
-      <button class="edit" [routerLink]="['/places/edit', place._id]">Edit</button>
-      <button class="delete" (click)="deletePlace()">Delete</button>
-    </ng-container>
-    
-    <button class="like" *ngIf="!isOwner && userService.user">Like</button>
+
+  <div *ngIf="!isLoading" class="place-details">
+    <div class="image-container">
+      <img [src]="place.image" [alt]="place.name" class="main-image">
+    </div>
+
+    <div class="content-container">
+      <div class="header">
+        <h1 class="title">{{place.name}}</h1>
+        <div class="location">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>{{place.city}}</span>
+        </div>
+      </div>
+
+      <div class="description-section">
+        <h3>About this place</h3>
+        <p class="description">{{place.description}}</p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <i class="far fa-clock"></i>
+          <p>Created</p>
+          <span>{{place.createdAt | time}}</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-heart"></i>
+          <p>Likes</p>
+          <span>{{likesCount}}</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <ng-container *ngIf="isOwner">
+          <button class="edit-btn" [routerLink]="['/places/edit', place._id]">
+            <i class="fas fa-edit"></i> Edit
+          </button>
+          <button class="delete-btn" (click)="deletePlace()">
+            <i class="fas fa-trash-alt"></i> Delete
+          </button>
+        </ng-container>
+        
+        <button 
+          class="like-btn" 
+          [class.liked]="hasLiked"
+          (click)="toggleLike()" 
+          *ngIf="!isOwner && userService.user">
+          <i class="fas" [class.fa-heart]="hasLiked" [class.fa-heart-o]="!hasLiked"></i>
+          {{hasLiked ? 'Unlike' : 'Like'}} ({{likesCount}})
+        </button>
+      </div>
+    </div>
   </div>
 </div>

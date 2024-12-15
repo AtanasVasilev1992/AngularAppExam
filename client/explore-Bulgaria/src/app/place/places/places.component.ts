@@ -11,7 +11,7 @@ export class PlacesComponent implements OnInit {
   places: Place[] = [];
   isLoading = true;
   currentPage = 1;
-  itemsPerPage = 6;
+  itemsPerPage = 3;
   totalItems = 0;
 
   get totalPages(): number {

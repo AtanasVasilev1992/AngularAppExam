@@ -3,9 +3,10 @@ import { ApiService } from '../../api.service';
 import { UserService } from '../user.service';
 import { Place } from '../../types/place';
 import { Museum } from '../../types/museum';
-import { Like, User } from '../../types/user';
+// import { Like, User } from '../../types/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { catchError, forkJoin, of } from 'rxjs';
+import { Like } from '../../types/like';
 
 @Component({
   selector: 'app-profile',
@@ -93,14 +94,16 @@ export class ProfileComponent implements OnInit {
   }
 
   loadLikedItems(likes: Like[]) {
-    likes.forEach(like => {
-      this.apiService.getPlace(like.itemId).pipe(
+    const itemIds = new Set(likes.map(like => like.itemId));
+    
+    itemIds.forEach(itemId => {
+      this.apiService.getPlace(itemId).pipe(
         catchError(() => of(null))
       ).subscribe(place => {
         if (place) {
           this.likedPlaces.push(place);
         } else {
-          this.apiService.getMuseum(like.itemId).pipe(
+          this.apiService.getMuseum(itemId).pipe(
             catchError(() => of(null))
           ).subscribe(museum => {
             if (museum) {
@@ -111,6 +114,7 @@ export class ProfileComponent implements OnInit {
       });
     });
   }
+  
   switchTab(tab: 'created' | 'liked') {
     this.activeTab = tab;
   }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Museum } from 'src/app/types/museum';
 import { UserService } from 'src/app/user/user.service';
+import { Like } from 'src/app/types/like';
 
 @Component({
   selector: 'app-details-museum',
@@ -12,8 +13,9 @@ import { UserService } from 'src/app/user/user.service';
 export class DetailsMuseumComponent implements OnInit {
   museum = {} as Museum;
   isLoading = true;
-  likes: number = 0;
+  likesCount = 0;
   hasLiked = false;
+  currentLike: Like | null = null;
 
   constructor(
     private apiService: ApiService,
@@ -23,38 +25,34 @@ export class DetailsMuseumComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe({
-      next: (params) => {
-        const museumId = params['museumId'];
-        if (!museumId) {
-          this.router.navigate(['/museums']);
-          return;
-        }
+    this.activatedRoute.params.subscribe((data) => {
+      const id = data['museumId'];
+      this.loadMuseum(id);
+    });
+  }
 
-        this.apiService.getMuseum(museumId).subscribe({
-          next: (museum) => {
-            this.museum = museum;
-            this.isLoading = false;
-            console.log('Museum loaded:', museum);
-          },
-          error: (err) => {
-            console.error('Error loading museum:', err);
-            this.isLoading = false;
-            this.router.navigate(['/museums']);
-          }
-        });
+  loadMuseum(id: string) {
+    this.apiService.getMuseum(id).subscribe({
+      next: (museum) => {
+        this.museum = museum;
+        this.loadLikes();
+        this.isLoading = false;
+        console.log('Museum loaded:', museum);
       },
       error: (err) => {
-        console.error('Error getting params:', err);
+        console.error('Error loading museum:', err);
+        this.isLoading = false;
         this.router.navigate(['/museums']);
       }
     });
-
-    this.loadLikes();
   }
 
   get isOwner(): boolean {
-    return this.userService.user?._id === this.museum._ownerId;
+    if (!this.userService.user || !this.museum._ownerId) {
+      return false;
+    }
+    
+    return this.userService.user._id === this.museum._ownerId;
   }
 
   deleteMuseum(): void {
@@ -75,20 +73,43 @@ export class DetailsMuseumComponent implements OnInit {
   }
 
   loadLikes() {
-    this.apiService.getLikes(this.museum._id).subscribe(likes => {
-      this.likes = likes.length;
-      this.hasLiked = likes.some(like => like.userId === this.userService.user?._id);
+    this.apiService.getItemLikes(this.museum._id).subscribe({
+      next: (likes: Like[]) => {
+        this.likesCount = likes.length;
+        if (this.userService.user) {
+          const userLike = likes.find(like => like._ownerId === this.userService.user?._id);
+          this.hasLiked = !!userLike;
+          this.currentLike = userLike || null;
+        }
+      },
+      error: (err: Error) => console.error('Error loading likes:', err)
     });
   }
 
-  likeMuseum() {
-    if (!this.userService.user) return;
-    
-    this.apiService.likeMuseum(this.museum._id).subscribe({
-      next: () => {
-        this.loadLikes();
-      },
-      error: (err) => console.error('Error liking museum:', err)
-    });
+  toggleLike() {
+    if (!this.userService.user) {
+      this.router.navigate(['/auth/login']);
+      return;
+    }
+
+    if (this.hasLiked && this.currentLike) {
+      this.apiService.removeLike(this.currentLike._id).subscribe({
+        next: () => {
+          this.hasLiked = false;
+          this.currentLike = null;
+          this.likesCount--;
+        },
+        error: (err: Error) => console.error('Error removing like:', err)
+      });
+    } else {
+      this.apiService.addLike(this.museum._id).subscribe({
+        next: (like: Like) => {
+          this.hasLiked = true;
+          this.currentLike = like;
+          this.likesCount++;
+        },
+        error: (err: Error) => console.error('Error adding like:', err)
+      });
+    }
   }
 }

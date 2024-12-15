@@ -4,14 +4,14 @@
   align-items: center;
   min-height: 80vh;
   padding: 20px;
-  background-color: #f8f9fa;
+  background-color: skyblue;
 }
 
 .form-container {
   width: 100%;
   max-width: 400px;
-  padding: 30px;
-  background: white;
+  padding: 4em;
+  background: rgb(143, 209, 235);
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
