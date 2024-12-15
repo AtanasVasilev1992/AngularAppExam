@@ -1,82 +1,97 @@
 <div class="profile-container">
-  <div *ngIf="isLoading">
-    <app-loader />
+  <div class="profile-header">
+    <div class="user-info">
+      <h2>{{ userService.user?.username }}'s Profile</h2>
+      <p>{{ userService.user?.email }}</p>
+    </div>
   </div>
 
-  <div *ngIf="!isLoading" class="profile-content">
-    <!-- Profile Info Section -->
-    <div class="profile-info">
-      <h2>Profile Information</h2>
-      <div *ngIf="!isEditMode">
-        <p>Username: {{userService.user?.username}}</p>
-        <p>Email: {{userService.user?.email}}</p>
-        <button (click)="toggleEditMode()">Edit Profile</button>
-      </div>
-      
-      <form *ngIf="isEditMode" [formGroup]="editForm" (ngSubmit)="updateProfile()">
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input id="username" type="text" formControlName="username">
-          <div *ngIf="editForm.get('username')?.touched && editForm.get('username')?.errors?.['required']">
-            Username is required
-          </div>
-          <div *ngIf="editForm.get('username')?.touched && editForm.get('username')?.errors?.['minlength']">
-            Username must be at least 5 characters
-          </div>
-        </div>
+  <div class="content-tabs">
+    <button 
+      [class.active]="activeTab === 'created'"
+      (click)="activeTab = 'created'">
+      My Content
+    </button>
+    <button 
+      [class.active]="activeTab === 'liked'"
+      (click)="activeTab = 'liked'">
+      Liked Content
+    </button>
+  </div>
 
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input id="email" type="email" formControlName="email">
-          <div *ngIf="editForm.get('email')?.touched && editForm.get('email')?.errors?.['required']">
-            Email is required
-          </div>
-          <div *ngIf="editForm.get('email')?.touched && editForm.get('email')?.errors?.['email']">
-            Please enter a valid email
-          </div>
-        </div>
-
-        <button type="submit" [disabled]="editForm.invalid">Save Changes</button>
-        <button type="button" (click)="toggleEditMode()">Cancel</button>
-      </form>
-    </div>
-
-    <!-- Tabs -->
-    <div class="content-tabs">
-      <button [class.active]="activeTab === 'created'" (click)="switchTab('created')">Created Items</button>
-      <button [class.active]="activeTab === 'liked'" (click)="switchTab('liked')">Liked Items</button>
-    </div>
-
-    <!-- Created Content -->
-    <div *ngIf="activeTab === 'created'">
-      <div class="places-section">
-        <h3>Your Places</h3>
-        <div class="items-grid">
-          <div *ngFor="let place of userPlaces" class="item-card">
-            <img [src]="place.image" [alt]="place.name">
+  <div class="content-section" *ngIf="activeTab === 'created'">
+    <div class="places-section" *ngIf="userPlaces.length > 0">
+      <h3>My Places</h3>
+      <div class="grid-container">
+        <div *ngFor="let place of userPlaces" class="content-card">
+          <img [src]="place.image" [alt]="place.name">
+          <div class="card-content">
             <h4>{{place.name}}</h4>
+            <p>{{place.city}}</p>
             <button [routerLink]="['/places', place._id]">View Details</button>
           </div>
-          <p *ngIf="userPlaces.length === 0">You haven't created any places yet.</p>
-        </div>
-      </div>
-
-      <div class="museums-section">
-        <h3>Your Museums</h3>
-        <div class="items-grid">
-          <div *ngFor="let museum of userMuseums" class="item-card">
-            <img [src]="museum.image" [alt]="museum.name">
-            <h4>{{museum.name}}</h4>
-            <button [routerLink]="['/museums', museum._id]">View Details</button>
-          </div>
-          <p *ngIf="userMuseums.length === 0">You haven't created any museums yet.</p>
         </div>
       </div>
     </div>
 
-    <!-- Liked Content -->
-    <div *ngIf="activeTab === 'liked'">
-      <!-- Similar structure for liked places and museums -->
+    <div class="museums-section" *ngIf="userMuseums.length > 0">
+      <h3>My Museums</h3>
+      <div class="grid-container">
+        <div *ngFor="let museum of userMuseums" class="content-card">
+          <img [src]="museum.image" [alt]="museum.name">
+          <div class="card-content">
+            <h4>{{museum.name}}</h4>
+            <p>{{museum.city}}</p>
+            <button [routerLink]="['/museums', museum._id]">View Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="userPlaces.length === 0 && userMuseums.length === 0" class="empty-state">
+      <p>You haven't created any content yet.</p>
+      <div class="action-buttons">
+        <button routerLink="/add-place">Add Place</button>
+        <button routerLink="/museums/add">Add Museum</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section" *ngIf="activeTab === 'liked'">
+    <div class="places-section" *ngIf="likedPlaces.length > 0">
+      <h3>Liked Places</h3>
+      <div class="grid-container">
+        <div *ngFor="let place of likedPlaces" class="content-card">
+          <img [src]="place.image" [alt]="place.name">
+          <div class="card-content">
+            <h4>{{place.name}}</h4>
+            <p>{{place.city}}</p>
+            <button [routerLink]="['/places', place._id]">View Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="museums-section" *ngIf="likedMuseums.length > 0">
+      <h3>Liked Museums</h3>
+      <div class="grid-container">
+        <div *ngFor="let museum of likedMuseums" class="content-card">
+          <img [src]="museum.image" [alt]="museum.name">
+          <div class="card-content">
+            <h4>{{museum.name}}</h4>
+            <p>{{museum.city}}</p>
+            <button [routerLink]="['/museums', museum._id]">View Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="likedPlaces.length === 0 && likedMuseums.length === 0" class="empty-state">
+      <p>You haven't liked any content yet.</p>
+      <div class="action-buttons">
+        <button routerLink="/places">Browse Places</button>
+        <button routerLink="/museums">Browse Museums</button>
+      </div>
     </div>
   </div>
 </div>
