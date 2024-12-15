@@ -1,19 +1,17 @@
  
-  footer {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 16px; 
-    text-align: center;
-  }
+footer {
+  position: fixed; 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2em;
+  text-align: center;
+  background: #222; 
+  color: skyblue;
+}
 
-  
-  footer p {
-    text-align: center;
-    background: #222;
-    color: skyblue;
-    margin: 0;
-    padding: 0;
-    font-size: 18 em;
-}   
+footer p {
+  margin: 0; 
+  padding: 0.5em; 
+  font-size: 1em;
+}
