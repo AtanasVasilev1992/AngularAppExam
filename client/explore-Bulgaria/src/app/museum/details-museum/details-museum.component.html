@@ -1,20 +1,59 @@
-<div *ngIf="isLoading">
+<div class="details-container">
+  <div *ngIf="isLoading" class="loader-container">
     <app-loader />
-</div>
+  </div>
 
-<div *ngIf="!isLoading">
-    <h2>{{museum.name}}</h2>
-    <img [src]="museum.image" [alt]="museum.name">
-    <p>Description: {{museum.description}}</p>
-    <p>Created {{museum.createdAt | time}}.</p>
-    <p>Work time: {{museum.workTime}}.</p>
-    
-    <div class="actions" *ngIf="userService.user">
+  <div *ngIf="!isLoading" class="museum-details">
+    <div class="image-container">
+      <img [src]="museum.image" [alt]="museum.name" class="main-image">
+    </div>
+
+    <div class="content-container">
+      <div class="header">
+        <h1 class="title">{{museum.name}}</h1>
+        <div class="location">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>{{museum.city}}</span>
+        </div>
+      </div>
+
+      <div class="description-section">
+        <h3>About this museum</h3>
+        <p class="description">{{museum.description}}</p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <i class="far fa-clock"></i>
+          <p>Created</p>
+          <span>{{museum.createdAt | time}}</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-heart"></i>
+          <p>Likes</p>
+          <span>{{likesCount}}</span>
+        </div>
+      </div>
+
+      <div class="actions">
         <ng-container *ngIf="isOwner">
-            <button class="edit" [routerLink]="['/museums/edit', museum._id]">Edit</button>
-            <button class="delete" (click)="deleteMuseum()">Delete</button>
+          <button class="edit-btn" [routerLink]="['/museums/edit', museum._id]">
+            <i class="fas fa-edit"></i> Edit
+          </button>
+          <button class="delete-btn" (click)="deleteMuseum()">
+            <i class="fas fa-trash-alt"></i> Delete
+          </button>
         </ng-container>
         
-        <button class="like" *ngIf="!isOwner">Like</button>
+        <button 
+          class="like-btn" 
+          [class.liked]="hasLiked"
+          (click)="toggleLike()" 
+          *ngIf="!isOwner && userService.user">
+          <i class="fas" [class.fa-heart]="hasLiked" [class.fa-heart-o]="!hasLiked"></i>
+          {{hasLiked ? 'Unlike' : 'Like'}} ({{likesCount}})
+        </button>
+      </div>
     </div>
+  </div>
 </div>
