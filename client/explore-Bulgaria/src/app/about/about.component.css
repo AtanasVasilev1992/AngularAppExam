@@ -122,32 +122,27 @@
     display: flex;
     gap: 20px;
     justify-content: center;
-    margin-top: 30px;
-  }
-  
-  .cta-btn {
-    padding: 12px 30px;
+    margin-top: 40px;
+}
+
+.cta-btn {
+    padding: 15px 30px;
     border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
-  }
-  
-  .cta-btn:first-child {
-    background-color: rgb(44, 123, 98);
-    color: white;
-  }
-  
-  .cta-btn.secondary {
-    background-color: transparent;
-    border: 2px solid rgb(44, 123, 98);
+}
+
+.cta-btn:first-child {
+    background-color: white;
     color: rgb(44, 123, 98);
-  }
-  
-  .cta-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
+}
+
+.cta-btn.secondary {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+}
   
   /* Responsive Design */
   @media (max-width: 768px) {

@@ -4,14 +4,13 @@
   align-items: center;
   min-height: 80vh;
   padding: 20px;
-  background-color: rgb(44, 123, 98);
 }
 
 .form-container {
   width: 100%;
   max-width: 400px;
   padding: 4em;
-  background: rgb(59, 139, 114);
+  background:  rgb(50, 112, 93);
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -132,7 +131,7 @@ input.ng-invalid.ng-touched {
 .submit-btn {
   width: 100%;
   padding: 12px;
-  background-color: rgb(181, 225, 114);
+  background-color: rgb(155, 180, 118);
   color: white;
   border: none;
   border-radius: 6px;
