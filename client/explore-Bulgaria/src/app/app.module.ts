@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-//import { UserModule } from './user/user.module';
 import { SharedModule } from './shared/shared.module';
 import { PlaceModule } from './place/place.module';
 import { CoreModule } from './core/core.module';
@@ -16,13 +15,11 @@ import { AppInterceptor, AppInterceptorProvider } from './app.interceptor';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { MuseumModule } from './museum/museum.module';
 import { AuthService } from './auth.service';
-// import { PlacesComponent } from './place/places/places.component';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent, HomeComponent, AuthenticateComponent],
   imports: [
     BrowserModule,
-    //UserModule,
     SharedModule,
     PlaceModule,
     CoreModule,
