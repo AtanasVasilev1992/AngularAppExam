@@ -1,0 +1,47 @@
+<section class="comments-section">
+    <h3>Comments</h3>
+
+    <div *ngIf="isLoading" class="loading-spinner">
+        <app-loader />
+    </div>
+
+    <div *ngIf="!isLoading" class="comments-container">
+        
+        <div *ngIf="userService.user" class="comment-form">
+            <textarea 
+                [(ngModel)]="newComment"
+                placeholder="Add your comment..."
+                rows="3"
+            ></textarea>
+            <button 
+                (click)="addComment()"
+                [disabled]="!newComment.trim()"
+                class="submit-btn"
+            >
+                Post Comment
+            </button>
+        </div>
+
+        <!-- Comments List -->
+        <div class="comments-list">
+            <div *ngFor="let comment of comments" class="comment-item">
+                <div class="comment-header">
+                    <span class="username">{{comment.username}}</span>
+                    <span class="date">{{comment.createdAt | time}}</span>
+                </div>
+                <p class="comment-text">{{comment.text}}</p>
+                <button 
+                    *ngIf="isCommentOwner(comment)"
+                    (click)="deleteComment(comment._id)"
+                    class="delete-btn"
+                >
+                    Delete
+                </button>
+            </div>
+            
+            <div *ngIf="comments.length === 0" class="no-comments">
+                No comments yet. Be the first to comment!
+            </div>
+        </div>
+    </div>
+</section>

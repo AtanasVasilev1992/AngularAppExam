@@ -7,6 +7,7 @@ import { PlaceRoutinModule } from './place-routing.module';
 import { DetailsComponent } from './details/details.component';
 import { FormsModule } from '@angular/forms';
 import { EditPlaceComponent } from './edit-place/edit-place.component';
+import { CommentsModule } from '../comments/comments.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { EditPlaceComponent } from './edit-place/edit-place.component';
     CommonModule,
     SharedModule,
     PlaceRoutinModule,
-    FormsModule
+    FormsModule,
+    CommentsModule
   ],
   exports: [
     PlacesComponent,

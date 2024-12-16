@@ -19,7 +19,7 @@ import { AboutComponent } from './about/about.component';
 import { JoinSectionComponent } from './about/join-section/join-section.component';
 
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent, HomeComponent, AuthenticateComponent, AboutComponent, JoinSectionComponent],
+  declarations: [AppComponent, NotFoundComponent, HomeComponent, AuthenticateComponent, AboutComponent, JoinSectionComponent,],
   imports: [
     BrowserModule,
     SharedModule,
@@ -29,7 +29,7 @@ import { JoinSectionComponent } from './about/join-section/join-section.componen
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MuseumModule
+    MuseumModule,
   ],
   providers: [ {
     provide: HTTP_INTERCEPTORS,

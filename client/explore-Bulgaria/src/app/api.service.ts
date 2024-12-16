@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Place } from './types/place';
 import { Museum } from './types/museum';
 import { Like } from './types/like';
+import { Comment } from './types/comment';
 import { Observable, catchError, forkJoin, map, tap, throwError } from 'rxjs';
 
 @Injectable({
@@ -20,9 +21,9 @@ export class ApiService {
   }
 
   getPlace(id: string): Observable<Place> {
-    return this.http.get<Place>(`${this.apiUrl}/data/places/${id}`).pipe(
-      tap(response => console.log('Fetched place:', response))
-    );
+    return this.http
+      .get<Place>(`${this.apiUrl}/data/places/${id}`)
+      .pipe(tap((response) => console.log('Fetched place:', response)));
   }
 
   createPlace(
@@ -53,14 +54,16 @@ export class ApiService {
   }
 
   getUserPlaces(userId: string): Observable<Place[]> {
-    return this.http.get<Place[]>(`${this.apiUrl}/data/places?where=_ownerId%3D%22${userId}%22`);
+    return this.http.get<Place[]>(
+      `${this.apiUrl}/data/places?where=_ownerId%3D%22${userId}%22`
+    );
   }
 
   // Museums Methods
   getMuseums(): Observable<Museum[]> {
     return this.http.get<Museum[]>(`${this.apiUrl}/data/museums`).pipe(
-      tap(response => console.log('Museums loaded:', response)),
-      catchError(error => {
+      tap((response) => console.log('Museums loaded:', response)),
+      catchError((error) => {
         console.error('Error loading museums:', error);
         return throwError(() => error);
       })
@@ -69,8 +72,8 @@ export class ApiService {
 
   getMuseum(id: string): Observable<Museum> {
     return this.http.get<Museum>(`${this.apiUrl}/data/museums/${id}`).pipe(
-      tap(museum => console.log('Museum loaded:', museum)),
-      catchError(error => {
+      tap((museum) => console.log('Museum loaded:', museum)),
+      catchError((error) => {
         console.error('Error loading museum:', error);
         return throwError(() => error);
       })
@@ -105,7 +108,9 @@ export class ApiService {
   }
 
   getUserMuseums(userId: string): Observable<Museum[]> {
-    return this.http.get<Museum[]>(`${this.apiUrl}/data/museums?where=_ownerId%3D%22${userId}%22`);
+    return this.http.get<Museum[]>(
+      `${this.apiUrl}/data/museums?where=_ownerId%3D%22${userId}%22`
+    );
   }
 
   // Likes Methods
@@ -118,38 +123,70 @@ export class ApiService {
   }
 
   getItemLikes(itemId: string): Observable<Like[]> {
-    return this.http.get<Like[]>(`${this.apiUrl}/data/likes?where=itemId%3D%22${itemId}%22`);
-  }
-
-  getLikesByUser(userId: string): Observable<Like[]> {
-    return this.http.get<Like[]>(`${this.apiUrl}/data/likes?where=_ownerId%3D%22${userId}%22`);
-  }
-
-  hasUserLiked(itemId: string, userId: string): Observable<boolean> {
     return this.http.get<Like[]>(
-      `${this.apiUrl}/data/likes?where=itemId%3D%22${itemId}%22%20and%20_ownerId%3D%22${userId}%22`
-    ).pipe(
-      map(likes => likes.length > 0)
+      `${this.apiUrl}/data/likes?where=itemId%3D%22${itemId}%22`
     );
   }
 
-  search(searchTerm: string): Observable<{ places: Place[], museums: Museum[] }> {
+  getLikesByUser(userId: string): Observable<Like[]> {
+    return this.http.get<Like[]>(
+      `${this.apiUrl}/data/likes?where=_ownerId%3D%22${userId}%22`
+    );
+  }
+
+  hasUserLiked(itemId: string, userId: string): Observable<boolean> {
+    return this.http
+      .get<Like[]>(
+        `${this.apiUrl}/data/likes?where=itemId%3D%22${itemId}%22%20and%20_ownerId%3D%22${userId}%22`
+      )
+      .pipe(map((likes) => likes.length > 0));
+  }
+
+  search(
+    searchTerm: string
+  ): Observable<{ places: Place[]; museums: Museum[] }> {
     const searchTermLower = searchTerm.toLowerCase();
-    
+
     return forkJoin({
       places: this.getPlaces().pipe(
-        map(places => places.filter(place => 
-          place.name.toLowerCase().includes(searchTermLower) ||
-          place.city.toLowerCase().includes(searchTermLower) ||
-          place.description.toLowerCase().includes(searchTermLower)
-        ))
+        map((places) =>
+          places.filter(
+            (place) =>
+              place.name.toLowerCase().includes(searchTermLower) ||
+              place.city.toLowerCase().includes(searchTermLower) ||
+              place.description.toLowerCase().includes(searchTermLower)
+          )
+        )
       ),
       museums: this.getMuseums().pipe(
-        map(museums => museums.filter(museum => 
-          museum.name.toLowerCase().includes(searchTermLower) ||
-          museum.description.toLowerCase().includes(searchTermLower)
-        ))
-      )
+        map((museums) =>
+          museums.filter(
+            (museum) =>
+              museum.name.toLowerCase().includes(searchTermLower) ||
+              museum.description.toLowerCase().includes(searchTermLower)
+          )
+        )
+      ),
     });
+  }
+
+  // Comments methods
+  addComment(itemId: string, text: string) {
+    return this.http.post<Comment>(`${this.apiUrl}/data/comments`, {
+      itemId,
+      text,
+    });
+  }
+
+  getCommentsByItem(itemId: string) {
+    return this.http.get<Comment[]>(
+      `${this.apiUrl}/data/comments?where=itemId%3D%22${itemId}%22`
+    );
+  }
+
+  deleteComment(commentId: string) {
+    return this.http.delete<Comment>(
+      `${this.apiUrl}/data/comments/${commentId}`
+    );
   }
 }

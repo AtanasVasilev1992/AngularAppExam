@@ -7,6 +7,7 @@ import { MuseumRoutinModule } from './museum-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditMuseumComponent } from './edit-museum/edit-museum.component';
+import { CommentsModule } from '../comments/comments.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { EditMuseumComponent } from './edit-museum/edit-museum.component';
     MuseumRoutinModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommentsModule
   ],
   exports: [
     MuseumsComponent,
