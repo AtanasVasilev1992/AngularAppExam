@@ -5,6 +5,11 @@
       <form class="login-form" #form="ngForm" (ngSubmit)="login(form)">
         <div class="form-group">
           <label for="email">Email</label>
+
+          <div class="error-box" *ngIf="errorMessage">
+            <p class="error-message">{{errorMessage}}</p>
+          </div>
+
           <input 
             type="text"
             name="email"
@@ -41,7 +46,10 @@
           </div>
         </div>
 
-        <button class="submit-btn" [disabled]="form.invalid">Login</button>
+         <button 
+        class="submit-btn" 
+        [disabled]="form.invalid"
+      >Login</button>
       </form>
 
       <div class="redirect-prompt">

@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
+  errorMessage: string = '';
+
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -30,7 +32,7 @@ export class RegisterComponent {
     ),
   });
 
-  register(): void {
+   register(): void {
     if (this.form.invalid) {
       return;
     }
@@ -43,8 +45,17 @@ export class RegisterComponent {
 
     this.userService
       .register(email!, username!, password!, rePassword!)
-      .subscribe(() => {
-        this.router.navigate(['/']);
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: (error) => {
+          if (error.status === 409) {
+            this.errorMessage = 'This email is already registered';
+          } else {
+            this.errorMessage = 'Registration error. Please try again.';
+          }
+        }
       });
   }
 }

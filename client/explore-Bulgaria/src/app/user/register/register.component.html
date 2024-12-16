@@ -5,6 +5,11 @@
       <form class="register-form" [formGroup]="form" (ngSubmit)="register()">
         <div class="form-group">
           <label for="email">Email</label>
+
+          <div class="error-box" *ngIf="errorMessage">
+            <p class="error-message">{{errorMessage}}</p>
+          </div>
+          
           <input 
             type="email" 
             id="email"

@@ -12,6 +12,7 @@ import { EMAIL_DOMAINS } from 'src/environments/environment';
 })
 export class LoginComponent {
   domains = EMAIL_DOMAINS;
+  errorMessage: string | undefined;
   constructor(private userService: UserService, private router: Router){}
 
   login(form: NgForm) {
@@ -23,11 +24,16 @@ export class LoginComponent {
   
     this.userService.login(email, password).subscribe({
       next: () => {
-        // Токенът вече е записан в услугата
         this.router.navigate(['/'])
       },
       error: (error) => {
-        console.error('Login failed:', error);
+        if (error.status === 403) {
+          this.errorMessage = 'Incorrect email or password';
+        } else if (error.status === 409) {
+          this.errorMessage = 'This email is not registered';
+        } else {
+          this.errorMessage = 'Login error. Please try again.';
+        }
       }
     });
   }
