@@ -4,6 +4,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { ErrorComponent } from './error/error.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,15 +13,18 @@ import { ErrorComponent } from './error/error.component';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    ErrorComponent
+    ErrorComponent,
+    SearchResultsComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    SearchResultsComponent
   ]
 })
 export class CoreModule { }

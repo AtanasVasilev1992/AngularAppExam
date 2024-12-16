@@ -10,7 +10,23 @@
               <a routerLink="/museums">Museums</a>
               <a routerLink="/auth/login">Login</a>
               <a routerLink="auth/register">Register</a>
+              <div class="search-container">
+                <input 
+                  type="text"
+                  [(ngModel)]="searchTerm"
+                  (ngModelChange)="onSearch()"
+                  (blur)="hideResults()"
+                  placeholder="Search..."
+                  class="search-input"
+                >
+                <app-search-results
+                  [places]="searchResults.places"
+                  [museums]="searchResults.museums"
+                  [isVisible]="showResults"
+                ></app-search-results>
+              </div>
           </div>
+
           <div *ngIf="isLoggedIn" class="mini-navbar">
               <a routerLink="/places">Places</a>
               <a routerLink="/add-place">New Place</a>
@@ -18,11 +34,27 @@
               <a routerLink="/museums/add">New Museum</a>
               <a routerLink="/auth/profile">{{username}}'s Profile</a>
               <a (click)="logout()">Logout</a>
-           
+              
+              <div class="search-container">
+                <input 
+                  type="text"
+                  [(ngModel)]="searchTerm"
+                  (input)="onSearch()"
+                  (blur)="hideResults()"
+                  placeholder="Search..."
+                  class="search-input"
+                >
+                <app-search-results
+                  *ngIf="showResults"
+                  [places]="searchResults.places"
+                  [museums]="searchResults.museums"
+                  [isVisible]="showResults"
+                  (resultClick)="clearSearch()"
+                ></app-search-results>
+              </div>
           </div>
         </ul>
       </nav>
-
     </div>
   </div>
 </header>

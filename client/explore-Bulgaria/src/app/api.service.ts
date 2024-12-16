@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Place } from './types/place';
 import { Museum } from './types/museum';
 import { Like } from './types/like';
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { Observable, catchError, forkJoin, map, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -131,5 +131,25 @@ export class ApiService {
     ).pipe(
       map(likes => likes.length > 0)
     );
+  }
+
+  search(searchTerm: string): Observable<{ places: Place[], museums: Museum[] }> {
+    const searchTermLower = searchTerm.toLowerCase();
+    
+    return forkJoin({
+      places: this.getPlaces().pipe(
+        map(places => places.filter(place => 
+          place.name.toLowerCase().includes(searchTermLower) ||
+          place.city.toLowerCase().includes(searchTermLower) ||
+          place.description.toLowerCase().includes(searchTermLower)
+        ))
+      ),
+      museums: this.getMuseums().pipe(
+        map(museums => museums.filter(museum => 
+          museum.name.toLowerCase().includes(searchTermLower) ||
+          museum.description.toLowerCase().includes(searchTermLower)
+        ))
+      )
+    });
   }
 }

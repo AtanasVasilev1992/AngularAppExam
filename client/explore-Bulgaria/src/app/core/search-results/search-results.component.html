@@ -1,0 +1,30 @@
+<div class="search-results" *ngIf="isVisible">
+    <div class="results-section" *ngIf="places.length > 0">
+      <h3>Places</h3>
+      <div class="result-item" *ngFor="let place of places | slice:0:3">
+        <img [src]="place.image" [alt]="place.name">
+        <div class="item-info">
+          <h4>{{place.name}}</h4>
+          <p>{{place.city}}</p>
+        </div>
+        <a [routerLink]="['/places', place._id]" class="view-link" (click)="onResultClick()">View</a>
+      </div>
+      <a [routerLink]="['/places']" class="see-all" *ngIf="places.length > 3">See all places ({{places.length}})</a>
+    </div>
+  
+    <div class="results-section" *ngIf="museums.length > 0">
+      <h3>Museums</h3>
+      <div class="result-item" *ngFor="let museum of museums | slice:0:3">
+        <img [src]="museum.image" [alt]="museum.name">
+        <div class="item-info">
+          <h4>{{museum.name}}</h4>
+        </div>
+        <a [routerLink]="['/museums', museum._id]" class="view-link" (click)="onResultClick()">View</a>
+      </div>
+      <a [routerLink]="['/museums']" class="see-all" *ngIf="museums.length > 3">See all museums ({{museums.length}})</a>
+    </div>
+  
+    <div class="no-results" *ngIf="places.length === 0 && museums.length === 0">
+      No results found
+    </div>
+  </div>

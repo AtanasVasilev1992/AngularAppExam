@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/user/user.service';
+import { ApiService } from 'src/app/api.service';
+import { Place } from 'src/app/types/place';
+import { Museum } from 'src/app/types/museum';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +11,47 @@ import { UserService } from 'src/app/user/user.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor(private userService: UserService, private router: Router){}
+  searchTerm: string = '';
+  searchResults: { places: Place[], museums: Museum[] } = { places: [], museums: [] };
+  showResults = false;
+
+  constructor(
+    private apiService: ApiService,
+    public userService: UserService,
+    private router: Router
+  ) {}
+
+  onSearch() {
+    if (this.searchTerm.length >= 2) {
+      this.apiService.search(this.searchTerm).subscribe(results => {
+        this.searchResults = results;
+        this.showResults = true;
+      });
+    } else {
+      this.searchResults = { places: [], museums: [] };
+      this.showResults = false;
+    }
+  }
+
+  
+  clearSearch() {
+    this.searchTerm = '';
+    this.searchResults = { places: [], museums: [] };
+    this.showResults = false;
+  }
+
+  hideResults() {
+    setTimeout(() => {
+      this.clearSearch();
+    }, 200);
+  }
+
+  onResultClick() {
+    this.clearSearch();
+  }
 
   get isLoggedIn(): boolean {
-    return this.userService.isLoggedIn(); 
+    return this.userService.isLoggedIn();
   }
 
   get username(): string {
@@ -20,9 +60,9 @@ export class HeaderComponent {
 
   logout() {
     this.userService.logout().subscribe({
-      next: () => this.router.navigate(['/api/']),
+      next: () => this.router.navigate(['/api']),
       error: () => {
-        this.router.navigate(['/api/'])
+        this.router.navigate(['/api'])
       }
     });
   }
