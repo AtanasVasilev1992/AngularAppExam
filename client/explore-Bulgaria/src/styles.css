@@ -41,3 +41,30 @@ h1, h2, h3, h4, h5, h6 {
 body {
   background-color: rgb(44, 123, 98);
 }
+
+ /* Typography  */
+
+ :root {
+  --heading-font: 'Montserrat', sans-serif;
+  --body-font: 'Open Sans', sans-serif;
+}
+
+body {
+  font-family: var(--body-font);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font);
+  font-weight: 600;
+}
+
+.logo {
+  font-family: var(--heading-font);
+  font-weight: 700;
+}
+
+.nav-links {
+  font-family: var(--body-font);
+  font-weight: 500;
+}
