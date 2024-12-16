@@ -5,9 +5,8 @@ import { EmailDirective } from './validators/email.directive';
 import { TimePipe } from './pipes/time.pipe';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-
-
-
+import { ShortenTextPipe } from './pipes/shorten-text.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -16,11 +15,18 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     TimePipe,
     PaginationComponent,
     ConfirmDialogComponent,
-
+    ShortenTextPipe,
+    FilterPipe,
   ],
-  imports: [
-    CommonModule
+  imports: [CommonModule],
+  exports: [
+    LoaderComponent,
+    EmailDirective,
+    TimePipe,
+    PaginationComponent,
+    ConfirmDialogComponent,
+    ShortenTextPipe,
+    FilterPipe
   ],
-  exports: [LoaderComponent, EmailDirective, TimePipe, PaginationComponent, ConfirmDialogComponent],
 })
-export class SharedModule { }
+export class SharedModule {}

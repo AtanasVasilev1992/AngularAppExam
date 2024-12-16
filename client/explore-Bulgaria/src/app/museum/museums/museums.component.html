@@ -8,7 +8,7 @@
             <div class="card">
                 <img [src]="museum.image" [alt]="museum.name" style="width:100%">
                 <h1>{{museum.name}}</h1>
-                <p class="title">{{museum.description}}</p>
+                <p class="description">{{museum.description | shortenText:20}}</p>
                 <p [routerLink]="museum._id"><button>More Info</button></p>
             </div>
         </div>
