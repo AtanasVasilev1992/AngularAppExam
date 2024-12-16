@@ -32,14 +32,7 @@
 </div>
 
 <div *ngIf="!isLoggedIn">
-    <div class="cta-section">
-        <div class="container">
-            <h2>Start Your Journey Today</h2>
-            <p>Join our community and explore the beauty of Bulgaria</p>
-            <div class="cta-buttons">
-                <a routerLink="/auth/register" class="cta-btn">Sign Up Now</a>
-                <a routerLink="/auth/login" class="cta-btn secondary">Login</a>
-            </div>
-        </div>
-    </div>
+    <div *ngIf="!isLoggedIn">
+        <app-join-section/>
+      </div>
 </div>

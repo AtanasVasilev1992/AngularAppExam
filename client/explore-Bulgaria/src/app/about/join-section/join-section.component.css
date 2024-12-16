@@ -1,0 +1,39 @@
+.join-section {
+    text-align: center;
+    padding: 60px 0;
+  }
+  
+  .join-section h2 {
+    color: white;
+    margin-bottom: 20px;
+  }
+
+  .join-section p {
+    color: white;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+  }
+  
+  .cta-btn {
+    padding: 15px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .cta-btn:first-child {
+    background-color: white;
+    color: rgb(44, 123, 98);
+  }
+  
+  .cta-btn.secondary {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+  }
