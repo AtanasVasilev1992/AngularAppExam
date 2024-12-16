@@ -4,21 +4,20 @@
     align-items: center;
     min-height: calc(100vh - 80px);
     padding: 20px;
-    background-color: #f8f9fa;
   }
   
   .form-container {
     width: 100%;
     max-width: 600px;
     padding: 30px;
-    background: white;
+    background:  rgb(50, 112, 93);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
   h1 {
     text-align: center;
-    color: #333;
+    color: white;
     margin-bottom: 30px;
     font-size: 24px;
     font-weight: 600;
@@ -35,7 +34,7 @@
   label {
     display: block;
     margin-bottom: 8px;
-    color: #555;
+    color: rgb(232, 227, 227);
     font-weight: 500;
   }
   
@@ -72,7 +71,7 @@
   .submit-btn {
     width: 100%;
     padding: 14px;
-    background-color: #4a90e2;
+    background-color: rgb(155, 180, 118);
     color: white;
     border: none;
     border-radius: 6px;
@@ -84,7 +83,7 @@
   }
   
   .submit-btn:hover:not(:disabled) {
-    background-color: #357abd;
+    background-color: rgb(149, 213, 54);
   }
   
   .submit-btn:disabled {
