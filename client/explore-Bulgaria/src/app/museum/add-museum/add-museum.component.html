@@ -2,23 +2,19 @@
     <div class="form-container">
       <h1>Add New Museum</h1>
       <div class="form-wrapper">
-        <form class="add-place-form" #form="ngForm" (ngSubmit)="addMuseum(form)">
+        <form class="add-place-form" [formGroup]="museumForm" (ngSubmit)="addMuseum()">
           <div class="form-group">
             <label for="name">Name</label>
             <input 
               type="text"
-              name="name"
               id="name"
               class="form-control"
               placeholder="Enter museum name"
-              ngModel
-              #inputName="ngModel"
-              required
-              minlength="5"
+              formControlName="name"
             >
-            <div class="error-container" *ngIf="inputName.touched">
-              <p class="error-message" *ngIf="inputName?.errors?.['required']">Name is required!</p>
-              <p class="error-message" *ngIf="inputName?.errors?.['minlength']">Name must be at least 5 characters!</p>
+            <div class="error-container" *ngIf="f['name'].touched">
+              <p class="error-message" *ngIf="f['name'].errors?.['required']">Name is required!</p>
+              <p class="error-message" *ngIf="f['name'].errors?.['minlength']">Name must be at least 5 characters!</p>
             </div>
           </div>
   
@@ -26,16 +22,13 @@
             <label for="image">Image URL</label>
             <input 
               type="text"
-              name="image"
               id="image"
               class="form-control"
               placeholder="Enter image URL"
-              ngModel
-              #inputImage="ngModel"
-              required
+              formControlName="image"
             >
-            <div class="error-container" *ngIf="inputImage.touched">
-              <p class="error-message" *ngIf="inputImage?.errors?.['required']">Image URL is required!</p>
+            <div class="error-container" *ngIf="f['image'].touched">
+              <p class="error-message" *ngIf="f['image'].errors?.['required']">Image URL is required!</p>
             </div>
           </div>
   
@@ -43,37 +36,29 @@
             <label for="city">City</label>
             <input 
               type="text"
-              name="city"
               id="city"
               class="form-control"
               placeholder="Enter city name"
-              ngModel
-              #inputCity="ngModel"
-              required
-              minlength="3"
+              formControlName="city"
             >
-            <div class="error-container" *ngIf="inputCity.touched">
-              <p class="error-message" *ngIf="inputCity?.errors?.['required']">City is required!</p>
-              <p class="error-message" *ngIf="inputCity?.errors?.['minlength']">City must be at least 3 characters!</p>
+            <div class="error-container" *ngIf="f['city'].touched">
+              <p class="error-message" *ngIf="f['city'].errors?.['required']">City is required!</p>
+              <p class="error-message" *ngIf="f['city'].errors?.['minlength']">City must be at least 3 characters!</p>
             </div>
           </div>
   
           <div class="form-group">
             <label for="description">Description</label>
             <textarea
-              name="description"
               id="description"
               class="form-control"
               placeholder="Enter museum description"
-              ngModel
-              #inputDescrpition="ngModel"
-              required
-              minlength="10"
+              formControlName="description"
               rows="4"
             ></textarea>
-            <div class="error-container" *ngIf="inputDescrpition.touched">
-              <p class="error-message" *ngIf="inputDescrpition?.errors?.['required']">Description is required!</p>
-              <p class="error-message" *ngIf="inputDescrpition?.errors?.['minlength']">Description must be at least 10 characters!</p>
+            <div class="error-container" *ngIf="f['description'].touched">
+              <p class="error-message" *ngIf="f['description'].errors?.['required']">Description is required!</p>
+              <p class="error-message" *ngIf="f['description'].errors?.['minlength']">Description must be at least 10 characters!</p>
             </div>
           </div>
   
@@ -81,20 +66,17 @@
             <label for="workTime">Work Time</label>
             <input 
               type="text"
-              name="workTime"
               id="workTime"
               class="form-control"
               placeholder="Enter work hours"
-              ngModel
-              #inputWorkTime="ngModel"
-              required
+              formControlName="workTime"
             >
-            <div class="error-container" *ngIf="inputWorkTime.touched">
-              <p class="error-message" *ngIf="inputWorkTime?.errors?.['required']">Work time is required!</p>
+            <div class="error-container" *ngIf="f['workTime'].touched">
+              <p class="error-message" *ngIf="f['workTime'].errors?.['required']">Work time is required!</p>
             </div>
           </div>
   
-          <button type="submit" class="submit-btn" [disabled]="form.invalid">
+          <button type="submit" class="submit-btn" [disabled]="museumForm.invalid">
             Create Museum
           </button>
         </form>
