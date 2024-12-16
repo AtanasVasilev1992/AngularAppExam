@@ -6,8 +6,8 @@ footer {
   bottom: 0;
   height: 2em;
   text-align: center;
-  background: #222; 
-  color: skyblue;
+  background-color: rgb(34, 113, 88);
+  color: white;
 }
 
 footer p {
