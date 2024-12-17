@@ -61,7 +61,7 @@ export class DetailsMuseumComponent implements OnInit {
   }
 
   confirmDelete(): void {
-    this.apiService.deletePlace(this.museum._id).subscribe({
+    this.apiService.deleteMuseum(this.museum._id).subscribe({
       next: () => {
         this.showDeleteDialog = false;
         this.router.navigate(['/museums']);
