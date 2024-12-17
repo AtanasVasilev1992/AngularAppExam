@@ -3,9 +3,9 @@
 }
 
 .hero-section {
-  background-color: white;
+  background-color: rgb(44, 123, 98);
   max-width: 1200px;
-  color: rgb(44, 123, 98);
+  color: white;
   margin: 0 auto;
   padding: 40px;
   text-align: center;

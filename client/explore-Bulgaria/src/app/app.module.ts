@@ -16,7 +16,7 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { MuseumModule } from './museum/museum.module';
 import { AuthService } from './auth.service';
 import { AboutComponent } from './about/about.component';
-import { JoinSectionComponent } from './about/join-section/join-section.component';
+import { JoinSectionComponent } from './home/join-section/join-section.component';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent, HomeComponent, AuthenticateComponent, AboutComponent, JoinSectionComponent,],
