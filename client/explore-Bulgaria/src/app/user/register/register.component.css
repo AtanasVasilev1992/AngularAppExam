@@ -57,12 +57,6 @@ label {
   margin-top: 6px;
 }
 
-.error-message {
-  color: #dc3545;
-  font-size: 14px;
-  margin-top: 4px;
-}
-
 .redirect-prompt {
   text-align: center;
   margin-top: 20px;
@@ -98,9 +92,11 @@ label {
 }
 
 .error-message {
+  background-color: #fee2e2;
   color: #dc2626;
   font-size: 14px;
-  margin: 0;
+  padding: 12px;
+  margin: 10px 0;
 }
 
 .error-text {
@@ -131,7 +127,7 @@ input.ng-invalid.ng-touched {
 .submit-btn {
   width: 100%;
   padding: 12px;
-  background-color: rgb(181, 225, 114);
+  background-color: rgb(155, 180, 118);
   color: white;
   border: none;
   border-radius: 6px;
