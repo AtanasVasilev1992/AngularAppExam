@@ -4,20 +4,21 @@
   align-items: center;
   min-height: calc(100vh - 80px);
   padding: 20px;
+  background-color:  rgba(227, 242, 253, 1);
 }
 
 .form-container {
   width: 100%;
   max-width: 600px;
   padding: 30px;
-  background:  rgb(50, 112, 93);
+  background:  white;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
-  color: white;
+  color: rgba(52, 0, 104, 1);
   margin-bottom: 30px;
   font-size: 24px;
   font-weight: 600;
@@ -34,7 +35,7 @@ h1 {
 label {
   display: block;
   margin-bottom: 8px;
-  color: rgb(232, 227, 227);
+  color: rgba(52, 0, 104, 1);
   font-weight: 500;
 }
 
@@ -71,10 +72,10 @@ textarea.form-control {
 .submit-btn {
   width: 100%;
   padding: 14px;
-  background-color: rgb(155, 180, 118);
-  color: white;
+  background-color: rgb(44, 123, 98);
+  color: rgba(227, 242, 253, 1);
   border: none;
-  border-radius: 6px;
+  border-radius: 24px;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
@@ -83,7 +84,7 @@ textarea.form-control {
 }
 
 .submit-btn:hover:not(:disabled) {
-  background-color: rgb(149, 213, 54);
+  opacity: 0.7;
 }
 
 .submit-btn:disabled {
