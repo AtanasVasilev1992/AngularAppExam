@@ -1,9 +1,9 @@
 export interface Comment {
     _id: string;
     text: string;
-    userId: string;
+    itemId: string;
     username: string;
-    itemId: string; 
-    createdAt: string;
-    updatedAt: string;
+    _ownerId: string;
+    _createdOn: number;
+    _updatedOn?: number;
 }

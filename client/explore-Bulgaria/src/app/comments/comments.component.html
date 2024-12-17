@@ -8,6 +8,9 @@
     <div *ngIf="!isLoading" class="comments-container">
         
         <div *ngIf="userService.user" class="comment-form">
+            <div class="comment-user">
+                Commenting as: <span class="username">{{currentUser?.username}}</span>
+            </div>
             <textarea 
                 [(ngModel)]="newComment"
                 placeholder="Add your comment..."
@@ -24,10 +27,10 @@
 
         <!-- Comments List -->
         <div class="comments-list">
-            <div *ngFor="let comment of comments" class="comment-item">
+            <div class="comment-item" *ngFor="let comment of comments">
                 <div class="comment-header">
                     <span class="username">{{comment.username}}</span>
-                    <span class="date">{{comment.createdAt | time}}</span>
+                    <span class="date">{{comment._createdOn | date:'medium'}}</span>
                 </div>
                 <p class="comment-text">{{comment.text}}</p>
                 <button 

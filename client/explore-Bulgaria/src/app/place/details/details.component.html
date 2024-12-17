@@ -56,6 +56,7 @@
         [onConfirm]="confirmDelete.bind(this)" [onCancel]="cancelDelete.bind(this)"></app-confirm-dialog>
     </div>
   </div>
-  <app-comments [itemId]="place._id"></app-comments>
+  <div class="comments-container">
+    <app-comments *ngIf="place._id" [itemId]="place._id"></app-comments> 
 </div>
 

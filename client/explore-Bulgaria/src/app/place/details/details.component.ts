@@ -28,7 +28,19 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((data) => {
       const id = data['placeId'];
-      this.loadPlace(id);
+  
+      this.apiService.getPlace(id).subscribe({
+        next: (place) => {
+          this.place = place;
+          this.isLoading = false;
+          console.log('Place loaded:', place);
+        },
+        error: (err) => {
+          console.error('Error loading place:', err);
+          this.isLoading = false;
+          this.router.navigate(['/places']);
+        }
+      });
     });
   }
 

@@ -28,7 +28,19 @@ export class DetailsMuseumComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((data) => {
       const id = data['museumId'];
-      this.loadMuseum(id);
+  
+      this.apiService.getMuseum(id).subscribe({
+        next: (museum) => {
+          this.museum = museum;
+          this.isLoading = false;
+          console.log('Museum loaded:', museum);
+        },
+        error: (err) => {
+          console.error('Error loading museum:', err);
+          this.isLoading = false;
+          this.router.navigate(['/museums']);
+        }
+      });
     });
   }
 

@@ -76,3 +76,14 @@
     color: #718096;
     padding: 2rem 0;
 }
+
+.comment-user {
+    margin-bottom: 10px;
+    color: #4a5568;
+    font-size: 0.9rem;
+}
+
+.comment-user .username {
+    color: rgb(44, 123, 98);
+    font-weight: 600;
+}

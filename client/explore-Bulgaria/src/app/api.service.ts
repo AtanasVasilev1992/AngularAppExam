@@ -1,19 +1,29 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Place } from './types/place';
 import { Museum } from './types/museum';
 import { Like } from './types/like';
 import { Comment } from './types/comment';
-import { Observable, catchError, forkJoin, map, tap, throwError } from 'rxjs';
+import { UserService } from './user/user.service';
+import {
+  Observable,
+  catchError,
+  forkJoin,
+  map,
+  of,
+  tap,
+  throwError,
+} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   private apiUrl = environment.apiUrl;
+  
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private userService: UserService ) {}
 
   // Places Methods
   getPlaces(): Observable<Place[]> {
@@ -171,22 +181,30 @@ export class ApiService {
   }
 
   // Comments methods
-  addComment(itemId: string, text: string) {
-    return this.http.post<Comment>(`${this.apiUrl}/data/comments`, {
-      itemId,
-      text,
-    });
-  }
-
   getCommentsByItem(itemId: string) {
-    return this.http.get<Comment[]>(
-      `${this.apiUrl}/data/comments?where=itemId%3D%22${itemId}%22`
+    return this.http.get<Comment[]>(`${this.apiUrl}/data/comments`).pipe(
+        map(comments => comments.filter(comment => comment.itemId === itemId)),
+        catchError(error => {
+            console.error('Error fetching comments:', error);
+            return of([]);
+        })
     );
-  }
+}
 
+
+addComment(itemId: string, text: string, username: string) {
+  return this.http.post<Comment>(`${this.apiUrl}/data/comments`, {
+      text,
+      itemId,
+      username,
+      _ownerId: this.userService.user?._id,
+      _createdOn: Date.now()
+  });
+}
   deleteComment(commentId: string) {
     return this.http.delete<Comment>(
       `${this.apiUrl}/data/comments/${commentId}`
     );
   }
+
 }
