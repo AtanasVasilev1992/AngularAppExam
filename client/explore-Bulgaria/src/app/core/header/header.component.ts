@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject, debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
 import { UserService } from 'src/app/user/user.service';
 import { ApiService } from 'src/app/api.service';
 import { Place } from 'src/app/types/place';
@@ -10,10 +11,11 @@ import { Museum } from 'src/app/types/museum';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   searchTerm: string = '';
   searchResults: { places: Place[], museums: Museum[] } = { places: [], museums: [] };
   showResults = false;
+  private searchSubject = new Subject<string>();
 
   constructor(
     private apiService: ApiService,
@@ -21,29 +23,32 @@ export class HeaderComponent {
     private router: Router
   ) {}
 
-  onSearch() {
-    if (this.searchTerm.length >= 2) {
-      this.apiService.search(this.searchTerm).subscribe(results => {
-        this.searchResults = results;
-        this.showResults = true;
-      });
-    } else {
-      this.searchResults = { places: [], museums: [] };
-      this.showResults = false;
-    }
+  ngOnInit() {
+    this.searchSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap(term => term ? this.apiService.search(term) : of({ places: [], museums: [] }))
+    ).subscribe(results => {
+      this.searchResults = results;
+      this.showResults = true;
+    });
   }
 
-  
-  clearSearch() {
-    this.searchTerm = '';
-    this.searchResults = { places: [], museums: [] };
-    this.showResults = false;
+  onSearch() {
+    this.searchSubject.next(this.searchTerm);
   }
 
   hideResults() {
     setTimeout(() => {
-      this.clearSearch();
+      this.showResults = false;
+      this.searchTerm = '';
     }, 200);
+  }
+
+  clearSearch() {
+    this.searchTerm = '';
+    this.searchResults = { places: [], museums: [] };
+    this.showResults = false;
   }
 
   onResultClick() {
@@ -65,5 +70,9 @@ export class HeaderComponent {
         this.router.navigate(['/'])
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.searchSubject.complete();
   }
 }

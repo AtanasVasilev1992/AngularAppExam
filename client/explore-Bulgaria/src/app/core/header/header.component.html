@@ -31,9 +31,9 @@
 
             <div class="search-container">
               <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" (blur)="hideResults()"
-                placeholder="Search..." class="search-input">
+                placeholder="Search places and museums..." class="search-input">
               <app-search-results *ngIf="showResults" [places]="searchResults.places" [museums]="searchResults.museums"
-                [isVisible]="showResults" (resultClick)="clearSearch()"></app-search-results>
+                [isVisible]="showResults" (resultClick)="hideResults()"></app-search-results>
             </div>
           </div>
         </ul>
