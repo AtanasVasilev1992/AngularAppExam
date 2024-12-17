@@ -1,90 +1,100 @@
+main {
+  background-color: rgba(227, 242, 253, 1);
+  justify-content: center;
+  padding-top: 7em;
+  padding-bottom: 7em;
+}
+
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
-    margin: auto;
-    text-align: center;
-    background-color: rgb(50, 112, 93);
-  }
-  
-  .title {
-    color: grey;
-    font-size: 18px;
-  }
-  
-  button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-  }
-  
-  a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
-  }
-  
-  button:hover, a:hover {
-    opacity: 0.7;
-  }
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  background-color: white;
+}
 
-  .museum-container {
-    display: inline-block;
-    margin: 15px;
-    width: 300px;
-  }
-  
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    border-radius: 5px;
-    padding: 15px;
-    text-align: center;
-  }
-  
-  .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-  
-  .card img {
-    border-radius: 5px 5px 0 0;
-    width: 270px;
-    height: auto;
-    aspect-ratio: 2/1;
-    object-fit: cover;
-  }
-  
-  .card button {
-    border: none;
-    outline: 0;
-    padding: 12px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-  }
-  
-  .card button:hover {
-    opacity: 0.7;
-  }
-  
-  .museum-title {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-  }
+.title {
+  color: grey;
+  font-size: 18px;
+}
 
-  .search-bar {
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  background-color: rgb(44, 123, 98);
+  color: rgba(227, 242, 253, 1);
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover,
+a:hover {
+  opacity: 0.7;
+}
+
+.museum-container {
+  display: inline-block;
+  margin: 15px;
+  width: 300px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+  border-radius: 5px 5px 0 0;
+  width: 270px;
+  height: auto;
+  aspect-ratio: 2/1;
+  object-fit: cover;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  background-color: rgb(44, 123, 98);
+  color: rgba(227, 242, 253, 1);
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+  border-radius: 24px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+
+.museum-title {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  color: rgba(52, 0, 104, 1);
+}
+
+.search-bar {
   max-width: 600px;
   margin: 20px auto;
   padding: 0 15px;
@@ -107,4 +117,14 @@
 
 .search-input::placeholder {
   color: #a0aec0;
+}
+
+p.description {
+  padding-bottom: 1.5em;
+}
+
+h2 {
+  padding-top: 1em;
+  line-height: 1.2;
+  padding-bottom: 0.7em;
 }

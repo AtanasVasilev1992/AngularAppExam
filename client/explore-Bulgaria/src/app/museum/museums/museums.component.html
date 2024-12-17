@@ -4,11 +4,11 @@
     </div> 
 
     <div *ngIf="!isLoading" class="museum-title"> 
-        <div *ngFor="let museum of paginatedMuseums" class="place-container">
+        <div *ngFor="let museum of paginatedMuseums" class="museum-container">
             <div class="card">
                 <img [src]="museum.image" [alt]="museum.name" style="width:100%">
-                <h1>{{museum.name}}</h1>
-                <p class="description">{{museum.description | shortenText:20}}</p>
+                <h2>{{museum.name}}</h2>
+                <p class="description">{{museum.description | shortenText:100}}</p>
                 <p [routerLink]="museum._id"><button>More Info</button></p>
             </div>
         </div>
