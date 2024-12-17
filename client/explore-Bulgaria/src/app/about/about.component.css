@@ -3,10 +3,13 @@
 }
 
 .hero-section {
-  /* background-color: white; */
-  color: white;
-  padding: 80px 20px;
+  background-color: white;
+  max-width: 1200px;
+  color: rgb(44, 123, 98);
+  margin: 0 auto;
+  padding: 40px;
   text-align: center;
+  border-radius: 10px;
 }
 
 .hero-section h1 {
