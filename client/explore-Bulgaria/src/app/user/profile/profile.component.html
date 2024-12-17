@@ -23,7 +23,7 @@
     <div class="places-section" *ngIf="userPlaces.length > 0">
       <h3>My Places</h3>
       <div class="grid-container">
-        <div *ngFor="let place of userPlaces" class="content-card">
+        <div *ngFor="let place of paginatedUserPlaces" class="content-card">
           <img [src]="place.image" [alt]="place.name">
           <div class="card-content">
             <h4>{{place.name}}</h4>
@@ -32,12 +32,18 @@
           </div>
         </div>
       </div>
+      <app-pagination
+        [currentPage]="currentPagePlaces"
+        [totalPages]="totalPagesPlaces"
+        [itemsPerPage]="itemsPerPage"
+        (pageChange)="onPageChangePlaces($event)">
+      </app-pagination>
     </div>
 
     <div class="museums-section" *ngIf="userMuseums.length > 0">
       <h3>My Museums</h3>
       <div class="grid-container">
-        <div *ngFor="let museum of userMuseums" class="content-card">
+        <div *ngFor="let museum of paginatedUserMuseums" class="content-card">
           <img [src]="museum.image" [alt]="museum.name">
           <div class="card-content">
             <h4>{{museum.name}}</h4>
@@ -46,6 +52,12 @@
           </div>
         </div>
       </div>
+      <app-pagination
+        [currentPage]="currentPageMuseums"
+        [totalPages]="totalPagesMuseums"
+        [itemsPerPage]="itemsPerPage"
+        (pageChange)="onPageChangeMuseums($event)">
+      </app-pagination>
     </div>
 
     <div *ngIf="userPlaces.length === 0 && userMuseums.length === 0" class="empty-state">
@@ -61,7 +73,7 @@
     <div class="places-section" *ngIf="likedPlaces.length > 0">
       <h3>Liked Places</h3>
       <div class="grid-container">
-        <div *ngFor="let place of likedPlaces" class="content-card">
+        <div *ngFor="let place of paginatedLikedPlaces" class="content-card">
           <img [src]="place.image" [alt]="place.name">
           <div class="card-content">
             <h4>{{place.name}}</h4>
@@ -70,12 +82,18 @@
           </div>
         </div>
       </div>
+      <app-pagination
+        [currentPage]="currentPageLikedPlaces"
+        [totalPages]="totalPagesLikedPlaces"
+        [itemsPerPage]="itemsPerPage"
+        (pageChange)="onPageChangeLikedPlaces($event)">
+      </app-pagination>
     </div>
 
     <div class="museums-section" *ngIf="likedMuseums.length > 0">
       <h3>Liked Museums</h3>
       <div class="grid-container">
-        <div *ngFor="let museum of likedMuseums" class="content-card">
+        <div *ngFor="let museum of paginatedLikedMuseums" class="content-card">
           <img [src]="museum.image" [alt]="museum.name">
           <div class="card-content">
             <h4>{{museum.name}}</h4>
@@ -84,6 +102,12 @@
           </div>
         </div>
       </div>
+      <app-pagination
+        [currentPage]="currentPageLikedMuseums"
+        [totalPages]="totalPagesLikedMuseums"
+        [itemsPerPage]="itemsPerPage"
+        (pageChange)="onPageChangeLikedMuseums($event)">
+      </app-pagination>
     </div>
 
     <div *ngIf="likedPlaces.length === 0 && likedMuseums.length === 0" class="empty-state">

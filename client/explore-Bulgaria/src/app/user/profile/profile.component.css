@@ -34,7 +34,7 @@
 .content-tabs {
   display: flex;
   gap: 10px;
-  background-color:  rgba(227, 242, 253, 1);
+  background-color: rgba(227, 242, 253, 1);
   padding: 2em;
 }
 
@@ -54,10 +54,16 @@
   color: rgba(227, 242, 253, 1);
 }
 
+.content-section {
+  background: rgba(227, 242, 253, 1);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
 .content-section h3 {
   color: #2d3748;
-  margin: 0 0 20px 0;
   font-size: 20px;
+  margin-left: 1em;
 }
 
 .grid-container {
@@ -73,6 +79,7 @@
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  margin: 1em;
 }
 
 .content-card:hover {
@@ -119,7 +126,7 @@
 .empty-state {
   text-align: center;
   padding: 40px;
-  background-color:  rgba(227, 242, 253, 1);
+  background-color: rgba(227, 242, 253, 1);
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -175,8 +182,13 @@
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .content-section {
@@ -191,6 +203,11 @@
 }
 
 @keyframes loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
