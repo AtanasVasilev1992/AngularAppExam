@@ -32,6 +32,7 @@ export class DetailsComponent implements OnInit {
       this.apiService.getPlace(id).subscribe({
         next: (place) => {
           this.place = place;
+          this.loadLikes(); 
           this.isLoading = false;
           console.log('Place loaded:', place);
         },
@@ -42,22 +43,7 @@ export class DetailsComponent implements OnInit {
         }
       });
     });
-  }
-
-  loadPlace(id: string) {
-    this.apiService.getPlace(id).subscribe({
-      next: (place) => {
-        this.place = place;
-        this.loadLikes();
-        this.isLoading = false;
-        console.log('Place loaded:', place);
-      },
-      error: (err) => {
-        console.error('Error loading place:', err);
-        this.isLoading = false;
-      }
-    });
-  }
+}
 
   get isOwner(): boolean {
     if (!this.userService.user || !this.place._ownerId) {

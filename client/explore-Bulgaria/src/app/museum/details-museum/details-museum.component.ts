@@ -32,6 +32,7 @@ export class DetailsMuseumComponent implements OnInit {
       this.apiService.getMuseum(id).subscribe({
         next: (museum) => {
           this.museum = museum;
+          this.loadLikes();
           this.isLoading = false;
           console.log('Museum loaded:', museum);
         },
@@ -42,24 +43,7 @@ export class DetailsMuseumComponent implements OnInit {
         }
       });
     });
-  }
-
-  loadMuseum(id: string) {
-    this.apiService.getMuseum(id).subscribe({
-      next: (museum) => {
-        this.museum = museum;
-        this.loadLikes();
-        this.isLoading = false;
-        console.log('Museum loaded:', museum);
-      },
-      error: (err) => {
-        console.error('Error loading museum:', err);
-        this.isLoading = false;
-        this.router.navigate(['/museums']);
-      }
-    });
-  }
-
+}
   get isOwner(): boolean {
     if (!this.userService.user || !this.museum._ownerId) {
       return false;

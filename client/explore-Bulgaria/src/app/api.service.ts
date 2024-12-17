@@ -125,8 +125,12 @@ export class ApiService {
 
   // Likes Methods
   addLike(itemId: string): Observable<Like> {
-    return this.http.post<Like>(`${this.apiUrl}/data/likes`, { itemId });
-  }
+    return this.http.post<Like>(`${this.apiUrl}/data/likes`, { 
+        itemId,
+        _ownerId: this.userService.user?._id,
+        _createdOn: Date.now()
+    });
+}
 
   removeLike(likeId: string): Observable<Like> {
     return this.http.delete<Like>(`${this.apiUrl}/data/likes/${likeId}`);

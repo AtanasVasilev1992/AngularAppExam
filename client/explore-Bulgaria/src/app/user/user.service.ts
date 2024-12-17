@@ -3,18 +3,8 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, EMPTY, Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { User } from '../types/user';
+import { AuthResponse, User } from '../types/user';
 import { AuthService } from '../auth.service';
-
-interface AuthResponse {
-  accessToken: string;
-  refreshToken: string;
-  _id: string;
-  email: string;
-  username: string;
-  __v: number;
-  password: string;
-}
 
 @Injectable({
   providedIn: 'root',
