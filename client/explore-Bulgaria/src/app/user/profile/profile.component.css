@@ -1,16 +1,18 @@
 /* profile.component.css */
 .profile-container {
   max-width: 1200px;
+  justify-content: center;
   margin: 0 auto;
-  padding: 20px;
+  padding-top: 7em;
+  padding-bottom: 7em;
 }
 
 .profile-header {
-  background: white;
+  background: rgba(227, 242, 253, 1);
   padding: 30px;
-  border-radius: 10px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
 }
 
 .user-info {
@@ -32,23 +34,24 @@
 .content-tabs {
   display: flex;
   gap: 10px;
-  margin-bottom: 30px;
+  background-color:  rgba(227, 242, 253, 1);
+  padding: 2em;
 }
 
 .content-tabs button {
   padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  background: #e2e8f0;
-  color: #4a5568;
+  border: 2px solid rgb(44, 123, 98);
+  border-radius: 24px;
+  background-color: rgba(227, 242, 253, 1);
+  color: rgb(44, 123, 98);
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .content-tabs button.active {
-  background: #4299e1;
-  color: white;
+  background-color: rgb(44, 123, 98);
+  color: rgba(227, 242, 253, 1);
 }
 
 .content-section h3 {
@@ -101,23 +104,24 @@
   width: 100%;
   padding: 10px;
   border: none;
-  border-radius: 6px;
-  background: #4299e1;
-  color: white;
+  border-radius: 24px;
+  background-color: rgb(44, 123, 98);
+  color: rgba(227, 242, 253, 1);
   font-weight: 500;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .card-content button:hover {
-  background: #3182ce;
+  opacity: 0.7;
 }
 
 .empty-state {
   text-align: center;
   padding: 40px;
-  background: white;
-  border-radius: 10px;
+  background-color:  rgba(227, 242, 253, 1);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -135,16 +139,16 @@
 .action-buttons button {
   padding: 10px 20px;
   border: none;
-  border-radius: 6px;
-  background: #4299e1;
-  color: white;
+  border-radius: 24px;
+  background-color: rgb(44, 123, 98);
+  color: rgba(227, 242, 253, 1);
   font-weight: 500;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .action-buttons button:hover {
-  background: #3182ce;
+  opacity: 0.7;
 }
 
 @media (max-width: 768px) {

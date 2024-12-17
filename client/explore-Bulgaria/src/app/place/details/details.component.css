@@ -1,190 +1,196 @@
 .details-container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-  }
-  
-  .loader-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px;
-  }
-  
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.place-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.image-container {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.main-image:hover {
+  transform: scale(1.05);
+}
+
+.content-container {
+  padding: 2rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+  color: rgba(52, 0, 104, 1);
+}
+
+.title {
+  font-size: 2.5rem;
+  color: rgba(52, 0, 104, 1);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(52, 0, 104, 1);
+  font-size: 1.1rem;
+}
+
+.location i {
+  color: rgba(44, 123, 98, 1);
+}
+
+.description-section {
+  margin-bottom: 2rem;
+}
+
+.description-section h3 {
+  color: rgba(52, 0, 104, 1);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.description {
+  color: rgba(52, 0, 104, 1);
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f7fafc;
+  border-radius: 8px;
+}
+
+.info-item {
+  text-align: center;
+}
+
+.info-item i {
+  font-size: 1.5rem;
+  color: rgba(44, 123, 98, 1);
+  margin-bottom: 0.5rem;
+}
+
+.info-item p {
+  color: rgba(52, 0, 104, 1);
+  margin-bottom: 0.25rem;
+}
+
+.info-item span {
+  color:rgba(52, 0, 104, 1);
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.edit-btn, .delete-btn, .like-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 24px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.edit-btn {
+  background-color: rgba(52, 0, 104, 1);
+  color: rgba(227, 242, 253, 1);
+}
+
+.edit-btn:hover {
+  opacity: 0.7;
+}
+
+.delete-btn {
+  background-color: #e53e3e;
+  color: rgba(227, 242, 253, 1);
+}
+
+.delete-btn:hover {
+  opacity: 0.7;
+}
+
+.like-btn {
+  background-color: white;
+  border: 2px solid rgba(52, 0, 104, 1);
+  color: rgba(52, 0, 104, 1);
+}
+
+.like-btn:hover {
+  background-color: rgba(227, 242, 253, 1);
+}
+
+.like-btn.liked {
+  background-color: rgba(52, 0, 104, 1);
+  color: rgba(227, 242, 253, 1);
+}
+
+.like-btn i {
+  transition: transform 0.3s ease;
+}
+
+.like-btn:hover i {
+  transform: scale(1.2);
+}
+
+@media (min-width: 768px) {
   .place-details {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    flex-direction: row;
   }
-  
+
   .image-container {
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-    position: relative;
+    flex: 1;
+    height: auto;
   }
-  
-  .main-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-  
-  .main-image:hover {
-    transform: scale(1.05);
-  }
-  
+
   .content-container {
-    padding: 2rem;
+    flex: 1;
+    padding: 3rem;
   }
-  
-  .header {
-    margin-bottom: 2rem;
-  }
-  
-  .title {
-    font-size: 2.5rem;
-    color: #2d3748;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-  }
-  
-  .location {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #718096;
-    font-size: 1.1rem;
-  }
-  
-  .location i {
-    color: #4299e1;
-  }
-  
-  .description-section {
-    margin-bottom: 2rem;
-  }
-  
-  .description-section h3 {
-    color: #2d3748;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-  }
-  
-  .description {
-    color: #4a5568;
-    line-height: 1.6;
-    font-size: 1.1rem;
-  }
-  
-  .info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: #f7fafc;
-    border-radius: 8px;
-  }
-  
-  .info-item {
-    text-align: center;
-  }
-  
-  .info-item i {
-    font-size: 1.5rem;
-    color: #4299e1;
-    margin-bottom: 0.5rem;
-  }
-  
-  .info-item p {
-    color: #718096;
-    margin-bottom: 0.25rem;
-  }
-  
-  .info-item span {
-    color: #2d3748;
-    font-weight: 600;
-  }
-  
-  .actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-  
-  .edit-btn, .delete-btn, .like-btn {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-  }
-  
-  .edit-btn {
-    background-color: #4299e1;
-    color: white;
-  }
-  
-  .edit-btn:hover {
-    background-color: #3182ce;
-  }
-  
-  .delete-btn {
-    background-color: #f56565;
-    color: white;
-  }
-  
-  .delete-btn:hover {
-    background-color: #e53e3e;
-  }
-  
-  .like-btn {
-    background-color: white;
-    border: 2px solid #4299e1;
-    color: #4299e1;
-  }
-  
-  .like-btn:hover {
-    background-color: #ebf8ff;
-  }
-  
-  .like-btn.liked {
-    background-color: #4299e1;
-    color: white;
-  }
-  
-  .like-btn i {
-    transition: transform 0.3s ease;
-  }
-  
-  .like-btn:hover i {
-    transform: scale(1.2);
-  }
-  
-  @media (min-width: 768px) {
-    .place-details {
-      flex-direction: row;
-    }
-  
-    .image-container {
-      flex: 1;
-      height: auto;
-    }
-  
-    .content-container {
-      flex: 1;
-      padding: 3rem;
-    }
-  }
+}
+
+p.created {
+  padding-top: 1em;
+  color: rgba(52, 0, 104, 1);
+}
