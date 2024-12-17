@@ -1350,6 +1350,7 @@
     	museums: {
             "1a2b3c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6": {
             name: "National Historical Museum",
+            city: "Sofia",
             image: "https://bulgariatravel.org/wp-content/uploads/2020/imported/298_1-scaled.jpg",
             description: "The National Historical Museum in Sofia is Bulgaria's largest museum, housing over 650,000 exhibits from various historical periods.",
             workTime: "Monday-Sunday: 09:00 - 17:30",
@@ -1364,6 +1365,7 @@
         },
             "2b3c4d5e-6f7g-8h9i-0j1k-l2m3n4o5p6q7": {
             name: "Ethnographic Museum",
+            city: "Plovdiv",
             image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/f9/68/1a/ethnographic-museum.jpg?w=1200&h=1200&s=1",
             description: "Located in the heart of Plovdiv, the Ethnographic Museum showcases traditional Bulgarian culture, crafts, and folklore.",
             workTime: "Tuesday-Saturday: 09:00 - 17:00",
@@ -1379,6 +1381,7 @@
         },
             "3c4d5e6f-7g8h-9i0j-1k2l-m3n4o5p6q7r8": {
             name: "Rila Monastery Museum",
+            city: "Rila",
             image: "https://bulgariatravel.org/wp-content/uploads/2020/imported/272_1-1024x682.jpg",
             description: "Situated in the Rila Mountains, this museum displays the rich history and artifacts of the Rila Monastery, a UNESCO World Heritage Site.",
             workTime: "Monday-Sunday: 08:30 - 18:00",
@@ -1393,6 +1396,7 @@
         },
             "4d5e6f7g-8h9i-0j1k-2l3m-n4o5p6q7r8s9": {
             name: "Museum of Natural History",
+            city: "Varna",
             image: "https://visit.varna.bg/media/cache/c5/42/thumb7_88888888888888.jpg",
             description: "The Museum of Natural History in Varna presents a comprehensive collection of Bulgaria's flora, fauna, and geology.",
             workTime: "Monday-Friday: 09:00 - 18:00",
@@ -1408,6 +1412,7 @@
         
             "5e6f7g8h-9i0j-1k2l-3m4n-o5p6q7r8s9t0": {
             name: "Aviation Museum",
+            city: "Plovdiv",
             image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/4b/b6/ec/outdoor-plane-exhibit.jpg?w=1200&h=1200&s=1",
             description: "Located near Plovdiv Airport, the Aviation Museum showcases Bulgaria's aviation history with restored aircraft and exhibits.",
             workTime: "Tuesday-Sunday: 10:00 - 16:30",
