@@ -16,6 +16,7 @@ A web application for exploring and sharing interesting places and museums acros
 - Edit and delete your own content
 - Like/unlike places and museums created by other users
 - Personal profile with created and liked content
+- Comment on places and museums
 
 ### Key Functionalities
 - CRUD operations (Create, Read, Update, Delete) for places and museums
@@ -26,6 +27,8 @@ A web application for exploring and sharing interesting places and museums acros
 - Pagination
 - Loading states with spinners
 - Confirmation dialogs for destructive actions
+- Global search functionality
+- Comments system
 
 ## 🛠️ Built With
 
@@ -112,6 +115,7 @@ Navigate to http://localhost:4200 to access the application.
 - Delete their own content
 - Like/unlike content
 - Access their profile page
+- Comment on places and museums
 
 ## 💾 Data Structure
 
@@ -144,9 +148,31 @@ interface Museum {
 }
 ```
 
-## 🔄 REST API
+### Comments
+```typescript
+interface Comment {
+    _id: string;
+    text: string;
+    itemId: string;
+    username: string;
+    _ownerId: string;
+    _createdOn: number;
+}
+```
 
-The application communicates with a REST API with the following endpoints:
+### Likes
+```typescript
+interface Like {
+    _id: string;
+    _ownerId: string;
+    itemId: string;
+    itemType: 'place' | 'museum';
+    createdAt: string;
+    updatedAt: string;
+}
+```
+
+## 🔄 REST API
 
 ### Authentication
 - POST `/users/register` - Register a new user
@@ -167,20 +193,91 @@ The application communicates with a REST API with the following endpoints:
 - PUT `/data/museums/:id` - Edit museum
 - DELETE `/data/museums/:id` - Delete museum
 
+### Comments
+- GET `/data/comments` - Get all comments
+- POST `/data/comments` - Create new comment
+- DELETE `/data/comments/:id` - Delete comment
+- GET `/data/comments?where=itemId="${itemId}"` - Get comments for specific item
+
 ### Likes
 - POST `/data/likes` - Like item
 - DELETE `/data/likes/:id` - Remove like
-- GET `/data/likes/:itemId` - Get likes for item
+- GET `/data/likes?where=itemId="${itemId}"` - Get likes for specific item
+- GET `/data/likes?where=_ownerId="${userId}"` - Get likes by user
 
-## Future Improvements
+## 🎯 Features in Detail
 
-- Search functionality
-- Advanced filtering
-- User comments
-- Image upload
-- Interactive map
-- Social sharing
-- Email notifications
+### Search Functionality
+- Global search across places and museums
+- Real-time search results with debounce
+- Results grouped by type (places/museums)
+
+### Comments System
+- Add comments to places and museums
+- Delete own comments
+- View all comments for each location
+- Username display for each comment
+
+### Like System
+- Like/Unlike places and museums
+- View total likes count
+- See liked status for logged-in users
+- View all liked items in profile
+
+### Profile Features
+- View created places and museums
+- View liked content
+- Manage own content
+
+## 🛠️ Technical Implementation
+
+### RxJS Operators Used
+- `debounceTime` - For search optimization
+- `distinctUntilChanged` - Prevent duplicate searches
+- `switchMap` - Handle async operations
+- `map` - Data transformation
+- `forkJoin` - Parallel API calls
+
+### Guards
+- `AuthActivate` - Protect private routes
+- Route protection for authenticated users
+
+### Custom Pipes
+- `time` - Format timestamps
+- `shortenText` - Truncate long descriptions
+
+### Shared Components
+- `Loader` - Loading spinner
+- `ConfirmDialog` - Confirmation dialogs
+- `SearchResults` - Search results display
+- `Pagination` - Page navigation
+
+## 🔧 Development
+
+### Project Structure
+```
+src/
+├── app/
+│   ├── core/            # Core components (header, footer)
+│   ├── shared/          # Shared components and pipes
+│   ├── user/            # Authentication components
+│   ├── place/           # Place-related components
+│   ├── museum/          # Museum-related components
+│   ├── types/           # TypeScript interfaces
+│   └── services/        # API and authentication services
+```
+
+### Development Commands
+```bash
+# Development server
+ng serve
+
+# Build
+ng build
+
+# Run tests
+ng test
+```
 
 ## 📝 License
 
