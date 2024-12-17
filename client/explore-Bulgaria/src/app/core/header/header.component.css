@@ -1,13 +1,23 @@
 .header {
   background-color: rgb(44, 123, 98);
   padding: 20px 10px;
-  position: relative; /* Добавено за правилно позициониране на dropdown */
+  position: relative; 
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* Лого стил */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-image {
+  height: 1.2em; 
+  width: auto;
+}
+
 .header a.logo {
   font-size: 25px;
   font-weight: bold;
@@ -15,7 +25,6 @@
   text-decoration: none;
 }
 
-/* Навигация */
 .header-right {
   display: flex;
   align-items: center;
@@ -40,7 +49,6 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Търсачка */
 .search-container {
   position: relative;
   width: 200px;
@@ -63,7 +71,6 @@
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
-/* Резултати от търсенето */
 .search-results {
   position: absolute;
   top: calc(100% + 10px);
@@ -128,7 +135,6 @@
   color: white;
 }
 
-/* Responsive дизайн */
 @media screen and (max-width: 768px) {
   .header {
     flex-direction: column;
