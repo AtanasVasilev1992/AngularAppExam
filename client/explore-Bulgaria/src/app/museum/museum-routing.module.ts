@@ -5,6 +5,7 @@ import { AddMuseumComponent } from './add-museum/add-museum.component';
 import { DetailsMuseumComponent } from './details-museum/details-museum.component';
 import { AuthActivate } from '../guards/auth.activate';
 import { EditMuseumComponent } from './edit-museum/edit-museum.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
     children: [
       { path: '', component: MuseumsComponent },
       { path: 'add', component: AddMuseumComponent, canActivate: [AuthActivate] },
-      { path: 'edit/:museumId', component: EditMuseumComponent },
+      { path: 'edit/:museumId', component: EditMuseumComponent, canActivate: [AuthGuard] },
       { path: ':museumId', component: DetailsMuseumComponent },
     ]
   }
