@@ -1,13 +1,61 @@
-import { ValidatorFn } from "@angular/forms";
-import { EMAIL_DOMAINS } from '../../../environments/environment'
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { Directive, Input } from '@angular/core';
+import { NG_VALIDATORS, Validator } from '@angular/forms';
 
-export function emailValidator(damains: string[]): ValidatorFn {
-  const damainStr = EMAIL_DOMAINS.join('|')
-    const regExp = new RegExp(`[A-Za-z0-9]+@gmail\.(${damainStr})`);
+// For Reactive Forms
+export function emailValidator(domains: string[]) {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (!control.value) {
+      return null;
+    }
+
+    const value = control.value.toLowerCase();
+    if (!value.match(/^[^@]{3,}@[^@]{3,}$/)) {
+      return { emailValidator: true };
+    }
+
+    const [_, domain] = value.split('@');
+    const domainExtension = domain.split('.').pop();
     
-    return (control) => {
-      const isEmailInvalid = control.value === '' || regExp.test(control.value)
-   
-      return isEmailInvalid ? null : { emailValidator: true};
-    };
+    if (!domains.includes(domainExtension)) {
+      return { emailValidator: true };
+    }
+
+    return null;
+  };
+}
+
+// For Template-Driven Forms
+@Directive({
+  selector: '[appEmail][ngModel]',
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: EmailValidatorDirective,
+      multi: true,
+    },
+  ],
+})
+export class EmailValidatorDirective implements Validator {
+  @Input('appEmail') domains: string[] = [];
+
+  validate(control: AbstractControl): ValidationErrors | null {
+    if (!control.value) {
+      return null;
+    }
+
+    const value = control.value.toLowerCase();
+    if (!value.match(/^[^@]{3,}@[^@]{3,}$/)) {
+      return { emailValidator: true };
+    }
+
+    const [_, domain] = value.split('@');
+    const domainExtension = domain.split('.').pop();
+    
+    if (!this.domains.includes(domainExtension)) {
+      return { emailValidator: true };
+    }
+
+    return null;
   }
+}
