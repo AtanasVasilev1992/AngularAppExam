@@ -1472,7 +1472,7 @@
         updatedAt: "2024-01-08T16:00:00Z",
         __v: 0
     }
-}
+}, comments: {}, likes: {},
     };
     var rules$1 = {
     	users: {
