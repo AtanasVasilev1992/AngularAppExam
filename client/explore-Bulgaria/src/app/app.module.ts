@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +20,7 @@ import { AboutComponent } from './about/about.component';
 import { JoinSectionComponent } from './home/join-section/join-section.component';
 
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent, HomeComponent, AuthenticateComponent, AboutComponent, JoinSectionComponent,],
+  declarations: [AppComponent, NotFoundComponent, HomeComponent, AuthenticateComponent, AboutComponent, JoinSectionComponent],
   imports: [
     BrowserModule,
     SharedModule,
@@ -30,6 +31,7 @@ import { JoinSectionComponent } from './home/join-section/join-section.component
     FormsModule,
     ReactiveFormsModule,
     MuseumModule,
+    BrowserAnimationsModule
   ],
   providers: [ {
     provide: HTTP_INTERCEPTORS,
