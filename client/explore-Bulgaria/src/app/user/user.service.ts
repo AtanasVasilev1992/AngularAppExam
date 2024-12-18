@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, EMPTY, Observable, throwError } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { AuthResponse, User } from '../types/user';
 import { AuthService } from '../auth.service';
@@ -120,18 +120,18 @@ export class UserService implements OnDestroy {
     return !!this.user$$.value && !!this.authService.getToken();
   }
 
-  updateProfile(username: string, email: string): Observable<User> {
-    return this.http.put<User>(
-      `${this.API_URL}/users/profile`,
-      { username, email },
-      { 
-        headers: { 'X-Authorization': this.authService.getToken() || '' },
-        withCredentials: true 
-      }
-    ).pipe(
-      tap(user => {
-        this.user$$.next(user);
-      })
-    );
-  }
+  // updateProfile(username: string, email: string): Observable<User> {
+  //   return this.http.put<User>(
+  //     `${this.API_URL}/users/profile`,
+  //     { username, email },
+  //     { 
+  //       headers: { 'X-Authorization': this.authService.getToken() || '' },
+  //       withCredentials: true 
+  //     }
+  //   ).pipe(
+  //     tap(user => {
+  //       this.user$$.next(user);
+  //     })
+  //   );
+  // }
 }

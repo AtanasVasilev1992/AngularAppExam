@@ -18,7 +18,6 @@ export class AuthService {
   private restoreToken() {
     const token = this.getToken();
     if (token) {
-      console.log('Restored token:', token);
       return true;
     }
     return false;
@@ -48,7 +47,6 @@ export class AuthService {
       return null;
     }
     
-    // Can add validation here
     return token;
   }
   
