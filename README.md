@@ -29,6 +29,12 @@ A web application for exploring and sharing interesting places and museums acros
 - Confirmation dialogs for destructive actions
 - Global search functionality
 - Comments system
+- Engaging animations using Angular Animations:
+  - Smooth page transitions
+  - Card loading animations with stagger effects
+  - Interactive button hover effects
+  - Tab switching animations in profile
+  - Content fade-in effects
 
 ## 🛠️ Built With
 
