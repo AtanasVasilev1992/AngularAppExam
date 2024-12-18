@@ -9,7 +9,9 @@
                 <img [src]="museum.image" [alt]="museum.name" style="width:100%">
                 <h2>{{museum.name}}</h2>
                 <p class="description">{{museum.description | shortenText:100}}</p>
-                <p [routerLink]="museum._id"><button>More Info</button></p>
+                <p [routerLink]="museum._id">
+                    <button [@buttonHover]="'active'">More Info</button>
+                </p>
             </div>
         </div>
     </div>

@@ -80,10 +80,10 @@ a:hover {
   font-size: 18px;
   border-radius: 24px;
 }
-
+/* 
 .card button:hover {
   opacity: 0.7;
-}
+} */
 
 .museum-title {
   display: flex;

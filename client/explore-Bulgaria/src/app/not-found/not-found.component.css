@@ -1,0 +1,125 @@
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 20px;
+  }
+  
+  .error-code {
+    font-size: 120px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 0;
+    animation: bounce 2s ease infinite;
+  }
+  
+  .error-message {
+    font-size: 24px;
+    color: #34495e;
+    margin: 20px 0;
+    animation: fadeIn 1s ease-in;
+  }
+  
+  .home-link {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(44, 123, 98);
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  .home-link:hover {
+    opacity: 0.7;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .space-element {
+    position: absolute;
+    background-color: #3498db;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .space-element:nth-child(1) {
+    width: 50px;
+    height: 50px;
+    top: 20%;
+    left: 20%;
+    animation-delay: 0s;
+  }
+  
+  .space-element:nth-child(2) {
+    width: 30px;
+    height: 30px;
+    top: 30%;
+    right: 25%;
+    animation-delay: 0.5s;
+  }
+  
+  .space-element:nth-child(3) {
+    width: 40px;
+    height: 40px;
+    bottom: 25%;
+    left: 30%;
+    animation-delay: 1s;
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(180deg);
+    }
+  }
+  
+  /* Responsive дизайн */
+  @media (max-width: 768px) {
+    .error-code {
+      font-size: 80px;
+    }
+    
+    .error-message {
+      font-size: 20px;
+    }
+  }
