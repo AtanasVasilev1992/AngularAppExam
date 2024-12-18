@@ -1,4 +1,4 @@
-<div class="profile-container">
+<div class="profile-container" [@sectionFade]>
   <div class="profile-header">
     <div class="user-info">
       <h2>{{ userService.user?.username }}'s Profile</h2>
@@ -19,10 +19,10 @@
     </button>
   </div>
 
-  <div class="content-section" *ngIf="activeTab === 'created'">
+  <div class="content-section" *ngIf="activeTab === 'created'" [@tabSwitch]>
     <div class="places-section" *ngIf="userPlaces.length > 0">
       <h3>My Places</h3>
-      <div class="grid-container">
+      <div class="grid-container" [@contentCards]>
         <div *ngFor="let place of paginatedUserPlaces" class="content-card">
           <img [src]="place.image" [alt]="place.name">
           <div class="card-content">
@@ -42,7 +42,7 @@
 
     <div class="museums-section" *ngIf="userMuseums.length > 0">
       <h3>My Museums</h3>
-      <div class="grid-container">
+      <div class="grid-container" [@contentCards]>
         <div *ngFor="let museum of paginatedUserMuseums" class="content-card">
           <img [src]="museum.image" [alt]="museum.name">
           <div class="card-content">
@@ -69,10 +69,10 @@
     </div>
   </div>
 
-  <div class="content-section" *ngIf="activeTab === 'liked'">
+  <div class="content-section" *ngIf="activeTab === 'liked'" [@tabSwitch]>
     <div class="places-section" *ngIf="likedPlaces.length > 0">
       <h3>Liked Places</h3>
-      <div class="grid-container">
+      <div class="grid-container" [@contentCards]>
         <div *ngFor="let place of paginatedLikedPlaces" class="content-card">
           <img [src]="place.image" [alt]="place.name">
           <div class="card-content">
@@ -92,7 +92,7 @@
 
     <div class="museums-section" *ngIf="likedMuseums.length > 0">
       <h3>Liked Museums</h3>
-      <div class="grid-container">
+      <div class="grid-container" [@contentCards]>
         <div *ngFor="let museum of paginatedLikedMuseums" class="content-card">
           <img [src]="museum.image" [alt]="museum.name">
           <div class="card-content">

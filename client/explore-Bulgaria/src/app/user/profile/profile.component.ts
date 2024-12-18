@@ -6,11 +6,18 @@ import { Museum } from '../../types/museum';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { catchError, forkJoin, of } from 'rxjs';
 import { Like } from '../../types/like';
+import { profileAnimations } from 'src/app/animations/profile.animations';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  animations: [
+    profileAnimations.tabSwitch,
+    profileAnimations.contentCards,
+    profileAnimations.sectionFade,
+    profileAnimations.buttonHover
+  ]
 })
 export class ProfileComponent implements OnInit {
   userPlaces: Place[] = [];
