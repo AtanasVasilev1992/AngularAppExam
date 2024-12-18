@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { cardAnimations } from 'src/app/animations/card.animations';
 import { ApiService } from 'src/app/api.service';
 import { Place } from 'src/app/types/place';
 
@@ -6,6 +7,10 @@ import { Place } from 'src/app/types/place';
   selector: 'app-places',
   templateUrl: './places.component.html',
   styleUrls: ['./places.component.css'],
+  animations: [
+    cardAnimations.cardList,
+    cardAnimations.buttonHover
+  ]
 })
 export class PlacesComponent implements OnInit {
   places: Place[] = [];

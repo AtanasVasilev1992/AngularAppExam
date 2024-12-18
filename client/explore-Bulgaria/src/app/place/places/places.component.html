@@ -4,7 +4,7 @@
     </div> 
 
 
-    <div *ngIf="!isLoading" class="place-title"> 
+    <div *ngIf="!isLoading" class="place-title" [@cardList]> 
         <div *ngFor="let place of paginatedPlaces" class="place-container">
             <div class="card">
                 <img [src]="place.image" [alt]="place.name" style="width:100%">

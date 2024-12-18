@@ -3,7 +3,7 @@
         <app-loader />
     </div> 
 
-    <div *ngIf="!isLoading" class="museum-title"> 
+    <div *ngIf="!isLoading" class="museum-title" [@cardList]> 
         <div *ngFor="let museum of paginatedMuseums" class="museum-container">
             <div class="card">
                 <img [src]="museum.image" [alt]="museum.name" style="width:100%">
