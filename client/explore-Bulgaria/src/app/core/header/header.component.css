@@ -13,9 +13,12 @@
   gap: 10px;
 }
 
+
 .logo-image {
-  height: 1.2em; 
+  height: 24px;
   width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .header a.logo {
@@ -139,31 +142,51 @@
   .header {
     flex-direction: column;
     padding: 15px;
+    text-align: center; 
+  }
+
+  .logo {
+    justify-content: center; 
+    width: 100%;
   }
 
   .header-right {
     margin-top: 15px;
     width: 100%;
+    display: flex;
+    justify-content: center; 
   }
 
   .mini-navbar {
     flex-direction: column;
     width: 100%;
     gap: 10px;
+    align-items: center; 
+  }
+
+  nav ul {
+    width: 100%;
+    padding: 0; 
+    margin: 0;
   }
 
   .mini-navbar a {
     width: 100%;
     text-align: center;
+    display: block; 
+    padding: 10px 0; 
   }
 
   .search-container {
     width: 100%;
-    margin: 15px 0;
+    margin: 15px auto; 
+    max-width: 300px;
   }
 
   .search-results {
     width: 100%;
     left: 0;
+    max-width: 300px; 
+    margin: 0 auto; 
   }
 }
