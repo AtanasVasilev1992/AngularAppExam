@@ -8,14 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 describe('AppComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-                BrowserAnimationsModule
-            ],
-            declarations: [
-                AppComponent, 
-                AuthenticateComponent
-            ],
+            imports: [HttpClientTestingModule, BrowserAnimationsModule],
+            declarations: [AppComponent, AuthenticateComponent],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
         }).compileComponents();
     });
@@ -25,5 +19,4 @@ describe('AppComponent', () => {
         const app = fixture.componentInstance;
         expect(app).toBeTruthy();
     });
-
 });
