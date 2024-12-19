@@ -1,14 +1,20 @@
 <main>
-    <div *ngIf="isLoading"> 
+    <div *ngIf="isLoading">
         <app-loader />
-    </div> 
+    </div>
 
-    <div *ngIf="!isLoading" class="museum-title" [@cardList]> 
+    <div *ngIf="!isLoading" class="museum-title" [@cardList]>
         <div *ngFor="let museum of paginatedMuseums" class="museum-container">
             <div class="card">
-                <img [src]="museum.image" [alt]="museum.name" style="width:100%">
-                <h2>{{museum.name}}</h2>
-                <p class="description">{{museum.description | shortenText:100}}</p>
+                <img
+                    [src]="museum.image"
+                    [alt]="museum.name"
+                    style="width: 100%"
+                />
+                <h2>{{ museum.name }}</h2>
+                <p class="description">
+                    {{ museum.description | shortenText : 100 }}
+                </p>
                 <p [routerLink]="museum._id">
                     <button [@buttonHover]="'active'">More Info</button>
                 </p>
@@ -16,7 +22,7 @@
         </div>
     </div>
 
-    <app-pagination 
+    <app-pagination
         [currentPage]="currentPage"
         [totalPages]="totalPages"
         [itemsPerPage]="itemsPerPage"

@@ -1,70 +1,96 @@
-
-*, *::before, *::after {
-  box-sizing: border-box;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
+
 body {
-  
-  line-height: 1.5;
+    line-height: 1.5;
 
-  -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
 }
 
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
 }
 
-input, button, textarea, select {
-  font: inherit;
+input,
+button,
+textarea,
+select {
+    font: inherit;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
-  overflow-wrap: break-word;
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
 }
 
 p {
-  text-wrap: pretty;
-}
-h1, h2, h3, h4, h5, h6 {
-  text-wrap: balance;
+    text-wrap: pretty;
 }
 
-#root, #__next {
-  isolation: isolate;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
 }
 
-body {
-  background-color: rgb(44, 123, 98);
-}
-
- /* Typography  */
-
- :root {
-  --heading-font: 'Montserrat', sans-serif;
-  --body-font: 'Open Sans', sans-serif;
+#root,
+#__next {
+    isolation: isolate;
 }
 
 body {
-  font-family: var(--body-font);
-  line-height: 1.6;
+    background-color: rgb(44, 123, 98);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--heading-font);
-  font-weight: 600;
+/* Typography  */
+
+:root {
+    --heading-font: "Montserrat", sans-serif;
+    --body-font: "Open Sans", sans-serif;
+}
+
+body {
+    font-family: var(--body-font);
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--heading-font);
+    font-weight: 600;
 }
 
 .logo {
-  font-family: var(--heading-font);
-  font-weight: 700;
+    font-family: var(--heading-font);
+    font-weight: 700;
 }
 
 .nav-links {
-  font-family: var(--body-font);
-  font-weight: 500;
+    font-family: var(--body-font);
+    font-weight: 500;
 }

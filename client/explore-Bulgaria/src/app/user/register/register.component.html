@@ -1,83 +1,125 @@
 <main class="auth-container">
-  <div class="form-container">
-    <h1>Create Account</h1>
-    <div class="form-wrapper">
-      <form class="register-form" [formGroup]="form" (ngSubmit)="register()">
-        <div class="form-group">
-          <label for="email">Email</label>
-
-          <div class="error-box" *ngIf="errorMessage">
-            <p class="error-message">{{errorMessage}}</p>
-          </div>
-          
-          <input 
-            type="email" 
-            id="email"
-            formControlName="email"
-            class="form-control"
-            placeholder="Enter your email"
-          >
-          <div class="error-container" *ngIf="form.get('email')?.touched">
-            <p class="error-message" *ngIf="form.get('email')?.errors?.['required']">Email is required!</p>
-            <p class="error-message" *ngIf="form.get('email')?.errors?.['emailValidator']">Email is invalid!</p>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input 
-            type="text" 
-            id="username"
-            formControlName="username"
-            autocomplete="username"
-            class="form-control"
-            placeholder="Choose a username"
-          >
-          <div class="error-container" *ngIf="form.get('username')?.touched">
-            <p class="error-message" *ngIf="form.get('username')?.errors?.['required']">Username is required!</p>
-            <p class="error-message" *ngIf="form.get('username')?.errors?.['minlength']">
-              Username must be at least 5 characters!
-            </p>
-          </div>
-        </div>
-
-        <div formGroupName="passGroup">
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input 
-              type="password" 
-              id="password"
-              formControlName="password"
-              autocomplete="new-password"
-              class="form-control"
-              placeholder="Create a password"
+    <div class="form-container">
+        <h1>Create Account</h1>
+        <div class="form-wrapper">
+            <form
+                class="register-form"
+                [formGroup]="form"
+                (ngSubmit)="register()"
             >
-          </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
 
-          <div class="form-group">
-            <label for="rePassword">Confirm Password</label>
-            <input 
-              type="password" 
-              id="rePassword"
-              formControlName="rePassword"
-              autocomplete="new-password"
-              class="form-control"
-              placeholder="Confirm your password"
-            >
-            <div class="error-container" *ngIf="form.get('passGroup')?.get('rePassword')?.touched">
-              <p class="error-message" *ngIf="form.get('passGroup')?.errors?.['matchPasswordsValidator']">
-                Passwords don't match!
-              </p>
+                    <div class="error-box" *ngIf="errorMessage">
+                        <p class="error-message">{{ errorMessage }}</p>
+                    </div>
+
+                    <input
+                        type="email"
+                        id="email"
+                        formControlName="email"
+                        class="form-control"
+                        placeholder="Enter your email"
+                    />
+                    <div
+                        class="error-container"
+                        *ngIf="form.get('email')?.touched"
+                    >
+                        <p
+                            class="error-message"
+                            *ngIf="form.get('email')?.errors?.['required']"
+                        >
+                            Email is required!
+                        </p>
+                        <p
+                            class="error-message"
+                            *ngIf="form.get('email')?.errors?.['emailValidator']"
+                        >
+                            Email is invalid!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        formControlName="username"
+                        autocomplete="username"
+                        class="form-control"
+                        placeholder="Choose a username"
+                    />
+                    <div
+                        class="error-container"
+                        *ngIf="form.get('username')?.touched"
+                    >
+                        <p
+                            class="error-message"
+                            *ngIf="form.get('username')?.errors?.['required']"
+                        >
+                            Username is required!
+                        </p>
+                        <p
+                            class="error-message"
+                            *ngIf="form.get('username')?.errors?.['minlength']"
+                        >
+                            Username must be at least 5 characters!
+                        </p>
+                    </div>
+                </div>
+
+                <div formGroupName="passGroup">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            formControlName="password"
+                            autocomplete="new-password"
+                            class="form-control"
+                            placeholder="Create a password"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rePassword">Confirm Password</label>
+                        <input
+                            type="password"
+                            id="rePassword"
+                            formControlName="rePassword"
+                            autocomplete="new-password"
+                            class="form-control"
+                            placeholder="Confirm your password"
+                        />
+                        <div
+                            class="error-container"
+                            *ngIf="
+                                form.get('passGroup')?.get('rePassword')
+                                    ?.touched
+                            "
+                        >
+                            <p
+                                class="error-message"
+                                *ngIf="form.get('passGroup')?.errors?.['matchPasswordsValidator']"
+                            >
+                                Passwords don't match!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="submit-btn" [disabled]="form.invalid">
+                    Register
+                </button>
+            </form>
+
+            <div class="redirect-prompt">
+                <p>
+                    Already have an account?
+                    <a routerLink="/auth/login">Sign in</a>
+                </p>
             </div>
-          </div>
         </div>
-
-        <button class="submit-btn" [disabled]="form.invalid">Register</button>
-      </form>
-
-      <div class="redirect-prompt">
-        <p>Already have an account? <a routerLink="/auth/login">Sign in</a></p>
-      </div>
     </div>
-  </div>
 </main>

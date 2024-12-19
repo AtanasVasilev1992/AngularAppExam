@@ -1,66 +1,81 @@
 <div class="details-container">
-  <div *ngIf="isLoading" class="loader-container">
-    <app-loader />
-  </div>
-
-  <div *ngIf="!isLoading" class="place-details">
-    <div class="image-container">
-      <img [src]="place.image" [alt]="place.name" class="main-image">
+    <div *ngIf="isLoading" class="loader-container">
+        <app-loader />
     </div>
 
-    <div class="content-container">
-      <div class="header">
-        <h1 class="title">{{place.name}}</h1>
-        <div class="location">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>{{place.city}}</span>
+    <div *ngIf="!isLoading" class="place-details">
+        <div class="image-container">
+            <img [src]="place.image" [alt]="place.name" class="main-image" />
         </div>
-      </div>
 
-      <div class="description-section">
-        <h3>About this place</h3>
-        <p class="description">{{place.description}}</p>
-      </div>
+        <div class="content-container">
+            <div class="header">
+                <h1 class="title">{{ place.name }}</h1>
+                <div class="location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>{{ place.city }}</span>
+                </div>
+            </div>
 
-      <div class="info-grid">
-        <div class="info-item">
-          <i class="far fa-clock"></i>
-          <p>Work time:</p>
-          <span>{{place.workTime}}</span>
+            <div class="description-section">
+                <h3>About this place</h3>
+                <p class="description">{{ place.description }}</p>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <i class="far fa-clock"></i>
+                    <p>Work time:</p>
+                    <span>{{ place.workTime }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-heart"></i>
+                    <p>Likes</p>
+                    <span>{{ likesCount }}</span>
+                </div>
+            </div>
+
+            <div class="actions">
+                <ng-container *ngIf="isOwner">
+                    <button
+                        class="edit-btn"
+                        [routerLink]="['/places/edit', place._id]"
+                    >
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="delete-btn" (click)="deletePlace()">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                </ng-container>
+
+                <button
+                    class="like-btn"
+                    [class.liked]="hasLiked"
+                    (click)="toggleLike()"
+                    *ngIf="!isOwner && userService.user"
+                >
+                    <i
+                        class="fas"
+                        [class.fa-heart]="hasLiked"
+                        [class.fa-heart-o]="!hasLiked"
+                    ></i>
+                    {{ hasLiked ? "Unlike" : "Like" }} ({{ likesCount }})
+                </button>
+            </div>
+
+            <div>
+                <p class="created">Created: {{ place.createdAt | time }}</p>
+            </div>
+
+            <app-confirm-dialog
+                [show]="showDeleteDialog"
+                message="Are you sure you want to delete this place? This action cannot be undone."
+                [onConfirm]="confirmDelete.bind(this)"
+                [onCancel]="cancelDelete.bind(this)"
+            ></app-confirm-dialog>
         </div>
-        <div class="info-item">
-          <i class="fas fa-heart"></i>
-          <p>Likes</p>
-          <span>{{likesCount}}</span>
-        </div>
-      </div>
-
-      <div class="actions">
-        <ng-container *ngIf="isOwner">
-          <button class="edit-btn" [routerLink]="['/places/edit', place._id]">
-            <i class="fas fa-edit"></i> Edit
-          </button>
-          <button class="delete-btn" (click)="deletePlace()">
-            <i class="fas fa-trash-alt"></i> Delete
-          </button>
-        </ng-container>
-
-        <button class="like-btn" [class.liked]="hasLiked" (click)="toggleLike()" *ngIf="!isOwner && userService.user">
-          <i class="fas" [class.fa-heart]="hasLiked" [class.fa-heart-o]="!hasLiked"></i>
-          {{hasLiked ? 'Unlike' : 'Like'}} ({{likesCount}})
-        </button>
-      </div>
-
-      <div>
-        <p class="created">Created: {{place.createdAt | time}}</p>
-      </div>
-
-      <app-confirm-dialog [show]="showDeleteDialog"
-        message="Are you sure you want to delete this place? This action cannot be undone."
-        [onConfirm]="confirmDelete.bind(this)" [onCancel]="cancelDelete.bind(this)"></app-confirm-dialog>
     </div>
-  </div>
-  <div class="comments-container">
-    <app-comments *ngIf="place._id" [itemId]="place._id"></app-comments> 
+    <div class="comments-container">
+        <app-comments *ngIf="place._id" [itemId]="place._id"></app-comments>
+    </div>
 </div>
-

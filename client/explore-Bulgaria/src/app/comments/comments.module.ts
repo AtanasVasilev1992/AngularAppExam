@@ -5,16 +5,8 @@ import { CommentsComponent } from './comments.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [
-    CommentsComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    SharedModule
-  ],
-  exports: [
-    CommentsComponent
-  ]
+    declarations: [CommentsComponent],
+    imports: [CommonModule, FormsModule, SharedModule],
+    exports: [CommentsComponent],
 })
-export class CommentsModule { }
+export class CommentsModule {}

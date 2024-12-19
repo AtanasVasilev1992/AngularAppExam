@@ -10,23 +10,19 @@ import { EditPlaceComponent } from './edit-place/edit-place.component';
 import { CommentsModule } from '../comments/comments.module';
 
 @NgModule({
-  declarations: [
-    PlacesComponent,
-    AddPlaceComponent,
-    DetailsComponent,
-    EditPlaceComponent
-  ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    PlaceRoutinModule,
-    FormsModule,
-    CommentsModule
-  ],
-  exports: [
-    PlacesComponent,
-    AddPlaceComponent,
-    DetailsComponent,
-  ]
+    declarations: [
+        PlacesComponent,
+        AddPlaceComponent,
+        DetailsComponent,
+        EditPlaceComponent,
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        PlaceRoutinModule,
+        FormsModule,
+        CommentsModule,
+    ],
+    exports: [PlacesComponent, AddPlaceComponent, DetailsComponent],
 })
-export class PlaceModule { }
+export class PlaceModule {}

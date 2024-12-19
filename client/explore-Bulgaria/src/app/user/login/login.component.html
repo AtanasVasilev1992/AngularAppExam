@@ -1,62 +1,84 @@
 <main class="auth-container">
-  <div class="form-container">
-    <h1>Login</h1>
-    <div class="form-wrapper">
-      <form class="login-form" #form="ngForm" (ngSubmit)="login(form)">
-        <div class="form-group">
-          <label for="email">Email</label>
+    <div class="form-container">
+        <h1>Login</h1>
+        <div class="form-wrapper">
+            <form class="login-form" #form="ngForm" (ngSubmit)="login(form)">
+                <div class="form-group">
+                    <label for="email">Email</label>
 
-          <div class="error-box" *ngIf="errorMessage">
-            <p class="error-message">{{errorMessage}}</p>
-          </div>
+                    <div class="error-box" *ngIf="errorMessage">
+                        <p class="error-message">{{ errorMessage }}</p>
+                    </div>
 
-          <input 
-            type="text"
-            name="email"
-            id="email"
-            placeholder="Enter your email"
-            autocomplete="email"
-            ngModel
-            #inputEmail="ngModel"
-            required
-            [appEmail]="domains"
-            class="form-control"
-          >
-          <div class="error-container" *ngIf="inputEmail.touched">
-            <p class="error-message" *ngIf="inputEmail.errors?.['required']">Email is required!</p>
-            <p class="error-message" *ngIf="inputEmail.errors?.['emailValidator']">Email is invalid!</p>
-          </div>
+                    <input
+                        type="text"
+                        name="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        ngModel
+                        #inputEmail="ngModel"
+                        required
+                        [appEmail]="domains"
+                        class="form-control"
+                    />
+                    <div class="error-container" *ngIf="inputEmail.touched">
+                        <p
+                            class="error-message"
+                            *ngIf="inputEmail.errors?.['required']"
+                        >
+                            Email is required!
+                        </p>
+                        <p
+                            class="error-message"
+                            *ngIf="inputEmail.errors?.['emailValidator']"
+                        >
+                            Email is invalid!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        ngModel
+                        #inputPassword="ngModel"
+                        required
+                        minlength="4"
+                        class="form-control"
+                    />
+                    <div class="error-container" *ngIf="inputPassword.touched">
+                        <p
+                            class="error-message"
+                            *ngIf="inputPassword.errors?.['required']"
+                        >
+                            Password is required!
+                        </p>
+                        <p
+                            class="error-message"
+                            *ngIf="inputPassword.errors?.['minlength']"
+                        >
+                            Password must be at least 4 characters!
+                        </p>
+                    </div>
+                </div>
+
+                <button class="submit-btn" [disabled]="form.invalid">
+                    Login
+                </button>
+            </form>
+
+            <div class="redirect-prompt">
+                <p>
+                    Don't have an account?
+                    <a routerLink="/auth/register">Create one</a>
+                </p>
+            </div>
         </div>
-
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input 
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Enter your password"
-            autocomplete="current-password"
-            ngModel
-            #inputPassword="ngModel"
-            required
-            minlength="4"
-            class="form-control"
-          >
-          <div class="error-container" *ngIf="inputPassword.touched">
-            <p class="error-message" *ngIf="inputPassword.errors?.['required']">Password is required!</p>
-            <p class="error-message" *ngIf="inputPassword.errors?.['minlength']">Password must be at least 4 characters!</p>
-          </div>
-        </div>
-
-         <button 
-        class="submit-btn" 
-        [disabled]="form.invalid"
-      >Login</button>
-      </form>
-
-      <div class="redirect-prompt">
-        <p>Don't have an account? <a routerLink="/auth/register">Create one</a></p>
-      </div>
     </div>
-  </div>
 </main>

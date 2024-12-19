@@ -1,121 +1,153 @@
 <div class="profile-container" [@sectionFade]>
-  <div class="profile-header">
-    <div class="user-info">
-      <h2>{{ userService.user?.username }}'s Profile</h2>
-      <p>{{ userService.user?.email }}</p>
-    </div>
-  </div>
-
-  <div class="content-tabs">
-    <button 
-      [class.active]="activeTab === 'created'"
-      (click)="activeTab = 'created'">
-      My Content
-    </button>
-    <button 
-      [class.active]="activeTab === 'liked'"
-      (click)="activeTab = 'liked'">
-      Liked Content
-    </button>
-  </div>
-
-  <div class="content-section" *ngIf="activeTab === 'created'" [@tabSwitch]>
-    <div class="places-section" *ngIf="userPlaces.length > 0">
-      <h3>My Places</h3>
-      <div class="grid-container" [@contentCards]>
-        <div *ngFor="let place of paginatedUserPlaces" class="content-card">
-          <img [src]="place.image" [alt]="place.name">
-          <div class="card-content">
-            <h4>{{place.name}}</h4>
-            <p>{{place.city}}</p>
-            <button [routerLink]="['/places', place._id]">View Details</button>
-          </div>
+    <div class="profile-header">
+        <div class="user-info">
+            <h2>{{ userService.user?.username }}'s Profile</h2>
+            <p>{{ userService.user?.email }}</p>
         </div>
-      </div>
-      <app-pagination
-        [currentPage]="currentPagePlaces"
-        [totalPages]="totalPagesPlaces"
-        [itemsPerPage]="itemsPerPage"
-        (pageChange)="onPageChangePlaces($event)">
-      </app-pagination>
     </div>
 
-    <div class="museums-section" *ngIf="userMuseums.length > 0">
-      <h3>My Museums</h3>
-      <div class="grid-container" [@contentCards]>
-        <div *ngFor="let museum of paginatedUserMuseums" class="content-card">
-          <img [src]="museum.image" [alt]="museum.name">
-          <div class="card-content">
-            <h4>{{museum.name}}</h4>
-            <p>{{museum.city}}</p>
-            <button [routerLink]="['/museums', museum._id]">View Details</button>
-          </div>
+    <div class="content-tabs">
+        <button
+            [class.active]="activeTab === 'created'"
+            (click)="activeTab = 'created'"
+        >
+            My Content
+        </button>
+        <button
+            [class.active]="activeTab === 'liked'"
+            (click)="activeTab = 'liked'"
+        >
+            Liked Content
+        </button>
+    </div>
+
+    <div class="content-section" *ngIf="activeTab === 'created'" [@tabSwitch]>
+        <div class="places-section" *ngIf="userPlaces.length > 0">
+            <h3>My Places</h3>
+            <div class="grid-container" [@contentCards]>
+                <div
+                    *ngFor="let place of paginatedUserPlaces"
+                    class="content-card"
+                >
+                    <img [src]="place.image" [alt]="place.name" />
+                    <div class="card-content">
+                        <h4>{{ place.name }}</h4>
+                        <p>{{ place.city }}</p>
+                        <button [routerLink]="['/places', place._id]">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <app-pagination
+                [currentPage]="currentPagePlaces"
+                [totalPages]="totalPagesPlaces"
+                [itemsPerPage]="itemsPerPage"
+                (pageChange)="onPageChangePlaces($event)"
+            >
+            </app-pagination>
         </div>
-      </div>
-      <app-pagination
-        [currentPage]="currentPageMuseums"
-        [totalPages]="totalPagesMuseums"
-        [itemsPerPage]="itemsPerPage"
-        (pageChange)="onPageChangeMuseums($event)">
-      </app-pagination>
-    </div>
 
-    <div *ngIf="userPlaces.length === 0 && userMuseums.length === 0" class="empty-state">
-      <p>You haven't created any content yet.</p>
-      <div class="action-buttons">
-        <button routerLink="/add-place">Add Place</button>
-        <button routerLink="/museums/add">Add Museum</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-section" *ngIf="activeTab === 'liked'" [@tabSwitch]>
-    <div class="places-section" *ngIf="likedPlaces.length > 0">
-      <h3>Liked Places</h3>
-      <div class="grid-container" [@contentCards]>
-        <div *ngFor="let place of paginatedLikedPlaces" class="content-card">
-          <img [src]="place.image" [alt]="place.name">
-          <div class="card-content">
-            <h4>{{place.name}}</h4>
-            <p>{{place.city}}</p>
-            <button [routerLink]="['/places', place._id]">View Details</button>
-          </div>
+        <div class="museums-section" *ngIf="userMuseums.length > 0">
+            <h3>My Museums</h3>
+            <div class="grid-container" [@contentCards]>
+                <div
+                    *ngFor="let museum of paginatedUserMuseums"
+                    class="content-card"
+                >
+                    <img [src]="museum.image" [alt]="museum.name" />
+                    <div class="card-content">
+                        <h4>{{ museum.name }}</h4>
+                        <p>{{ museum.city }}</p>
+                        <button [routerLink]="['/museums', museum._id]">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <app-pagination
+                [currentPage]="currentPageMuseums"
+                [totalPages]="totalPagesMuseums"
+                [itemsPerPage]="itemsPerPage"
+                (pageChange)="onPageChangeMuseums($event)"
+            >
+            </app-pagination>
         </div>
-      </div>
-      <app-pagination
-        [currentPage]="currentPageLikedPlaces"
-        [totalPages]="totalPagesLikedPlaces"
-        [itemsPerPage]="itemsPerPage"
-        (pageChange)="onPageChangeLikedPlaces($event)">
-      </app-pagination>
-    </div>
 
-    <div class="museums-section" *ngIf="likedMuseums.length > 0">
-      <h3>Liked Museums</h3>
-      <div class="grid-container" [@contentCards]>
-        <div *ngFor="let museum of paginatedLikedMuseums" class="content-card">
-          <img [src]="museum.image" [alt]="museum.name">
-          <div class="card-content">
-            <h4>{{museum.name}}</h4>
-            <p>{{museum.city}}</p>
-            <button [routerLink]="['/museums', museum._id]">View Details</button>
-          </div>
+        <div
+            *ngIf="userPlaces.length === 0 && userMuseums.length === 0"
+            class="empty-state"
+        >
+            <p>You haven't created any content yet.</p>
+            <div class="action-buttons">
+                <button routerLink="/add-place">Add Place</button>
+                <button routerLink="/museums/add">Add Museum</button>
+            </div>
         </div>
-      </div>
-      <app-pagination
-        [currentPage]="currentPageLikedMuseums"
-        [totalPages]="totalPagesLikedMuseums"
-        [itemsPerPage]="itemsPerPage"
-        (pageChange)="onPageChangeLikedMuseums($event)">
-      </app-pagination>
     </div>
 
-    <div *ngIf="likedPlaces.length === 0 && likedMuseums.length === 0" class="empty-state">
-      <p>You haven't liked any content yet.</p>
-      <div class="action-buttons">
-        <button routerLink="/places">Browse Places</button>
-        <button routerLink="/museums">Browse Museums</button>
-      </div>
+    <div class="content-section" *ngIf="activeTab === 'liked'" [@tabSwitch]>
+        <div class="places-section" *ngIf="likedPlaces.length > 0">
+            <h3>Liked Places</h3>
+            <div class="grid-container" [@contentCards]>
+                <div
+                    *ngFor="let place of paginatedLikedPlaces"
+                    class="content-card"
+                >
+                    <img [src]="place.image" [alt]="place.name" />
+                    <div class="card-content">
+                        <h4>{{ place.name }}</h4>
+                        <p>{{ place.city }}</p>
+                        <button [routerLink]="['/places', place._id]">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <app-pagination
+                [currentPage]="currentPageLikedPlaces"
+                [totalPages]="totalPagesLikedPlaces"
+                [itemsPerPage]="itemsPerPage"
+                (pageChange)="onPageChangeLikedPlaces($event)"
+            >
+            </app-pagination>
+        </div>
+
+        <div class="museums-section" *ngIf="likedMuseums.length > 0">
+            <h3>Liked Museums</h3>
+            <div class="grid-container" [@contentCards]>
+                <div
+                    *ngFor="let museum of paginatedLikedMuseums"
+                    class="content-card"
+                >
+                    <img [src]="museum.image" [alt]="museum.name" />
+                    <div class="card-content">
+                        <h4>{{ museum.name }}</h4>
+                        <p>{{ museum.city }}</p>
+                        <button [routerLink]="['/museums', museum._id]">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <app-pagination
+                [currentPage]="currentPageLikedMuseums"
+                [totalPages]="totalPagesLikedMuseums"
+                [itemsPerPage]="itemsPerPage"
+                (pageChange)="onPageChangeLikedMuseums($event)"
+            >
+            </app-pagination>
+        </div>
+
+        <div
+            *ngIf="likedPlaces.length === 0 && likedMuseums.length === 0"
+            class="empty-state"
+        >
+            <p>You haven't liked any content yet.</p>
+            <div class="action-buttons">
+                <button routerLink="/places">Browse Places</button>
+                <button routerLink="/museums">Browse Museums</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

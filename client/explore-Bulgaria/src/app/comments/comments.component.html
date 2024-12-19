@@ -6,13 +6,21 @@
     </div>
 
     <div *ngIf="!isLoading" class="comments-container">
-
         <div *ngIf="userService.user" class="comment-form">
             <div class="comment-user">
-                Commenting as: <span class="username">{{currentUser?.username}}</span>
+                Commenting as:
+                <span class="username">{{ currentUser?.username }}</span>
             </div>
-            <textarea [(ngModel)]="newComment" placeholder="Add your comment..." rows="3"></textarea>
-            <button (click)="addComment()" [disabled]="!newComment.trim()" class="submit-btn">
+            <textarea
+                [(ngModel)]="newComment"
+                placeholder="Add your comment..."
+                rows="3"
+            ></textarea>
+            <button
+                (click)="addComment()"
+                [disabled]="!newComment.trim()"
+                class="submit-btn"
+            >
                 Post Comment
             </button>
         </div>
@@ -21,11 +29,17 @@
         <div class="comments-list">
             <div class="comment-item" *ngFor="let comment of comments">
                 <div class="comment-header">
-                    <span class="username">{{comment.username}}</span>
-                    <span class="date">{{comment._createdOn | date:'medium'}}</span>
+                    <span class="username">{{ comment.username }}</span>
+                    <span class="date">{{
+                        comment._createdOn | date : "medium"
+                    }}</span>
                 </div>
-                <p class="comment-text">{{comment.text}}</p>
-                <button *ngIf="isCommentOwner(comment)" (click)="deleteComment(comment._id)" class="delete-btn">
+                <p class="comment-text">{{ comment.text }}</p>
+                <button
+                    *ngIf="isCommentOwner(comment)"
+                    (click)="deleteComment(comment._id)"
+                    class="delete-btn"
+                >
                     Delete
                 </button>
             </div>
@@ -36,7 +50,10 @@
         </div>
     </div>
 
-    <app-confirm-dialog [show]="showDeleteDialog"
+    <app-confirm-dialog
+        [show]="showDeleteDialog"
         message="Are you sure you want to delete this comment? This action cannot be undone."
-        [onConfirm]="confirmDelete.bind(this)" [onCancel]="cancelDelete.bind(this)"></app-confirm-dialog>
+        [onConfirm]="confirmDelete.bind(this)"
+        [onCancel]="cancelDelete.bind(this)"
+    ></app-confirm-dialog>
 </section>

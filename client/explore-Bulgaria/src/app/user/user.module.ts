@@ -8,27 +8,16 @@ import { ProfileComponent } from './profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 
-
-
-
 @NgModule({
-  declarations: [
-    LoginComponent,
-    RegisterComponent,
-    ProfileComponent
-  ],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    RouterModule,
-    FormsModule,
-    SharedModule,
-    ReactiveFormsModule
-  ],
-  exports: [
-    LoginComponent,
-    RegisterComponent
-  ],
-  
+    declarations: [LoginComponent, RegisterComponent, ProfileComponent],
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        RouterModule,
+        FormsModule,
+        SharedModule,
+        ReactiveFormsModule,
+    ],
+    exports: [LoginComponent, RegisterComponent],
 })
-export class UserModule { }
+export class UserModule {}

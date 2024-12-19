@@ -1,10 +1,26 @@
 <div class="flex justify-center space-x-2 my-4">
-    <button class="pagination-btn" [disabled]="currentPage === 1"
-        (click)="onPageChange(currentPage - 1)">Previous</button>
+    <button
+        class="pagination-btn"
+        [disabled]="currentPage === 1"
+        (click)="onPageChange(currentPage - 1)"
+    >
+        Previous
+    </button>
 
-    <button *ngFor="let page of pages" class="pagination-btn" [class.active]="page === currentPage"
-        (click)="onPageChange(page)">{{ page }}</button>
+    <button
+        *ngFor="let page of pages"
+        class="pagination-btn"
+        [class.active]="page === currentPage"
+        (click)="onPageChange(page)"
+    >
+        {{ page }}
+    </button>
 
-    <button class="pagination-btn" [disabled]="currentPage === totalPages"
-        (click)="onPageChange(currentPage + 1)">Next</button>
+    <button
+        class="pagination-btn"
+        [disabled]="currentPage === totalPages"
+        (click)="onPageChange(currentPage + 1)"
+    >
+        Next
+    </button>
 </div>

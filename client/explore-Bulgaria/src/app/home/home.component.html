@@ -4,7 +4,9 @@
         <p class="subtitle">Discover the hidden gems of Bulgaria</p>
         <div class="hero-buttons">
             <a routerLink="/places" class="explore-btn">Explore Places</a>
-            <a routerLink="/museums" class="explore-btn secondary">Visit Museums</a>
+            <a routerLink="/museums" class="explore-btn secondary"
+                >Visit Museums</a
+            >
         </div>
     </div>
 </div>
@@ -14,23 +16,32 @@
         <div class="feature-card" [@featureItem]>
             <i class="fas fa-map-marked-alt"></i>
             <h3>Amazing Places</h3>
-            <p>Discover beautiful locations across Bulgaria - from seaside treasures to mountain peaks.</p>
+            <p>
+                Discover beautiful locations across Bulgaria - from seaside
+                treasures to mountain peaks.
+            </p>
         </div>
 
         <div class="feature-card" [@featureItem]>
             <i class="fas fa-landmark"></i>
             <h3>Rich Culture</h3>
-            <p>Explore museums and cultural sites that tell Bulgaria's fascinating history.</p>
+            <p>
+                Explore museums and cultural sites that tell Bulgaria's
+                fascinating history.
+            </p>
         </div>
 
         <div class="feature-card" [@featureItem]>
             <i class="fas fa-users"></i>
             <h3>Community</h3>
-            <p>Join our community of explorers, share your experiences and discover new destinations.</p>
+            <p>
+                Join our community of explorers, share your experiences and
+                discover new destinations.
+            </p>
         </div>
     </div>
 </div>
 
 <div *ngIf="!isLoggedIn">
-    <app-join-section/>
+    <app-join-section />
 </div>

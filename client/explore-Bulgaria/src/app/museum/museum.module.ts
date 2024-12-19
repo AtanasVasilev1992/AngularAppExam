@@ -10,24 +10,20 @@ import { EditMuseumComponent } from './edit-museum/edit-museum.component';
 import { CommentsModule } from '../comments/comments.module';
 
 @NgModule({
-  declarations: [
-    MuseumsComponent,
-    AddMuseumComponent,
-    DetailsMuseumComponent,
-    EditMuseumComponent
-  ],
-  imports: [
-    CommonModule,
-    MuseumRoutinModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CommentsModule
-  ],
-  exports: [
-    MuseumsComponent,
-    DetailsMuseumComponent,
-    AddMuseumComponent
-  ]
+    declarations: [
+        MuseumsComponent,
+        AddMuseumComponent,
+        DetailsMuseumComponent,
+        EditMuseumComponent,
+    ],
+    imports: [
+        CommonModule,
+        MuseumRoutinModule,
+        SharedModule,
+        FormsModule,
+        ReactiveFormsModule,
+        CommentsModule,
+    ],
+    exports: [MuseumsComponent, DetailsMuseumComponent, AddMuseumComponent],
 })
-export class MuseumModule { }
+export class MuseumModule {}

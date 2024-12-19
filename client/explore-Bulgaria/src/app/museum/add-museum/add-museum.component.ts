@@ -4,54 +4,56 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
-  selector: 'app-add-museum',
-  templateUrl: './add-museum.component.html',
-  styleUrls: ['./add-museum.component.css']
+    selector: 'app-add-museum',
+    templateUrl: './add-museum.component.html',
+    styleUrls: ['./add-museum.component.css'],
 })
 export class AddMuseumComponent implements OnInit {
-  museumForm: FormGroup;
+    museumForm: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private apiService: ApiService,
-    private router: Router
-  ) {
-    this.museumForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(5)]],
-      image: ['', [Validators.required]],
-      city: ['', [Validators.required, Validators.minLength(3)]],
-      description: ['', [Validators.required, Validators.minLength(10)]],
-      workTime: ['', [Validators.required]]
-    });
-  }
-
-  ngOnInit(): void {}
-
-  addMuseum(): void {
-    if (this.museumForm.invalid) {
-      Object.keys(this.museumForm.controls).forEach(key => {
-        const control = this.museumForm.get(key);
-        if (control?.invalid) {
-          control.markAsTouched();
-        }
-      });
-      return;
+    constructor(
+        private fb: FormBuilder,
+        private apiService: ApiService,
+        private router: Router
+    ) {
+        this.museumForm = this.fb.group({
+            name: ['', [Validators.required, Validators.minLength(5)]],
+            image: ['', [Validators.required]],
+            city: ['', [Validators.required, Validators.minLength(3)]],
+            description: ['', [Validators.required, Validators.minLength(10)]],
+            workTime: ['', [Validators.required]],
+        });
     }
 
-    const { name, image, city, description, workTime } = this.museumForm.value;
+    ngOnInit(): void {}
 
-    this.apiService.createMuseum(name, image, city, description, workTime)
-      .subscribe({
-        next: () => {
-          this.router.navigate(['/museums']);
-        },
-        error: (err) => {
-          console.error('Error creating museum:', err);
+    addMuseum(): void {
+        if (this.museumForm.invalid) {
+            Object.keys(this.museumForm.controls).forEach((key) => {
+                const control = this.museumForm.get(key);
+                if (control?.invalid) {
+                    control.markAsTouched();
+                }
+            });
+            return;
         }
-      });
-  }
 
-  get f() {
-    return this.museumForm.controls;
-  }
+        const { name, image, city, description, workTime } =
+            this.museumForm.value;
+
+        this.apiService
+            .createMuseum(name, image, city, description, workTime)
+            .subscribe({
+                next: () => {
+                    this.router.navigate(['/museums']);
+                },
+                error: (err) => {
+                    console.error('Error creating museum:', err);
+                },
+            });
+    }
+
+    get f() {
+        return this.museumForm.controls;
+    }
 }

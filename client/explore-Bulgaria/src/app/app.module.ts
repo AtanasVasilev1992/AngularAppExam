@@ -20,34 +20,34 @@ import { AboutComponent } from './about/about.component';
 import { JoinSectionComponent } from './home/join-section/join-section.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NotFoundComponent,
-    HomeComponent,
-    AuthenticateComponent,
-    AboutComponent,
-    JoinSectionComponent,
-  ],
-  imports: [
-    BrowserModule,
-    SharedModule,
-    PlaceModule,
-    CoreModule,
-    HttpClientModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MuseumModule,
-    BrowserAnimationsModule,
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AppInterceptor,
-      multi: true,
-    },
-    AuthService,
-  ],
-  bootstrap: [AppComponent],
+    declarations: [
+        AppComponent,
+        NotFoundComponent,
+        HomeComponent,
+        AuthenticateComponent,
+        AboutComponent,
+        JoinSectionComponent,
+    ],
+    imports: [
+        BrowserModule,
+        SharedModule,
+        PlaceModule,
+        CoreModule,
+        HttpClientModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MuseumModule,
+        BrowserAnimationsModule,
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AppInterceptor,
+            multi: true,
+        },
+        AuthService,
+    ],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

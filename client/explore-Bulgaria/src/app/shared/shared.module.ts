@@ -10,26 +10,26 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { EmailValidatorDirective } from './utils/email-validator';
 
 @NgModule({
-  declarations: [
-    LoaderComponent,
-    EmailDirective,
-    TimePipe,
-    PaginationComponent,
-    ConfirmDialogComponent,
-    ShortenTextPipe,
-    FilterPipe,
-    EmailValidatorDirective,
-  ],
-  imports: [CommonModule],
-  exports: [
-    LoaderComponent,
-    EmailDirective,
-    TimePipe,
-    PaginationComponent,
-    ConfirmDialogComponent,
-    ShortenTextPipe,
-    FilterPipe,
-    EmailValidatorDirective
-  ],
+    declarations: [
+        LoaderComponent,
+        EmailDirective,
+        TimePipe,
+        PaginationComponent,
+        ConfirmDialogComponent,
+        ShortenTextPipe,
+        FilterPipe,
+        EmailValidatorDirective,
+    ],
+    imports: [CommonModule],
+    exports: [
+        LoaderComponent,
+        EmailDirective,
+        TimePipe,
+        PaginationComponent,
+        ConfirmDialogComponent,
+        ShortenTextPipe,
+        FilterPipe,
+        EmailValidatorDirective,
+    ],
 })
 export class SharedModule {}

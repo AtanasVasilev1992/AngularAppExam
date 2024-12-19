@@ -7,24 +7,14 @@ import { ErrorComponent } from './error/error.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { FormsModule } from '@angular/forms';
 
-
-
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    FooterComponent,
-    ErrorComponent,
-    SearchResultsComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule
-  ],
-  exports: [
-    FooterComponent,
-    HeaderComponent,
-    SearchResultsComponent
-  ]
+    declarations: [
+        HeaderComponent,
+        FooterComponent,
+        ErrorComponent,
+        SearchResultsComponent,
+    ],
+    imports: [CommonModule, RouterModule, FormsModule],
+    exports: [FooterComponent, HeaderComponent, SearchResultsComponent],
 })
-export class CoreModule { }
+export class CoreModule {}

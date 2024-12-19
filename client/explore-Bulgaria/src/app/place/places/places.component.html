@@ -1,21 +1,26 @@
 <main>
-    <div *ngIf="isLoading"> 
+    <div *ngIf="isLoading">
         <app-loader />
-    </div> 
+    </div>
 
-
-    <div *ngIf="!isLoading" class="place-title" [@cardList]> 
+    <div *ngIf="!isLoading" class="place-title" [@cardList]>
         <div *ngFor="let place of paginatedPlaces" class="place-container">
             <div class="card">
-                <img [src]="place.image" [alt]="place.name" style="width:100%">
-                <h1>{{place.name}}</h1>
-                <p class="description">{{place.description | shortenText:100}}</p>
+                <img
+                    [src]="place.image"
+                    [alt]="place.name"
+                    style="width: 100%"
+                />
+                <h1>{{ place.name }}</h1>
+                <p class="description">
+                    {{ place.description | shortenText : 100 }}
+                </p>
                 <p [routerLink]="place._id"><button>More Info</button></p>
             </div>
         </div>
     </div>
 
-    <app-pagination 
+    <app-pagination
         [currentPage]="currentPage"
         [totalPages]="totalPages"
         [itemsPerPage]="itemsPerPage"
