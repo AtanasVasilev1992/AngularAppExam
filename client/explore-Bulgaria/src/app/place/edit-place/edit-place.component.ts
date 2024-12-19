@@ -45,6 +45,11 @@ export class EditPlaceComponent implements OnInit {
 
         const { name, image, city, description, workTime } = form.value;
 
+        const urlPattern = /^https?:\/\/.+/i;
+        if (!urlPattern.test(image)) {
+            return;
+        }
+
         this.apiService
             .editPlace(this.place._id, name, image, city, description, workTime)
             .subscribe({

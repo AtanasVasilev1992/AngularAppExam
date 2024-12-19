@@ -47,6 +47,7 @@
                         ngModel
                         #inputImage="ngModel"
                         required
+                        appUrlValidator
                     />
                     <div class="error-container" *ngIf="inputImage.touched">
                         <p
@@ -54,6 +55,12 @@
                             *ngIf="inputImage?.errors?.['required']"
                         >
                             Image URL is required!
+                        </p>
+                        <p
+                            class="error-message"
+                            *ngIf="inputImage?.errors?.['invalidUrl']"
+                        >
+                            URL must start with http:// or https://
                         </p>
                     </div>
                 </div>

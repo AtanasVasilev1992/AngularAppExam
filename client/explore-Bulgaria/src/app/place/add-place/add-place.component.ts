@@ -16,6 +16,11 @@ export class AddPlaceComponent {
         }
 
         const { name, image, city, description, workTime } = form.value;
+        
+        const urlPattern = /^https?:\/\/.+/i;
+        if (!urlPattern.test(image)) {
+            return;
+        }
 
         this.apiService
             .createPlace(name, image, city, description, workTime)
