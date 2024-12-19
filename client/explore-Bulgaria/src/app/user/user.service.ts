@@ -22,7 +22,7 @@ export class UserService implements OnDestroy {
         this.autoLoadProfile();
     }
     ngOnDestroy(): void {
-        throw new Error('Method not implemented.');
+        this.user$$.complete();
     }
 
     private autoLoadProfile() {
