@@ -32,7 +32,11 @@ export class ApiService {
     getPlace(id: string): Observable<Place> {
         return this.http.get<Place>(`${this.apiUrl}/data/places/${id}`).pipe(
             catchError((error) => {
-                console.error('Error fetching place:', error);
+                if (error.status === 404) {
+                    console.error('Place not found or has been deleted');
+                } else {
+                    console.error('Error fetching place:', error);
+                }
                 return throwError(() => error);
             })
         );
@@ -87,7 +91,11 @@ export class ApiService {
     getMuseum(id: string): Observable<Museum> {
         return this.http.get<Museum>(`${this.apiUrl}/data/museums/${id}`).pipe(
             catchError((error) => {
-                console.error('Error loading museum:', error);
+                if (error.status === 404) {
+                    console.error('Museum not found or has been deleted');
+                } else {
+                    console.error('Error loading museum:', error);
+                }
                 return throwError(() => error);
             })
         );

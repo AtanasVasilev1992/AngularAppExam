@@ -4,7 +4,7 @@ import { UserService } from '../user.service';
 import { Place } from '../../types/place';
 import { Museum } from '../../types/museum';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { catchError, forkJoin, of } from 'rxjs';
+import { catchError, forkJoin, of, throwError } from 'rxjs';
 import { Like } from '../../types/like';
 import { profileAnimations } from 'src/app/animations/profile.animations';
 
@@ -109,18 +109,33 @@ export class ProfileComponent implements OnInit {
 
     loadLikedItems(likes: Like[]) {
         const itemIds = new Set(likes.map((like) => like.itemId));
+        const loadedItems = 0;
 
         itemIds.forEach((itemId) => {
             this.apiService
                 .getPlace(itemId)
-                .pipe(catchError(() => of(null)))
+                .pipe(
+                    catchError((error) => {
+                        if (error.status === 404) {
+                            return of(null);
+                        }
+                        return throwError(() => error);
+                    })
+                )
                 .subscribe((place) => {
                     if (place) {
                         this.likedPlaces.push(place);
                     } else {
                         this.apiService
                             .getMuseum(itemId)
-                            .pipe(catchError(() => of(null)))
+                            .pipe(
+                                catchError((error) => {
+                                    if (error.status === 404) {
+                                        return of(null);
+                                    }
+                                    return throwError(() => error);
+                                })
+                            )
                             .subscribe((museum) => {
                                 if (museum) {
                                     this.likedMuseums.push(museum);

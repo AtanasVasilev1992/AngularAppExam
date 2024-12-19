@@ -127,11 +127,23 @@ export class UserService implements OnDestroy {
     }
 
     getProfile(): Observable<User> {
-        return this.http.get<User>(`${this.API_URL}/users/me`, {
-            headers: {
-                'X-Authorization': this.authService.getToken() || '',
-            },
-        });
+        return this.http
+            .get<User>(`${this.API_URL}/users/me`, {
+                headers: {
+                    'X-Authorization': this.authService.getToken() || '',
+                },
+            })
+            .pipe(
+                catchError((error) => {
+                    if (error.status === 404) {
+                        console.error('User profile not found');
+                        this.authService.clearTokens();
+                    } else {
+                        console.error('Error fetching profile:', error);
+                    }
+                    return throwError(() => error);
+                })
+            );
     }
 
     isLoggedIn(): boolean {
