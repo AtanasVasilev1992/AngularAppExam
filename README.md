@@ -369,6 +369,16 @@ ng build
 ng test
 ```
 
+# My pages
+
+![home](../AngularAppExam/client/explore-Bulgaria/src/assets/pages/home.png)
+![about](../AngularAppExam/client/explore-Bulgaria/src/assets/pages/about.png)
+![404](../AngularAppExam/client/explore-Bulgaria/src/assets/pages/404.png)
+![museums](../AngularAppExam/client/explore-Bulgaria/src/assets/pages/museums.png)
+![places/details](../AngularAppExam/client/explore-Bulgaria/src/assets/pages/place-details.png)
+![places/details-author](../AngularAppExam/client/explore-Bulgaria/src/assets/pages/places-details-author.png)
+![profile](../AngularAppExam/client/explore-Bulgaria/src/assets/pages/profil-my-content.png)
+
 ## 📝 License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
