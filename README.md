@@ -245,8 +245,8 @@ interface Like {
 - `forkJoin` - Parallel API calls
 
 ### Guards
-- `AuthActivate` - Protect private routes
-- Route protection for authenticated users
+- `AuthGuard` - Protect private routes
+- `PublicGuard` - Route protection for authenticated users
 
 ### Custom Pipes
 - `time` - Format timestamps
