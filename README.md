@@ -79,7 +79,7 @@ npm install
 1. Start the server
 ```bash
 cd server
-node server.js
+npm start
 ```
 The server will start on http://localhost:3030
 
