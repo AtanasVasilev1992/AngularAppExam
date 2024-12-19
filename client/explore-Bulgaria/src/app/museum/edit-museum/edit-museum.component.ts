@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
+import { urlValidator } from 'src/app/shared/validators/url.validator';
 import { Museum } from 'src/app/types/museum';
 
 @Component({
@@ -22,7 +23,7 @@ export class EditMuseumComponent implements OnInit {
     ) {
         this.museumForm = this.fb.group({
             name: ['', [Validators.required, Validators.minLength(5)]],
-            image: ['', [Validators.required]],
+            image: ['', [Validators.required, urlValidator]],
             city: ['', [Validators.required, Validators.minLength(3)]],
             description: ['', [Validators.required, Validators.minLength(10)]],
             workTime: ['', [Validators.required]],

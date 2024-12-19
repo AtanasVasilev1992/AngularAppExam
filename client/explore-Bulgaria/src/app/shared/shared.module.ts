@@ -8,6 +8,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { ShortenTextPipe } from './pipes/shorten-text.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { EmailValidatorDirective } from './utils/email-validator';
+import { UrlValidatorDirective } from './validators/url.directive';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import { EmailValidatorDirective } from './utils/email-validator';
         ShortenTextPipe,
         FilterPipe,
         EmailValidatorDirective,
+        UrlValidatorDirective
     ],
     imports: [CommonModule],
     exports: [
@@ -30,6 +32,7 @@ import { EmailValidatorDirective } from './utils/email-validator';
         ShortenTextPipe,
         FilterPipe,
         EmailValidatorDirective,
+        UrlValidatorDirective
     ],
 })
 export class SharedModule {}
