@@ -119,19 +119,4 @@ export class UserService implements OnDestroy {
   isLoggedIn(): boolean {
     return !!this.user$$.value && !!this.authService.getToken();
   }
-
-  // updateProfile(username: string, email: string): Observable<User> {
-  //   return this.http.put<User>(
-  //     `${this.API_URL}/users/profile`,
-  //     { username, email },
-  //     { 
-  //       headers: { 'X-Authorization': this.authService.getToken() || '' },
-  //       withCredentials: true 
-  //     }
-  //   ).pipe(
-  //     tap(user => {
-  //       this.user$$.next(user);
-  //     })
-  //   );
-  // }
 }

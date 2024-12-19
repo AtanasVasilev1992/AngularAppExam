@@ -185,32 +185,4 @@ export class ProfileComponent implements OnInit {
   switchTab(tab: 'created' | 'liked') {
     this.activeTab = tab;
   }
-
-  // toggleEditMode() {
-  //   if (!this.isEditMode) {
-  //     this.editForm.patchValue({
-  //       username: this.userService.user?.username,
-  //       email: this.userService.user?.email
-  //     });
-  //   }
-  //   this.isEditMode = !this.isEditMode;
-  // }
-
-  // updateProfile() { 
-  //   if (this.editForm.invalid) {
-  //     return;
-  //   }
-
-  //   const { username, email } = this.editForm.value;
-    
-  //   this.userService.updateProfile(username, email).subscribe({
-  //     next: () => {
-  //       this.isEditMode = false;
-  //       console.log('Profile updated successfully');
-  //     },
-  //     error: (err) => {
-  //       console.error('Error updating profile:', err);
-  //     }
-  //   });
-  // }
 }
