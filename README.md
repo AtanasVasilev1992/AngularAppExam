@@ -258,6 +258,59 @@ interface Like {
 - `SearchResults` - Search results display
 - `Pagination` - Page navigation
 
+## 🧪 Unit Testing
+
+### Test Coverage
+- API Service tests for core functionality
+- CRUD operations testing for Places and Museums
+- Form validation tests
+- Service method tests for error handling
+
+### Components Tested
+- **Places**:
+  - AddPlaceComponent
+    - Form validation
+    - URL validation
+    - API interaction
+    - Navigation after success
+  - EditPlaceComponent
+    - Data loading
+    - Form population
+    - Update functionality
+    - URL validation
+    - Access control
+
+- **Museums**:
+  - Similar test coverage as Places
+  - Create/Edit functionality
+  - Form validation
+  - URL validation
+
+### API Service Tests
+- GET operations
+- POST operations
+- PUT operations
+- DELETE operations
+- Error handling scenarios
+- Response mapping
+
+### Key Test Features
+- Mocked services and dependencies
+- Async operation testing
+- Form interaction testing
+- Navigation testing
+- Error scenario coverage
+- Input validation
+
+### Running Tests
+```bash
+# Run all tests
+ng test
+
+# Run tests with coverage report
+ng test --code-coverage
+```
+
 ## 🔧 Development
 
 ### Project Structure
