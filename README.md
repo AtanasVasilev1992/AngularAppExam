@@ -36,6 +36,11 @@ A web application for exploring and sharing interesting places and museums acros
   - Tab switching animations in profile
   - Content fade-in effects
 
+## 🚀 Live Demo
+The application is deployed and accessible at:
+- Frontend: [Explore Bulgaria](https://explore-bulgaria-2024-19-12.web.app)
+- Backend: Local development server
+
 ## 🛠️ Built With
 
 - Angular 16
@@ -44,6 +49,7 @@ A web application for exploring and sharing interesting places and museums acros
 - Express
 - HTML5
 - CSS3
+- Firebase (Hosting)
 
 ## 📋 Prerequisites
 
@@ -89,6 +95,31 @@ cd client
 ng serve
 ```
 Navigate to http://localhost:4200 to access the application.
+
+### Deployment
+The frontend application is deployed using Firebase Hosting:
+
+1. Install Firebase tools
+```bash
+npm install -g firebase-tools
+```
+
+2. Login to Firebase
+```bash
+firebase login
+```
+
+3. Build the application
+```bash
+ng build
+```
+
+4. Deploy to Firebase
+```bash
+firebase deploy
+```
+
+The application will be available at the provided Firebase hosting URL.
 
 ## 📱 Application Structure
 
