@@ -6,14 +6,7 @@ import { Museum } from './types/museum';
 import { Like } from './types/like';
 import { Comment } from './types/comment';
 import { UserService } from './user/user.service';
-import {
-    Observable,
-    catchError,
-    forkJoin,
-    map,
-    of,
-    throwError,
-} from 'rxjs';
+import { Observable, catchError, forkJoin, map, of, throwError } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -31,16 +24,10 @@ export class ApiService {
     getPlace(id: string): Observable<Place> {
         return this.http.get<Place>(`${this.apiUrl}/data/places/${id}`).pipe(
             catchError((error) => {
-                if (error.status === 404) {
-                    console.error('Place not found or has been deleted');
-                } else {
-                    console.error('Error fetching place:', error);
-                }
                 return throwError(() => error);
             })
         );
     }
-
     createPlace(
         name: string,
         image: string,
@@ -90,11 +77,6 @@ export class ApiService {
     getMuseum(id: string): Observable<Museum> {
         return this.http.get<Museum>(`${this.apiUrl}/data/museums/${id}`).pipe(
             catchError((error) => {
-                if (error.status === 404) {
-                    console.error('Museum not found or has been deleted');
-                } else {
-                    console.error('Error loading museum:', error);
-                }
                 return throwError(() => error);
             })
         );

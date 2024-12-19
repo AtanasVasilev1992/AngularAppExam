@@ -4,7 +4,7 @@ import { UserService } from '../user.service';
 import { Place } from '../../types/place';
 import { Museum } from '../../types/museum';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { catchError, forkJoin, of, throwError } from 'rxjs';
+import { catchError, forkJoin, map, of, throwError } from 'rxjs';
 import { Like } from '../../types/like';
 import { profileAnimations } from 'src/app/animations/profile.animations';
 
@@ -60,85 +60,101 @@ export class ProfileComponent implements OnInit {
     loadUserContent() {
         const userId = this.userService.user?._id;
         if (!userId) {
-            console.error('No user ID available');
+            this.isLoading = false;
             return;
         }
 
         this.isLoading = true;
 
-        const createdContent = forkJoin({
-            places: this.apiService.getUserPlaces(userId).pipe(
-                catchError((err) => {
-                    console.error('Error loading places:', err);
-                    return of([]);
-                })
-            ),
-            museums: this.apiService.getUserMuseums(userId).pipe(
-                catchError((err) => {
-                    console.error('Error loading museums:', err);
-                    return of([]);
-                })
-            ),
-        });
+        this.apiService
+            .getLikesByUser(userId)
+            .pipe(
+                catchError(() => of([])),
+                map((likes) => likes.map((like) => like.itemId))
+            )
+            .subscribe({
+                next: (likedIds) => {
+                    if (likedIds.length === 0) {
+                        this.loadCreatedContent(userId);
+                        return;
+                    }
 
-        createdContent.subscribe({
+                    forkJoin({
+                        places: this.apiService.getPlaces().pipe(
+                            map((places) =>
+                                places.filter((place) =>
+                                    likedIds.includes(place._id)
+                                )
+                            ),
+                            catchError(() => of([]))
+                        ),
+                        museums: this.apiService.getMuseums().pipe(
+                            map((museums) =>
+                                museums.filter((museum) =>
+                                    likedIds.includes(museum._id)
+                                )
+                            ),
+                            catchError(() => of([]))
+                        ),
+                    }).subscribe({
+                        next: (content) => {
+                            this.likedPlaces = content.places;
+                            this.likedMuseums = content.museums;
+                            this.loadCreatedContent(userId);
+                        },
+                        error: () => {
+                            this.loadCreatedContent(userId);
+                        },
+                    });
+                },
+                error: () => {
+                    this.loadCreatedContent(userId);
+                },
+            });
+    }
+
+    private loadCreatedContent(userId: string) {
+        forkJoin({
+            places: this.apiService
+                .getUserPlaces(userId)
+                .pipe(catchError(() => of([]))),
+            museums: this.apiService
+                .getUserMuseums(userId)
+                .pipe(catchError(() => of([]))),
+        }).subscribe({
             next: (content) => {
                 this.userPlaces = content.places;
                 this.userMuseums = content.museums;
             },
-            error: (err) => console.error('Error loading content:', err),
-            complete: () => (this.isLoading = false),
+            complete: () => {
+                this.isLoading = false;
+            },
         });
-
-        this.apiService
-            .getLikesByUser(userId)
-            .pipe(
-                catchError((err) => {
-                    console.error('Error loading likes:', err);
-                    return of([]);
-                })
-            )
-            .subscribe((likes) => {
-                if (likes.length > 0) {
-                    this.loadLikedItems(likes);
-                } else {
-                    this.isLoading = false;
-                }
-            });
     }
 
     loadLikedItems(likes: Like[]) {
         const itemIds = new Set(likes.map((like) => like.itemId));
-        const loadedItems = 0;
+        let loadedItems = 0;
+        const totalItems = itemIds.size;
 
         itemIds.forEach((itemId) => {
             this.apiService
                 .getPlace(itemId)
-                .pipe(
-                    catchError((error) => {
-                        if (error.status === 404) {
-                            return of(null);
-                        }
-                        return throwError(() => error);
-                    })
-                )
+                .pipe(catchError(() => of(null)))
                 .subscribe((place) => {
                     if (place) {
                         this.likedPlaces.push(place);
                     } else {
                         this.apiService
                             .getMuseum(itemId)
-                            .pipe(
-                                catchError((error) => {
-                                    if (error.status === 404) {
-                                        return of(null);
-                                    }
-                                    return throwError(() => error);
-                                })
-                            )
+                            .pipe(catchError(() => of(null)))
                             .subscribe((museum) => {
                                 if (museum) {
                                     this.likedMuseums.push(museum);
+                                }
+                                loadedItems++;
+                                if (loadedItems === totalItems) {
+                                    this.isLoading = false;
                                 }
                             });
                     }
